@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/estilo.css')}}">
+    <meta charset="UTF-8">
+    <title>Pedidos</title>
+</head>
+<body>
+    <h1 align="center">Pedidos</h1>
+    <table border="1">
+        <th>Número de pedido</th>
+        <th>Número de comprador</th>
+        <th>Número de vendedor</th>
+        <th>Número de tarjeta</th>
+        <th>Fecha de registro</th>
+        <th>Fecha de atención</th>
+        <th>Fecha de recepción</th>
+        <th>Fecha de cierre</th>
+        <th>Total</th>
+        <th>Estatus</th>
+        <th>Consultar</th>
+        <tr>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>1</td>
+            <td>12/05/2021</td>
+            <td>25/05/2021</td>
+            <td>06/06/2021</td>
+            <td>15/06/2021</td>
+            <td>16,500.00</td>
+            <td>S</td>
+            <td><a href="/pedidos/verPedido"><img src="{{url_for('static',filename='img/ojo.png')}}"></a></td>
+        </tr>
+    </table>
+    <a href="javascript: history.go(-1)">Regresar</a>
+    <footer>
+    </footer>
+</body>
+</html>

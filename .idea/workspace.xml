@@ -2,10 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ebc4e450-0a8d-4679-86b8-a9cfaf90d145" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/Verano_Shopitesz_Eq2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Verano_Shopitesz_Eq2.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/Pedidos/pedidos.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Pedidos/pedidos.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/Pedidos/verPedido.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Pedidos/verPedido.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/Usuarios/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Usuarios/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/Usuarios/registrar.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/Usuarios/registrar.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
