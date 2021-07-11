@@ -1,0 +1,45 @@
+<!Doctype HTML>
+<HTML LANG="ES">
+    <HEAD>
+        <link rel="stylesheet" href="{{url_for('static',filename='css/estilo.css')}}">
+        <meta charset="utf-8">
+        <title>Login</title>
+    </HEAD>
+    <body>
+        <p align="center"><b>Crear cuenta</b></p>
+        <div align="center"><img src="{{url_for('static',filename='img/registro.png')}}"></div>
+        <br>
+        <form action="/login" align="center">
+            <label>Nombre(s):</label>
+            <br>
+            <input type="text" name="nombre">
+            <br>
+            <label>Apellido paterno:</label>
+            <br>
+            <input type="text" name="ApP">
+            <br>
+            <label>Apellido materno:</label>
+            <br>
+            <input type="text" name="ApM">
+            <br>
+            <label>Dirección:</label>
+            <br>
+            <input type="text" name="direccion">
+            <br>
+            <label>Teléfono:</label>
+            <br>
+            <input type="text" name="telefono">
+            <br>
+            <label>Correo electronico:</label>
+            <br>
+            <input type="text" name="email">
+            <br>
+            <label>Contraseña:</label>
+            <br>
+            <input type="password" name="password">
+            <br>
+            <br>
+            <button type="submit">Registrar</button>
+        </form>
+    </body>
+</HTML>

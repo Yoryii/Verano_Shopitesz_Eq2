@@ -1,0 +1,29 @@
+<!Doctype HTML>
+<HTML LANG="ES">
+    <HEAD>
+        <link rel="stylesheet" href="{{url_for('static',filename='css/estilo.css')}}">
+        <meta charset="utf-8">
+        <title>Login</title>
+    </HEAD>
+    <body>
+        <p align="center"><b>Acceso a ShopItesz</b></p>
+        <div align="center"><img src="{{url_for('static',filename='img/login.png')}}"></div>
+        <br>
+        <br>
+        <form action="/login" align="center">
+            <label>Email:</label>
+            <br>
+            <input type="email" name="email">
+            <br>
+            <label>Contraseña:</label>
+            <br>
+            <input type="password" name="pwd">
+            <br>
+            <br>
+            <button type="submit">Entrar</button>
+            <br>
+            <br>
+            <a href="/usuarios/new">Registrar Cuenta</a>
+        </form>
+    </body>
+</HTML>
