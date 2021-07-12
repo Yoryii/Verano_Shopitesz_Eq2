@@ -42,9 +42,12 @@ def error():
     return render_template('Usuarios/error.html')
 
 @app.route('/Error')
-def carrito():
+def carritos():
     return render_template('Usuarios/Error.html')
 
+@app.route('/usuarios/error')
+def errore():
+    return render_template('Usuarios/error.html')
 
 if __name__=='__main__':
     app.run(debug=True)
