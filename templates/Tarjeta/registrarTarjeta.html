@@ -1,10 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<!Doctype HTML>
+<HTML LANG="ES">
+    <HEAD>
+        <link rel="stylesheet" href="{{url_for('static',filename='css/estilo.css')}}">
+        <meta charset="utf-8">
+        <title>Registrar tarjeta</title>
+    </HEAD>
+    <body>
+        <p align="center"><b>Registrar nueva tarjeta</b></p>
+        <div align="center"><img src="{{url_for('static',filename='img/Tarjeta.jpg')}}"></div>
+        <br>
+        <form align="center">
+            <label>Nombre(s):</label>
+            <br>
+            <input type="text" name="nombre">
+            <br>
+            <label>Numero de usuario:</label>
+            <br>
+            <input type="text" name="noUsuario">
+            <br>
+            <label>Numero de tarjeta:</label>
+            <br>
+            <input type="text" name="noTarjeta">
+            <br>
+            <label>Saldo:</label>
+            <br>
+            <input type="text" name="saldo">
+            <br>
+            <label>Banco:</label>
+            <br>
+            <input type="text" name="banco">
+            <br>
+            <label>Estatus:</label>
+            <br>
+            <input type="text" name="estatus">
 
-</body>
-</html>
+            <br>
+            <br>
+            <button type="submit">Registrar</button>
+        </form>
+    </body>
+</HTML>
