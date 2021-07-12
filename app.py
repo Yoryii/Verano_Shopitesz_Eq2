@@ -31,15 +31,15 @@ def tarjetas():
 def nuevaTarjeta():
     return render_template('Tarjeta/registrarTarjeta.html')
 
-<<<<<<< HEAD
+
 @app.route('/usuarios/error')
 def error():
     return render_template('Usuarios/error.html')
-=======
+
 @app.route('/Error')
 def carrito():
     return render_template('Usuarios/Error.html')
->>>>>>> a5951f41d4b815979e7f76f08c650ff7bbc97f2d
+
 
 if __name__=='__main__':
     app.run(debug=True)
