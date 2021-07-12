@@ -11,6 +11,11 @@ def login():
 def registrarUsuario():
     return render_template('Usuarios/registrar.html')
 
+@app.route('/categorias')
+def categorias():
+    return render_template('categorias.html')
+
+
 @app.route('/pedidos/pedidos')
 def consultarPedidos():
     return render_template('Pedidos/pedidos.html')
