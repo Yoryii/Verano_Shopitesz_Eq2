@@ -19,5 +19,9 @@ def consultarPedidos():
 def verPedido():
     return render_template('Pedidos/verPedido.html')
 
+@app.route('/pedidos/carrito')
+def carrito():
+    return render_template('Pedidos/Carrito.html')
+
 if __name__=='__main__':
     app.run(debug=True)
