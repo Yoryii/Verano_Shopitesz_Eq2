@@ -31,5 +31,9 @@ def carrito():
 def carrito():
     return render_template('Tarjeta/registrarTarjeta.html')
 
+@app.route('/Error')
+def carrito():
+    return render_template('Usuarios/Error.html')
+
 if __name__=='__main__':
     app.run(debug=True)
