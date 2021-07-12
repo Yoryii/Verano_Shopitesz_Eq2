@@ -1,10 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="es">
 <head>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/estilo.css')}}">
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Tarjetas</title>
 </head>
 <body>
-
+    <h1 align="center">Carrito</h1>
+    <table border="2">
+        <th>id tarjeta</th>
+        <th>Número de usuario</th>
+        <th>Número de tarjeta</th>
+        <th>Saldo</th>
+        <th>Banco</th>
+        <th>Estatus</th>
+        <th>Registrar nueva tarjeta</th>
+        <tr>
+            <td>1</td>
+            <td>123</td>
+            <td>4598712365478952</td>
+            <td>$10,000</td>
+            <td>BBVA</td>
+            <td>Verificada</td>
+            <td><a href="/Tarjeta/Tarjetas"><img src="{{url_for('static',filename='img/ojo.png')}}"></a></td>
+        </tr>
+    </table>
+    <a href="javascript: history.go(-1)">Regresar</a>
+    <footer>
+    </footer>
 </body>
 </html>

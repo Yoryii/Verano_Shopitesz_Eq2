@@ -23,5 +23,9 @@ def verPedido():
 def carrito():
     return render_template('Pedidos/Carrito.html')
 
+@app.route('/Tarjetas')
+def carrito():
+    return render_template('Tarjeta/Tarjetas.html')
+
 if __name__=='__main__':
     app.run(debug=True)
