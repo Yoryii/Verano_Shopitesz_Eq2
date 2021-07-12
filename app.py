@@ -24,12 +24,16 @@ def carrito():
     return render_template('Pedidos/Carrito.html')
 
 @app.route('/Tarjetas')
-def carrito():
+def tarjetas():
     return render_template('Tarjeta/Tarjetas.html')
 
 @app.route('/Tarjetas/new')
-def carrito():
+def nuevaTarjeta():
     return render_template('Tarjeta/registrarTarjeta.html')
+
+@app.route('/usuarios/error')
+def error():
+    return render_template('Usuarios/error.html')
 
 if __name__=='__main__':
     app.run(debug=True)
