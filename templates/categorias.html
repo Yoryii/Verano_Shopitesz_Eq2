@@ -1,0 +1,35 @@
+<!Doctype HTML>
+<HTML LANG="ES">
+    <HEAD>
+        <link rel="stylesheet" href="{{url_for('static',filename='css/estilo.css')}}">
+        <meta charset="utf-8">
+        <title>Categorias</title>
+    </HEAD>
+    <body> <!--background="{{url_for('static',filename='img/fondo.png')}}"-->
+        <p align="center"><b>Categorias</b></p>
+
+        <br>
+        <br>
+        <form align="center">
+            <label>Electronicos</label>
+            <br>
+            <br>
+            <div align="center"><img src="{{url_for('static',filename='img/categorias/cel.png')}}"></div>
+
+            <br>
+            <br>
+            <label>Ropa</label>
+            <br>
+            <br>
+            <div align="center"><img src="{{url_for('static',filename='img/categorias/shirt.png')}}"></div>
+            <br>
+           <label>Herramientas</label>
+            <div align="center"><img src="{{url_for('static',filename='img/categorias/martillo.jpg')}}"></div>
+            <br>
+            <br>
+            <a href="/">Regresar</a>
+            <br>
+
+        </form>
+    </body>
+</HTML>
