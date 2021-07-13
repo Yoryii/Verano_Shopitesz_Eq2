@@ -27,6 +27,22 @@ def login():
 def nuevoUsuario():
     return render_template('Usuarios/registrar.html')
 
+@app.route('/usuarios/agregar',methods=['post'])
+def agregarUsuario():
+    #try:
+    u = Usuario()
+    u.nombreCompleto=request.form['nombre']
+    u.direccion = request.form['direccion']
+    u.telefono = request.form['telefono']
+    u.email = request.form['email']
+    u.contrasena = request.form['password']
+    u.tipo = 'Comprador'
+    u.estatus='Activo'
+    u.agregar()
+    #except:
+    print(error)
+    return redirect(url_for('consultaUsuarios'))
+
 @app.route('/usuarios')
 def consultaUsuarios():
     u = Usuario()
