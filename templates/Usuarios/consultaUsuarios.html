@@ -23,18 +23,20 @@
         <th>Estatus</th>
         <th>Modificar</th>
         <th>Eliminar</th>
-        <tr>
-            <td>1</td>
-            <td>Jorge López</td>
-            <td>La Esperanza 14</td>
-            <td>3514796498</td>
-            <td>yoryi@gmail.com</td>
-            <td>Hola.123</td>
-            <td>Administrador</td>
-            <td>A</td>
-            <td><a href="/usuarios/edit"><img src="{{url_for('static',filename='img/editar.png')}}"></a></td>
-            <td><a href="./eliminarUsuarios.html"><img src="{{url_for('static',filename='img/eliminar.png')}}"></a></td>
-        </tr>
+        {% for u in usuarios %}
+            <tr>
+                <td>{{u.idUsuario}}</td>
+                <td>{{u.nombreCompleto}}</td>
+                <td>{{u.direccion}}</td>
+                <td>{{u.telefono}}</td>
+                <td>{{u.email}}</td>
+                <td>{{u.contrasena}}</td>
+                <td>{{u.tipo}}</td>
+                <td>{{u.estatus}}</td>
+                <td><a href="/usuarios/edit"><img src="{{url_for('static',filename='img/editar.png')}}"></a></td>
+                <td><a href="./eliminarUsuarios.html"><img src="{{url_for('static',filename='img/eliminar.png')}}"></a></td>
+            </tr>
+        {% endfor %}
     </table>
     <br>
     <div align="center"><a href="/"><button>Ir al inicio</button></a></div>

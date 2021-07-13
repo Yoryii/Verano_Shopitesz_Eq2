@@ -1,6 +1,9 @@
 create database BD_Shopitesz_Eq2;
 use BD_Shopitesz_Eq2;
 
+/*drop database BD_Shopitesz_Eq2;
+drop user 'user_shopitesz_Eq2';*/
+
 /*Tablas*/
 create table Usuarios
 (
@@ -10,7 +13,7 @@ direccion varchar(200) not null,
 telefono char(12) not null,
 email varchar(100) not null,
 contrasena varchar(20) not null,
-tipo varchar(10) not null,
+tipo varchar(15) not null,
 estatus varchar(10) not null,
 constraint pk_usuarios primary key (idUsuario),
 constraint uk_usuarios unique (email),

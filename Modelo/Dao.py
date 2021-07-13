@@ -13,7 +13,7 @@ class Categoria(db.Model):
     def consultaGeneral(self):
         return self.query.all()
 
-    def consultaIndividuall(self,id):
+    def consultaIndividual(self,id):
         return Categoria.query.get(id)
 
     def consultarImagen(self,id):
@@ -34,22 +34,21 @@ class Categoria(db.Model):
 #Parte de Yoryi - Inicio
 #Usuarios - Inicio
 class Usuario(db.Model):
-    __tablename__='Usuarios'
-    idUsuario=Column(Integer,primary_key=True)
-    nombreCompleto=Column(String)
-    direccion=Column(String)
-    telefono=Column(String)
-    email=Column(String)
-    contrasena=Column(String)
-    tipo=Column(String)
-    estatus=Column(String,nullable=False)
-    
+    __tablename__ = 'Usuarios'
+    idUsuario = Column(Integer, primary_key=True)
+    nombreCompleto = Column(String)
+    direccion = Column(String)
+    telefono = Column(String)
+    email = Column(String, unique=True)
+    contrasena = Column(String)
+    tipo = Column(String)
+    estatus = Column(String, nullable=False)
 
     def consultaGeneral(self):
         return self.query.all()
 
-    def consultaIndividuall(self,id):
-        return Categoria.query.get(id)
+    def consultaIndividual(self,id):
+        return Usuario.query.get(id)
 
     def agregar(self):
         db.session.add(self)
