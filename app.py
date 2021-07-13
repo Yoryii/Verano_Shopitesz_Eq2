@@ -1,8 +1,11 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request,redirect,url_for,flash
 from flask_bootstrap import Bootstrap
+from Modelo.Dao import db
 app = Flask(__name__)
 Bootstrap(app)
-
+app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://user_shopitesz_Eq2:Hola.123@localhost/BD_Shopitesz_Eq2'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
+app.secret_key='Cl4v3'
 #Rutas del sistema - inicio
 #Página principal
 @app.route('/')
