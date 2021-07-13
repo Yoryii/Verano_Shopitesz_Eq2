@@ -1,71 +1,63 @@
 <!doctype html>
 <html lang="es">
 <head>
-    <link rel="stylesheet" href="../plantilla/bootstrap.min.css">
-    <script src="../bootstrap-4.5.3-dist/js/bootstrap.min.js"></script>
-    <script src="../JS/Usuario.js"></script>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/estilo.css')}}">
     <meta charset="UTF-8">
-    <title>ProgrammerPancho</title>
+    <title>Editar usuario</title>
 </head>
 <body>
-    <header>
-        INSTITUTO TECNOLOGICO DE ESTUDIOS SUPERIORES DE ZAMORA
-    </header>
     <main>
         <section>
-            <h1>REGISTRO DE USUARIOS</h1>
-            <form onsubmit="return validar(this)">
-                <div id="datosPersonales">
+            <h1 align="center">Editar usuario</h1>
+            <div align="center"><img style="width:120px; height:120px;" src="{{url_for('static',filename='img/usuariosEdit.png')}}"></div>
+            <form>
+                <div id="datosPersonales" align="center">
                     <fieldset>
                         <legend>Datos del usuario</legend>
 
-                        <label>ID usuario:</label>
-                        <input type="number" name="idUsuario" required>
+                        <label>Número de usuario:</label>
+                        <input type="number" name="idUsuario" readonly>
                         <br>
 
                         <label>Nombre:</label>
-                        <input type="text" name="nombre" required>
+                        <input type="text" name="nombre">
                         <br>
 
-                        <label>Sexo:</label>
-                        <input type="checkbox" name="sexo">Hombre
-                        <input type="checkbox" name="sexo">Mujer
+                        <label>Dirección:</label>
+                        <input type="text" name="direccion">
                         <br>
 
                         <label>Teléfono:</label>
-                        <input type="number" name="teléfono" required>
+                        <input type="number" name="teléfono">
                         <br>
 
                         <label>Email:</label>
-                        <input type="email" name="email" required>
-                        <br>
-
-                        <label>Estatus:</label>
-                        <input type="checkbox" name="estatus">Activo
-                        <input type="checkbox" name="estatus">Inactivo
-                        <br>
-
-                        <label>Tipo:</label>
-                        <input type="checkbox" name="tipo">Docente
-                        <input type="checkbox" name="tipo">Alumno
-                        <input type="checkbox" name="tipo">Comité
+                        <input type="email" name="email">
                         <br>
 
                         <label>Contraseña:</label>
-                        <input type="password" name="contraseña" required>
+                        <input type="password" name="contraseña">
                         <br>
 
-                        <button>Cancelar</button>
-                        <button type="submit">Guardar</button>
-                        <div id="notificaciones"></div>
+                        <label>Tipo:</label>
+                        <br>
+                        <input type="checkbox" name="tipo">Cliente
+                        <input type="checkbox" name="tipo">Vendedor
+                        <input type="checkbox" name="tipo">Administrador
+                        <br>
+                        <br>
+
+                        <a href="/usuarios">Cancelar</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="/usuarios">Guardar</a>
                     </fieldset>
                     </div>
                  </form>
-            <a href="javascript: history.go(-1)">Regresar</a>
         </section>
     </main>
-    <footer>
-        Elaborado por Francisco Hdez
-    </footer>
+        <footer>
+            <br>
+            <div align="center">Curso de verano 2021 Ⓡ</div>
+        </footer>
 </body>
 </html>
