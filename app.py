@@ -18,9 +18,21 @@ def login():
 
 #Rutas de Yoryi - inicio
 
+#Usuarios - inicio
+
 @app.route('/usuarios/new')
-def registrarUsuario():
+def nuevoUsuario():
     return render_template('Usuarios/registrar.html')
+
+@app.route('/usuarios')
+def consultaUsuarios():
+    return render_template('Usuarios/consultaUsuarios.html')
+
+@app.route('/usuarios/edit')
+def editarUsuario():
+    return render_template('Usuarios/editarUsuario.html')
+
+#Usuarios fin
 
 @app.route('/pedidos/pedidos')
 def consultarPedidos():
