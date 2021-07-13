@@ -6,21 +6,13 @@
         <title>Registrar usuario</title>
     </HEAD>
     <body>
-        <p align="center"><b>Crear cuenta</b></p>
+        <h1 align="center">Registrar usuario</h1>
         <div align="center"><img src="{{url_for('static',filename='img/registro.png')}}"></div>
         <br>
         <form align="center">
-            <label>Nombre(s):</label>
+            <label>Nombre completo:</label>
             <br>
             <input type="text" name="nombre">
-            <br>
-            <label>Apellido paterno:</label>
-            <br>
-            <input type="text" name="ApP">
-            <br>
-            <label>Apellido materno:</label>
-            <br>
-            <input type="text" name="ApM">
             <br>
             <label>Dirección:</label>
             <br>
@@ -40,6 +32,12 @@
             <br>
             <br>
             <button type="submit">Registrar</button>
+            <br>
+            <a href="javascript: history.go(-1)">Regresar</a>
         </form>
+        <footer>
+            <br>
+            <div align="center">Curso de verano 2021 Ⓡ</div>
+        </footer>
     </body>
 </HTML>
