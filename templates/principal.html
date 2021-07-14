@@ -1,6 +1,168 @@
-{% extends '../comunes/base.html' %}
-{% block contenido %}
-    <p>se mostraria la lista de productos y ofertas</p>
-    <a href="/productos">Productos</a>
-    <a href="/validarSesion">Iniciar Sesion</a>
-{% endblock %}
+<!Doctype HTML>
+<HTML LANG="ES">
+    <HEAD>
+        <link rel="stylesheet" href="{{url_for('static',filename='css/estilo.css')}}">
+        <meta charset="utf-8">
+        <title>Categorias</title>
+        <!--
+
+        CARRUSEL DE CONTENIDOOOOOO!!!!!!
+        -->
+
+
+        <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+<script>
+var current = 0;
+var imagenes = new Array();
+
+$(document).ready(function() {
+    var numImages = 6;
+    if (numImages <= 3) {
+        $('.right-arrow').css('display', 'none');
+        $('.left-arrow').css('display', 'none');
+    }
+
+    $('.left-arrow').on('click',function() {
+        if (current > 0) {
+            current = current - 1;
+        } else {
+            current = numImages - 3;
+        }
+
+        $(".carrusel").animate({"left": -($('#product_'+current).position().left)}, 600);
+
+        return false;
+    });
+
+    $('.left-arrow').on('hover', function() {
+        $(this).css('opacity','0.5');
+    }, function() {
+        $(this).css('opacity','1');
+    });
+
+    $('.right-arrow').on('hover', function() {
+        $(this).css('opacity','0.5');
+    }, function() {
+        $(this).css('opacity','1');
+    });
+
+    $('.right-arrow').on('click', function() {
+        if (numImages > current + 3) {
+            current = current+1;
+        } else {
+            current = 0;
+        }
+
+        $(".carrusel").animate({"left": -($('#product_'+current).position().left)}, 600);
+
+        return false;
+    });
+ });
+</script>
+
+
+
+
+        <!--
+        FIN CARRUSEL!!!!!!!!!!!!!!!!!!
+        -->
+
+        <style>
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333333;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #111111;
+}
+</style>
+    </HEAD>
+    <body> <!--background="{{url_for('static',filename='img/fondo.png')}}"-->
+        <p align="center"><b>Categorias</b></p>
+<ul>
+  <li><a href="default.html">Home</a></li>
+  <li><a href="news.asp">News</a></li>
+  <li><a href="contact.asp">Contact</a></li>
+  <li><a href="about.asp">About</a></li>
+</ul>
+        <br>
+    <p align="right">
+
+    Búsqueda de música: <input type="search" name="busquedamusica" placeholder="Canción, autor, álbum...">
+
+    <input type="submit" value="Buscar">
+
+  </p>
+<br>
+
+    <!--
+    Carrusel de contenido!!!!!!!!!!!!!!!!!!!!!!!!!
+    -->
+
+    <div id="carrusel">
+    <a href="#" class="left-arrow"><img src="images/left-arrow.png" /></a>
+    <a href="#" class="right-arrow"><img src="images/right-arrow.png" /></a>
+    <div class="carrusel">
+        <div class="product" id="product_0">
+            <img src="{{url_for('static',filename='img/cel.png')}}" width="195" height="100" />
+            <h5>Lorem ipsum 1</h5>
+            <p>165.00 €</p>
+        </div>
+        <div class="product" id="product_1">
+            <img src="{{url_for('static',filename='img/shirt.png')}}" width="195" height="100" />
+            <h5>Lorem ipsum 2</h5>
+            <p>100.00 €</p>
+        </div>
+        <div class="product" id="product_2">
+            <img src="{{url_for('static',filename='img/martillo.jpg')}}" width="195" height="100" />
+            <h5>Lorem ipsum 3</h5>
+            <p>250.00 €</p>
+        </div>
+        <div class="product" id="product_3">
+            <img src="{{url_for('static',filename='img/cel.png')}}" width="195" height="100" />
+            <h5>Lorem ipsum 4</h5>
+            <p>75.00 €</p>
+        </div>
+        <div class="product" id="product_4">
+            <img src="{{url_for('static',filename='img/shirt.png')}}" width="195" height="100" />
+            <h5>Lorem ipsum 5</h5>
+            <p>65.00 €</p>
+        </div>
+        <div class="product" id="product_5">
+            <img src="{{url_for('static',filename='img/martillo.jpg')}}" width="195" height="100" />
+            <h5>Lorem ipsum 6</h5>
+            <p>40.00 €</p>
+        </div>
+    </div>
+</div>
+
+
+    <!--
+    Fin CARRUSEL!!!!!!!!!!!!!!!!!
+    -->
+
+
+
+
+
+        <br>
+
+    </body>
+</HTML>
