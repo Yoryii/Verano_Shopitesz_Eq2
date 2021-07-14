@@ -13,13 +13,20 @@
 
 
  #carrusel {
-    float:left;
+    float:center;
     width:600px;
     overflow:hidden;
     height:203px;
     position:relative;
     margin-top:20px;
     margin-bottom:20px;
+
+    display: flex;
+    align-items: center;
+
+
+    margin: 0 auto; /* requerido para alineación horizontal */
+
 }
 
 #carrusel .left-arrow {
