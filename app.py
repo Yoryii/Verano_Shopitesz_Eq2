@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request,redirect,url_for,flash
 from flask_bootstrap import Bootstrap
-from Modelo.Dao import db, Usuario
+from Modelo.Dao import db, Usuario, Pedido
 app = Flask(__name__)
 Bootstrap(app)
 app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://user_shopitesz_Eq2:Hola.123@localhost/BD_Shopitesz_Eq2'
@@ -53,10 +53,14 @@ def editarUsuario():
     return render_template('Usuarios/editarUsuario.html')
 
 #Usuarios fin
+#Pedidos - Inicio
 
-@app.route('/pedidos/pedidos')
-def consultarPedidos():
-    return render_template('Pedidos/pedidos.html')
+@app.route('/pedidos')
+def consultaPedidos():
+    p = Pedido()
+    return render_template('Pedidos/consultaPedidos.html', pedidos=p.consultaGeneral())
+
+#Pedidos - Fin
 
 @app.route('/pedidos/verPedido')
 def verPedido():

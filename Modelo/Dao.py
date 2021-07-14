@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Column,Integer,String,BLOB
+from sqlalchemy import Column,Integer,String,BLOB,Date,Float
 
 db=SQLAlchemy()
 
@@ -62,5 +62,38 @@ class Usuario(db.Model):
         db.session.delete(self)
         db.session.commit()
 #Usuarios - Fin
+
+#Pedidos - Inicio
+class Pedido(db.Model):
+    __tablename__ = 'Pedidos'
+    idPedido = Column(Integer, primary_key=True)
+    idComprador = Column(Integer)
+    idVendedor = Column(Integer)
+    idTarjeta = Column(Integer)
+    fechaRegistro = Column(Date)
+    fechaAtencion = Column(Date)
+    fechaRecepcion = Column(Date)
+    fechaCierre = Column(Date)
+    total = Column(Float)
+    estatus = Column(String, nullable=False)
+
+    def consultaGeneral(self):
+        return self.query.all()
+
+    def consultaIndividual(self,id):
+        return Pedido.query.get(id)
+
+    def agregar(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def editar(self):
+        db.session.merge(self)
+        db.session.commit()
+
+    def eliminar(self):
+        db.session.delete(self)
+        db.session.commit()
+#Pedidos - Fin
 
 #Parte de Yoryi - Fin
