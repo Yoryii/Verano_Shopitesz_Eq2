@@ -99,6 +99,9 @@ def error():
 def categorias():
     return render_template('categorias.html')
 
+@app.route('/productos')
+def productos():
+    return render_template('Pedidos/productos.html')
 #Rutas de JO - fin
 
 if __name__=='__main__':
