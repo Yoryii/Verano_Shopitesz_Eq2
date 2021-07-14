@@ -96,4 +96,40 @@ class Pedido(db.Model):
         db.session.commit()
 #Pedidos - Fin
 
+#DetallePedidos - Inicio
+
+class DetallePedido(db.Model):
+    __tablename__ = 'DetallePedidos'
+    idDetalle = Column(Integer, primary_key=True)
+    idPedido = Column(Integer)
+    idProducto = Column(Integer)
+    precio = Column(Float)
+    cantidadPedida = Column(Integer)
+    cantidadEnviada = Column(Integer)
+    cantidadAceptada = Column(Integer)
+    cantidadRechazada = Column(Integer)
+    subtotal = Column(Float)
+    estatus = Column(String, nullable=False)
+    comentario = Column(String)
+
+    def consultaGeneral(self):
+        return self.query.all()
+
+    def consultaIndividual(self,id):
+        return DetallePedido.query.get(id)
+
+    def agregar(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def editar(self):
+        db.session.merge(self)
+        db.session.commit()
+
+    def eliminar(self):
+        db.session.delete(self)
+        db.session.commit()
+
+#DetallePedidos - Fin
+
 #Parte de Yoryi - Fin

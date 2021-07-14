@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/estilo.css')}}">
+    <meta charset="UTF-8">
+    <title>Detalle Pedidos</title>
+</head>
+<nav>
+    <h1 align="center">Detalles de pedidos</h1>
+    <div align="center"><img style="width:100px; height:100px;" src="{{url_for('static',filename='img/pedidos.png')}}"></div>
+</nav>
+<body>
+    <div align="center"><a href="/detallePedidos/new"><img src="{{url_for('static',filename='img/add.gif')}}">Registrar detalle</a></div>
+    <br>
+    <table border="5" align="center">
+        <th>ID Detalle</th>
+        <th>ID Pedido</th>
+        <th>ID Producto</th>
+        <th>precio</th>
+        <th>Cantidad pedida</th>
+        <th>Cantidad enviada</th>
+        <th>Cantidad aceptada</th>
+        <th>Cantidad rechazada</th>
+        <th>Subtotal</th>
+        <th>Estatus</th>
+        <th>Comentario</th>
+        <th>Modificar</th>
+        <th>Eliminar</th>
+        {% for d in detallePedidos %}
+            <tr>
+                <td>{{d.idDetalle}}</td>
+                <td>{{d.idPedido}}</td>
+                <td>{{d.idProducto}}</td>
+                <td>{{d.precio}}</td>
+                <td>{{d.cantidadPedida}}</td>
+                <td>{{d.cantidadEnviada}}</td>
+                <td>{{d.cantidadAceptada}}</td>
+                <td>{{d.cantidadRechazada}}</td>
+                <td>{{d.subtotal}}</td>
+                <td>{{d.estatus}}</td>
+                <td>{{d.comentario}}</td>
+                <td><a href="/usuarios/edit"><img src="{{url_for('static',filename='img/editar.png')}}"></a></td>
+                <td><a href="./eliminarUsuarios.html"><img src="{{url_for('static',filename='img/eliminar.png')}}"></a></td>
+            </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <div align="center"><a href="/"><button>Ir al inicio</button></a></div>
+    <footer>
+        <br>
+        <div align="center">Curso de verano 2021 Ⓡ</div>
+    </footer>
+</body>
+</html>
