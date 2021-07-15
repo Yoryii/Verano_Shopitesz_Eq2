@@ -1,8 +1,11 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request,redirect,url_for,flash
 from flask_bootstrap import Bootstrap
+from Modelo.Dao import db, Usuario, Pedido, DetallePedido
 app = Flask(__name__)
 Bootstrap(app)
-
+app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://user_shopitesz_Eq2:Hola.123@localhost/BD_Shopitesz_Eq2'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
+app.secret_key='Cl4v3'
 #Rutas del sistema - inicio
 #Página principal
 @app.route('/')
@@ -24,23 +27,49 @@ def login():
 def nuevoUsuario():
     return render_template('Usuarios/registrar.html')
 
+@app.route('/usuarios/agregar',methods=['post'])
+def agregarUsuario():
+    #try:
+    u = Usuario()
+    u.nombreCompleto=request.form['nombre']
+    u.direccion = request.form['direccion']
+    u.telefono = request.form['telefono']
+    u.email = request.form['email']
+    u.contrasena = request.form['password']
+    u.tipo = 'Comprador'
+    u.estatus='Activo'
+    u.agregar()
+    #except:
+    print(error)
+    return redirect(url_for('consultaUsuarios'))
+
 @app.route('/usuarios')
 def consultaUsuarios():
-    return render_template('Usuarios/consultaUsuarios.html')
+    u = Usuario()
+    return render_template('Usuarios/consultaUsuarios.html', usuarios=u.consultaGeneral())
 
 @app.route('/usuarios/edit')
 def editarUsuario():
     return render_template('Usuarios/editarUsuario.html')
 
 #Usuarios fin
+#Pedidos - Inicio
 
-@app.route('/pedidos/pedidos')
-def consultarPedidos():
-    return render_template('Pedidos/pedidos.html')
+@app.route('/pedidos')
+def consultaPedidos():
+    p = Pedido()
+    return render_template('Pedidos/consultaPedidos.html', pedidos=p.consultaGeneral())
 
-@app.route('/pedidos/verPedido')
-def verPedido():
-    return render_template('Pedidos/verPedido.html')
+#Pedidos - Fin
+
+#DetallePedidos - Inicio
+
+@app.route('/detallePedidos')
+def consultaDetallePedidos():
+    d = DetallePedido()
+    return render_template('Pedidos/consultaDetallePedidos.html', detallePedidos=d.consultaGeneral())
+
+#DetallePedidos - Fin
 
 #Rutas de Yoryi - fin
 
@@ -70,7 +99,11 @@ def error():
 def categorias():
     return render_template('categorias.html')
 
+@app.route('/productos')
+def productos():
+    return render_template('Pedidos/productos.html')
 #Rutas de JO - fin
 
 if __name__=='__main__':
+    db.init_app(app)
     app.run(debug=True)

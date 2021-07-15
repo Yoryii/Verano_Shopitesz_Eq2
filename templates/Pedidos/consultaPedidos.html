@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/estilo.css')}}">
+    <meta charset="UTF-8">
+    <title>Pedidos</title>
+</head>
+<nav>
+    <h1 align="center">Pedidos</h1>
+    <div align="center"><img style="width:100px; height:100px;" src="{{url_for('static',filename='img/pedidos.png')}}"></div>
+</nav>
+<body>
+    <div align="center"><a href="/pedidos/new"><img src="{{url_for('static',filename='img/add.gif')}}">Registrar pedido</a></div>
+    <br>
+    <table border="5" align="center">
+        <th>ID pedido</th>
+        <th>ID comprador</th>
+        <th>ID vendedor</th>
+        <th>ID Tarjeta</th>
+        <th>Fecha de registro</th>
+        <th>Fecha de atención</th>
+        <th>Fecha de recepción</th>
+        <th>Fecha de cierre</th>
+        <th>Total</th>
+        <th>Estatus</th>
+        <th>Modificar</th>
+        <th>Eliminar</th>
+        {% for p in pedidos %}
+            <tr>
+                <td>{{p.idPedido}}</td>
+                <td>{{p.idComprador}}</td>
+                <td>{{p.idVendedor}}</td>
+                <td>{{p.idTarjeta}}</td>
+                <td>{{p.fechaRegistro}}</td>
+                <td>{{p.fechaAtencion}}</td>
+                <td>{{p.fechaRecepcion}}</td>
+                <td>{{p.fechaCierre}}</td>
+                <td>{{p.total}}</td>
+                <td>{{p.estatus}}</td>
+                <td><a href="/usuarios/edit"><img src="{{url_for('static',filename='img/editar.png')}}"></a></td>
+                <td><a href="./eliminarUsuarios.html"><img src="{{url_for('static',filename='img/eliminar.png')}}"></a></td>
+            </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <div align="center"><a href="/"><button>Ir al inicio</button></a></div>
+    <footer>
+        <br>
+        <div align="center">Curso de verano 2021 Ⓡ</div>
+    </footer>
+</body>
+</html>
