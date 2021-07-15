@@ -77,7 +77,7 @@ def consultaDetallePedidos():
 
 @app.route('/pedidos/carrito')
 def carrito():
-    return render_template('Pedidos/Carrito.html')
+    return render_template('pedidos/Carrito.html')
 
 @app.route('/Tarjetas')
 def tarjetas():
