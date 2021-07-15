@@ -1,0 +1,43 @@
+<!Doctype HTML>
+<HTML LANG="ES">
+    <HEAD>
+        <link rel="stylesheet" href="{{url_for('static',filename='css/estilo.css')}}">
+        <meta charset="utf-8">
+        <title>Registrar usuario</title>
+    </HEAD>
+    <body>
+        <h1 align="center">Registrar usuario</h1>
+        <div align="center"><img src="{{url_for('static',filename='img/registro.png')}}"></div>
+        <br>
+        <form align="center" action="/usuarios/agregar"  method="post">
+            <label>Nombre completo:</label>
+            <br>
+            <input type="text" name="nombre">
+            <br>
+            <label>Dirección:</label>
+            <br>
+            <input type="text" name="direccion">
+            <br>
+            <label>Teléfono:</label>
+            <br>
+            <input type="text" name="telefono">
+            <br>
+            <label>Correo electronico:</label>
+            <br>
+            <input type="text" name="email">
+            <br>
+            <label>Contraseña:</label>
+            <br>
+            <input type="password" name="password">
+            <br>
+            <br>
+            <button type="submit">Registrar</button>
+            <br>
+            <a href="javascript: history.go(-1)">Regresar</a>
+        </form>
+        <footer>
+            <br>
+            <div align="center">Curso de verano 2021 Ⓡ</div>
+        </footer>
+    </body>
+</HTML>

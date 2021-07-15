@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/estilo.css')}}">
+    <meta charset="UTF-8">
+    <title>Editar usuario</title>
+</head>
+<body>
+    <main>
+        <section>
+            <h1 align="center">Editar usuario</h1>
+            <div align="center"><img style="width:120px; height:120px;" src="{{url_for('static',filename='img/usuariosEdit.png')}}"></div>
+            <form>
+                <div id="datosPersonales" align="center">
+                    <fieldset>
+                        <legend>Datos del usuario</legend>
+
+                        <label>Número de usuario:</label>
+                        <input type="number" name="idUsuario" readonly>
+                        <br>
+
+                        <label>Nombre:</label>
+                        <input type="text" name="nombre">
+                        <br>
+
+                        <label>Dirección:</label>
+                        <input type="text" name="direccion">
+                        <br>
+
+                        <label>Teléfono:</label>
+                        <input type="number" name="teléfono">
+                        <br>
+
+                        <label>Email:</label>
+                        <input type="email" name="email">
+                        <br>
+
+                        <label>Contraseña:</label>
+                        <input type="password" name="contraseña">
+                        <br>
+
+                        <label>Tipo:</label>
+                        <br>
+                        <input type="checkbox" name="tipo">Cliente
+                        <input type="checkbox" name="tipo">Vendedor
+                        <input type="checkbox" name="tipo">Administrador
+                        <br>
+                        <br>
+
+                        <a href="/usuarios">Cancelar</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="/usuarios">Guardar</a>
+                    </fieldset>
+                    </div>
+                 </form>
+        </section>
+    </main>
+        <footer>
+            <br>
+            <div align="center">Curso de verano 2021 Ⓡ</div>
+        </footer>
+</body>
+</html>

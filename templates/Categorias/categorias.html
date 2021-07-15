@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/estilo.css')}}">
+    <meta charset="UTF-8">
+    <title>Usuarios</title>
+</head>
+<nav>
+    <h1 align="center">Usuarios</h1>
+    <div align="center"><img style="width:100px; height:100px;" src="{{url_for('static',filename='img/usuarios.png')}}"></div>
+</nav>
+<body>
+    <div align="center"><a href="/usuarios/new"><img src="{{url_for('static',filename='img/add.gif')}}">Registrar usuario</a></div>
+    <br>
+    <table border="5" align="center">
+        <th>Número de usuario</th>
+        <th>Nombre completo</th>
+        <th>Dirección</th>
+        <th>Teléfono</th>
+        <th>Correo electrónico</th>
+        <th>Contraseña</th>
+        <th>Tipo</th>
+        <th>Estatus</th>
+        <th>Modificar</th>
+        <th>Eliminar</th>
+        {% for u in usuarios %}
+            <tr>
+                <td>{{u.idUsuario}}</td>
+                <td>{{u.nombreCompleto}}</td>
+                <td>{{u.direccion}}</td>
+                <td>{{u.telefono}}</td>
+                <td>{{u.email}}</td>
+                <td>{{u.contrasena}}</td>
+                <td>{{u.tipo}}</td>
+                <td>{{u.estatus}}</td>
+                <td><a href="/usuarios/edit"><img src="{{url_for('static',filename='img/editar.png')}}"></a></td>
+                <td><a href="./eliminarUsuarios.html"><img src="{{url_for('static',filename='img/eliminar.png')}}"></a></td>
+            </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <div align="center"><a href="/"><button>Ir al inicio</button></a></div>
+    <footer>
+        <br>
+        <div align="center">Curso de verano 2021 Ⓡ</div>
+    </footer>
+</body>
+</html>

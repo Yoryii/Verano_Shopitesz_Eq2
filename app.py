@@ -95,13 +95,19 @@ def error():
 
 #Rutas de JO - inicio
 
+#Rutas CATEGORIAS------------------------------------------INICIO
+
 @app.route('/categorias')
 def categorias():
-    return render_template('categorias.html')
+    return render_template('Categorias/categorias.html')
+
+
+#Rutas CATEGORIAS------------------------------------------FIN
+
 
 @app.route('/productos')
 def productos():
-    return render_template('Pedidos/productos.html')
+    return render_template('Productos/productos.html')
 #Rutas de JO - fin
 
 if __name__=='__main__':
