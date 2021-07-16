@@ -3,30 +3,35 @@
 <head>
     <link rel="stylesheet" href="{{url_for('static',filename='css/estilo.css')}}">
     <meta charset="UTF-8">
-    <title>Tarjetas</title>
+    <title>Categorias</title>
+    
 </head>
 <body>
-    <h1 align="center">Tarjetas</h1>
-    <table border="2">
-        <th>id tarjeta</th>
-        <th>Número de usuario</th>
-        <th>Número de tarjeta</th>
-        <th>Saldo</th>
-        <th>Banco</th>
-        <th>Estatus</th>
-        <th>Registrar nueva tarjeta</th>
+
+
+    <h1 align="center">Categorias</h1>
+    <br>
+    <table align="center" border="2">
+        <th>idCategoria</th>
+        <th>Nombre</th>
+        <th>Imagen</th>
+        <th>estatus</th>
+        <th>Modificar</th>
         <tr>
             <td>1</td>
-            <td>123</td>
-            <td>4598712365478952</td>
-            <td>$10,000</td>
-            <td>BBVA</td>
-            <td>Verificada</td>
+            <td>Electrónicos</td>
             <td><a href="/Tarjetas/new"><img src="{{url_for('static',filename='img/Tarjeta.jpg')}}"></a></td>
+            <td>Activo</td>
+            <td><input type="submit" value="Modificar"></td>
         </tr>
     </table>
-    <a href="javascript: history.go(-1)">Regresar</a>
-    <footer>
-    </footer>
+    <br>
+
+    <div align="center"><input type="submit" value="Agregar Categoria"></div>
+    <br>
+    <br>
+    <div align="center"><a href="javascript: history.go(-1)">Regresar</a></div>
+    <br>
+
 </body>
 </html>
