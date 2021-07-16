@@ -101,6 +101,10 @@ def error():
 def categorias():
     return render_template('Categorias/categorias.html')
 
+@app.route('categorias/new')
+def nuevaCategoria():
+    return render_template('Categorias/agregarCategoria.html')
+
 
 #Rutas CATEGORIAS------------------------------------------FIN
 
