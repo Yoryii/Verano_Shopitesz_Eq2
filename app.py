@@ -40,7 +40,7 @@ def agregarUsuario():
     u.estatus='Activo'
     u.agregar()
     #except:
-    print(error)
+    #print(error)
     return redirect(url_for('consultaUsuarios'))
 
 @app.route('/usuarios')
@@ -48,9 +48,19 @@ def consultaUsuarios():
     u = Usuario()
     return render_template('Usuarios/consultaUsuarios.html', usuarios=u.consultaGeneral())
 
-@app.route('/usuarios/edit')
+@app.route('/usuarios/edit',methods=['post'])
 def editarUsuario():
-    return render_template('Usuarios/editarUsuario.html')
+    u=Usuario()
+    u.idUsuario=request.form['idUsuario']
+    u.nombreCompleto = request.form['nombre']
+    u.direccion = request.form['direccion']
+    u.telefono = request.form['telefono']
+    u.email = request.form['email']
+    u.contrasena = request.form['password']
+    u.tipo = request.form['tipo']
+    u.estatus = 'Activo'
+    u.editar()
+    return redirect(url_for('consultaUsuarios'))
 
 @app.route('/usuarios/<int:id>')
 def consultaUsuario(id):

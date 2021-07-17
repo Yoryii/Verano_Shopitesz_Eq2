@@ -10,7 +10,7 @@
         <section>
             <h1 align="center">Editar usuario</h1>
             <div align="center"><img style="width:120px; height:120px;" src="{{url_for('static',filename='img/usuariosEdit.png')}}"></div>
-            <form method="post">
+            <form method="post" action="/usuarios/edit">
                 <div id="datosPersonales" align="center">
                     <fieldset>
                         <legend>Datos del usuario</legend>
@@ -28,7 +28,7 @@
                         <br>
 
                         <label>Teléfono:</label>
-                        <input type="text" name="teléfono" value="{{usuario.telefono}}">
+                        <input type="text" name="telefono" value="{{usuario.telefono}}">
                         <br>
 
                         <label>Email:</label>
@@ -36,7 +36,7 @@
                         <br>
 
                         <label>Contraseña:</label>
-                        <input type="password" name="contraseña" value="{{usuario.contrasena}}">
+                        <input type="password" name="password" value="{{usuario.contrasena}}">
                         <br>
 
                         <label>Tipo:</label>
@@ -64,7 +64,7 @@
 
                         <a href="/usuarios">Cancelar</a>
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="/usuarios">Guardar</a>
+                        <a href="/usuarios"><button type="submit">Guardar</button></a>
                     </fieldset>
                     </div>
                  </form>
