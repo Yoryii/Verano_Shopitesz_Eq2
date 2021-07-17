@@ -36,7 +36,7 @@ def agregarUsuario():
     u.telefono = request.form['telefono']
     u.email = request.form['email']
     u.contrasena = request.form['password']
-    u.tipo = 'Comprador'
+    u.tipo = request.form['tipo']
     u.estatus='Activo'
     u.agregar()
     #except:
@@ -51,6 +51,11 @@ def consultaUsuarios():
 @app.route('/usuarios/edit')
 def editarUsuario():
     return render_template('Usuarios/editarUsuario.html')
+
+@app.route('/usuarios/<int:id>')
+def consultaUsuario(id):
+    u = Usuario()
+    return render_template('usuarios/editarUsuario.html', usuario=u.consultaIndividual(id))
 
 #Usuarios fin
 #Pedidos - Inicio

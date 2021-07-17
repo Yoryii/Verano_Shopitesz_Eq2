@@ -10,40 +10,55 @@
         <section>
             <h1 align="center">Editar usuario</h1>
             <div align="center"><img style="width:120px; height:120px;" src="{{url_for('static',filename='img/usuariosEdit.png')}}"></div>
-            <form>
+            <form method="post">
                 <div id="datosPersonales" align="center">
                     <fieldset>
                         <legend>Datos del usuario</legend>
 
                         <label>Número de usuario:</label>
-                        <input type="number" name="idUsuario" readonly>
+                        <input type="number" name="idUsuario" readonly value="{{usuario.idUsuario}}">
                         <br>
 
                         <label>Nombre:</label>
-                        <input type="text" name="nombre">
+                        <input type="text" name="nombre" value="{{usuario.nombreCompleto}}">
                         <br>
 
                         <label>Dirección:</label>
-                        <input type="text" name="direccion">
+                        <input type="text" name="direccion" value="{{usuario.direccion}}">
                         <br>
 
                         <label>Teléfono:</label>
-                        <input type="number" name="teléfono">
+                        <input type="text" name="teléfono" value="{{usuario.telefono}}">
                         <br>
 
                         <label>Email:</label>
-                        <input type="email" name="email">
+                        <input type="email" name="email" value="{{usuario.email}}">
                         <br>
 
                         <label>Contraseña:</label>
-                        <input type="password" name="contraseña">
+                        <input type="password" name="contraseña" value="{{usuario.contrasena}}">
                         <br>
 
                         <label>Tipo:</label>
                         <br>
-                        <input type="checkbox" name="tipo">Cliente
-                        <input type="checkbox" name="tipo">Vendedor
-                        <input type="checkbox" name="tipo">Administrador
+                        <select name="tipo">
+                            {% if usuario.tipo=='Comprador' %}
+                            <option value="Comprador" selected>Comprador</option>
+                            {% else %}
+                            <option value="Comprador">Comprador</option>
+                            {% endif %}
+                            {% if usuario.tipo=='Vendedor' %}
+                            <option value="Vendedor" selected>Vendedor</option>
+                            {% else %}
+                            <option value="Vendedor">Vendedor</option>
+                            {% endif %}
+                            {% if usuario.tipo=='Administrador' %}
+                            <option value="Administrador" selected>Administrador</option>
+                            {% else %}
+                            <option value="Administrador">Administrador</option>
+                            {% endif %}
+                        </select>
+
                         <br>
                         <br>
 
