@@ -1,11 +1,32 @@
-from flask import Flask, render_template, request,redirect,url_for,flash
+#GDU
+from datetime import timedelta
+
+from flask import Flask, render_template, request,redirect,url_for,flash,session,abort
 from flask_bootstrap import Bootstrap
 from Modelo.Dao import db, Usuario, Pedido, DetallePedido
+
+#GDU
+from flask_login import login_required,login_user,logout_user,current_user,LoginManager
+
 app = Flask(__name__)
 Bootstrap(app)
 app.config['SQLALCHEMY_DATABASE_URI']='mysql+pymysql://user_shopitesz_Eq2:Hola.123@localhost/BD_Shopitesz_Eq2'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
 app.secret_key='Cl4v3'
+
+#GDU
+login_manager=LoginManager()
+login_manager.init_app(app)
+login_manager.login_view='mostrar_login'
+login_manager.login_message='¡ Tu sesión expiró !'
+login_manager.login_message_category="info"
+
+#GDU
+@app.before_request
+def before_request():
+    session.permanent=True
+    app.permanent_session_lifetime=timedelta(minutes=10)
+
 #Rutas del sistema - inicio
 #Página principal
 @app.route('/')
@@ -14,8 +35,43 @@ def inicio():
 
 #Login
 @app.route('/login')
+def mostrar_login():
+    if current_user.is_authenticated:
+        return render_template('principal.html')
+    else:
+        return render_template('Usuarios/login.html')
+
+#GDU
+@login_manager.user_loader
+def cargar_usuario(id):
+    return Usuario.query.get(int(id))
+
+#GDU
+@app.route("/Usuarios/validarSesion",methods=['POST'])
 def login():
-    return render_template('Usuarios/login.html')
+    correo=request.form['email']
+    password=request.form['pwd']
+    usuario=Usuario()
+    user=usuario.validar(correo,password)
+    if user!=None:
+        login_user(user)
+        return render_template('principal.html')
+    else:
+        #flash('Nombre de usuario o contraseña incorrectos')
+        return render_template('Usuarios/login.html')
+
+#GDU
+@app.route('/Usuarios/cerrarSesion')
+@login_required
+def cerrarSesion():
+    logout_user()
+    return redirect(url_for('mostrar_login'))
+
+#GDU
+@app.route('/Usuarios/verPerfil')
+@login_required
+def consultaPerfil():
+    return render_template('Usuarios/editar.html')
 
 #Rutas del sistema - fin
 
@@ -25,7 +81,10 @@ def login():
 
 @app.route('/usuarios/new')
 def nuevoUsuario():
-    return render_template('Usuarios/registrar.html')
+    if current_user.is_authenticated and not current_user.is_admin():
+        return render_template('principal.html')
+    else:
+        return render_template('Usuarios/registrar.html')
 
 @app.route('/usuarios/agregar',methods=['post'])
 def agregarUsuario():
@@ -35,8 +94,8 @@ def agregarUsuario():
     u.direccion = request.form['direccion']
     u.telefono = request.form['telefono']
     u.email = request.form['email']
-    u.contrasena = request.form['password']
-    u.tipo = request.form['tipo']
+    u.password = request.form['password']
+    u.tipo=request.values.get("tipo","Comprador")
     u.estatus='Activo'
     u.agregar()
     #except:

@@ -30,6 +30,7 @@
             <br>
             <input type="password" name="password">
             <br>
+            {% if current_user.is_authenticated and current_user.is_admin() %}
             <br>
             <select name="tipo">
                 <option value="Comprador" selected>Comprador</option>
@@ -37,6 +38,7 @@
                 <option value="Administrador">Administrador</option>
             </select>
             <br>
+            {% endif %}
             <br>
             <button type="submit">Registrar</button>
             <br>
