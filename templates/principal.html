@@ -56,6 +56,11 @@ li a:hover {
     {% if current_user.is_authenticated %}
     <li><a href="/Usuarios/cerrarSesion"><font color="red"> Cerrar Sesion </font> </a></li>
     {% endif %}
+    <li>
+              <a href="/usuarios/{{current_user.idUsuario}}">
+                {{current_user.nombreCompleto}}
+              </a>
+    </li>
 </ul>
 
 
