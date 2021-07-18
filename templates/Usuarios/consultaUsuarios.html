@@ -18,7 +18,7 @@
         <th>Dirección</th>
         <th>Teléfono</th>
         <th>Correo electrónico</th>
-        <th>Contraseña</th>
+        <!--<th>Contraseña</th>-->
         <th>Tipo</th>
         <th>Estatus</th>
         <th>Modificar</th>
@@ -30,7 +30,7 @@
                 <td>{{u.direccion}}</td>
                 <td>{{u.telefono}}</td>
                 <td>{{u.email}}</td>
-                <td>{{u.contrasena}}</td>
+                <!--<td>{{u.password_hash}}</td>-->
                 <td>{{u.tipo}}</td>
                 <td>{{u.estatus}}</td>
                 <td><a href="/usuarios/{{u.idUsuario}}"><img src="{{url_for('static',filename='img/editar.png')}}"></a></td>

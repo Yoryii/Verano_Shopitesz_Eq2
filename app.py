@@ -58,7 +58,7 @@ def login():
         return render_template('principal.html')
     else:
         #flash('Nombre de usuario o contraseña incorrectos')
-        return render_template('Usuarios/login.html')
+        return render_template('Usuarios/login.html', mensaje="Nombre de usuario o contraseña incorrectos")
 
 #GDU
 @app.route('/Usuarios/cerrarSesion')
@@ -114,12 +114,24 @@ def editarUsuario():
     u.nombreCompleto = request.form['nombre']
     u.direccion = request.form['direccion']
     u.telefono = request.form['telefono']
-    u.email = request.form['email']
-    u.contrasena = request.form['password']
-    u.tipo = request.form['tipo']
-    u.estatus = 'Activo'
-    u.editar()
+    if current_user.is_authenticated and current_user.is_admin():
+        u.email = request.form['email']
+    u.password = request.form['password']
+    if current_user.is_authenticated and current_user.is_admin():
+        u.tipo=request.values.get("tipo",u.tipo)
+    #u.estatus = 'Activo'
+    if current_user.is_authenticated and current_user.is_admin():
+        u.editar()
+    else:
+        u.editarLite(request.form['idUsuario'], request.form['nombre'], request.form['direccion'], request.form['telefono'], request.form['password'])
     return redirect(url_for('consultaUsuarios'))
+    #else:
+     #   u.nombreCompleto = request.form['nombre']
+       # u.direccion = request.form['direccion']
+        #u.telefono = request.form['telefono']
+        #u.password = request.form['password']
+        #u.editar()
+        #return redirect(url_for('consultaUsuarios'))
 
 @app.route('/usuarios/<int:id>')
 def consultaUsuario(id):

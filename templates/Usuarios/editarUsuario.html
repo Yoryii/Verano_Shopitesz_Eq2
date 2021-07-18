@@ -14,8 +14,7 @@
                 <div id="datosPersonales" align="center">
                     <fieldset>
                         <legend>Datos del usuario</legend>
-
-                        <label>Número de usuario:</label>
+                        <label>ID usuario:</label>
                         <input type="number" name="idUsuario" readonly value="{{usuario.idUsuario}}">
                         <br>
 
@@ -30,15 +29,17 @@
                         <label>Teléfono:</label>
                         <input type="text" name="telefono" value="{{usuario.telefono}}">
                         <br>
-
+                        {% if current_user.is_authenticated and current_user.is_admin() %}
                         <label>Email:</label>
                         <input type="email" name="email" value="{{usuario.email}}">
                         <br>
-
+                        {% endif %}
                         <label>Contraseña:</label>
                         <input type="password" name="password" value="{{usuario.contrasena}}">
                         <br>
 
+
+                        {% if current_user.is_authenticated and current_user.is_admin() %}
                         <label>Tipo:</label>
                         <br>
                         <select name="tipo">
@@ -60,11 +61,12 @@
                         </select>
 
                         <br>
+                        {% endif %}
                         <br>
 
                         <a href="/usuarios">Cancelar</a>
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="/usuarios"><button type="submit">Guardar</button></a>
+                        <a href="/usuarios"><button type="submit">Guardar admin</button></a>
                     </fieldset>
                     </div>
                  </form>

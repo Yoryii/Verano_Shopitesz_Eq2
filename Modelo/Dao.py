@@ -115,6 +115,13 @@ class Usuario(UserMixin, db.Model):
     def eliminar(self):
         db.session.delete(self)
         db.session.commit()
+    def editarLite(self, id, name, address, phone, pwd):
+        u=self.consultaIndividual(id)
+        u.nombre = name
+        u.direccion = address
+        u.telefono = phone
+        u.password = pwd
+        u.editar()
 #Usuarios - Fin
 
 #Pedidos - Inicio
