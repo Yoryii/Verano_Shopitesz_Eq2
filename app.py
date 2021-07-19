@@ -142,10 +142,16 @@ def consultaUsuario(id):
 
 @app.route('/usuarios/delete/<int:id>')
 def eliminarUsuario(id):
-    u=Usuario()
-    u.idUsuario=id
-    u.eliminar()
-    return render_template('principal.html')
+    if current_user.is_authenticated and (current_user.idUsuario == id or current_user.is_admin()):
+        u=Usuario()
+        u.idUsuario=id
+        u.eliminar()
+        if current_user.idUsuario == id:
+            return redirect(url_for('cerrarSesion'))
+        else:
+            return render_template('principal.html')
+    else:
+        return render_template('principal.html')
 #Usuarios fin
 #Pedidos - Inicio
 
