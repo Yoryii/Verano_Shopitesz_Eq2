@@ -159,6 +159,8 @@ def consultaDetallePedidos():
 
 #Rutas de Yoryi - fin
 
+
+
 #Rutas de Pancho - inicio
 
 @app.route('/pedidos/carrito')
@@ -176,6 +178,14 @@ def nuevaTarjeta():
 @app.route('/usuarios/error')
 def error():
     return render_template('Usuarios/error.html')
+
+@app.route('/Tarjetas/editarTarjeta')
+def editarTarjeta():
+    return render_template('Tarjeta/editarTarjeta.html')
+
+@app.route('/Tarjetas/eliminarTarjeta')
+def eliminarTarjeta():
+    return render_template('Tarjeta/eliminarTarjeta.html')
 
 #Rutas de Pancho - fin
 
