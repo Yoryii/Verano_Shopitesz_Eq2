@@ -113,7 +113,8 @@ class Usuario(UserMixin, db.Model):
         db.session.commit()
 
     def eliminar(self):
-        db.session.delete(self)
+        usuario = self.consultaIndividual(self.idUsuario)
+        db.session.delete(usuario)
         db.session.commit()
     def editarLite(self, id, name, address, phone, pwd):
         u=self.consultaIndividual(id)
