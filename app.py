@@ -104,39 +104,41 @@ def agregarUsuario():
 
 @app.route('/usuarios')
 def consultaUsuarios():
-    u = Usuario()
-    return render_template('Usuarios/consultaUsuarios.html', usuarios=u.consultaGeneral())
+    if current_user.is_authenticated and current_user.is_admin():
+        u = Usuario()
+        return render_template('Usuarios/consultaUsuarios.html', usuarios=u.consultaGeneral())
+    else:
+        return render_template('principal.html')
 
 @app.route('/usuarios/edit',methods=['post'])
 def editarUsuario():
-    u=Usuario()
-    u.idUsuario=request.form['idUsuario']
-    u.nombreCompleto = request.form['nombre']
-    u.direccion = request.form['direccion']
-    u.telefono = request.form['telefono']
-    if current_user.is_authenticated and current_user.is_admin():
-        u.email = request.form['email']
-    u.password = request.form['password']
-    if current_user.is_authenticated and current_user.is_admin():
-        u.tipo=request.values.get("tipo",u.tipo)
-    #u.estatus = 'Activo'
-    if current_user.is_authenticated and current_user.is_admin():
-        u.editar()
+    if current_user.is_authenticated:
+        u=Usuario()
+        u.idUsuario=request.form['idUsuario']
+        u.nombreCompleto = request.form['nombre']
+        u.direccion = request.form['direccion']
+        u.telefono = request.form['telefono']
+        if current_user.is_authenticated and current_user.is_admin():
+            u.email = request.form['email']
+        u.password = request.form['password']
+        if current_user.is_authenticated and current_user.is_admin():
+            u.tipo=request.values.get("tipo",u.tipo)
+        #u.estatus = 'Activo'
+        if current_user.is_authenticated and current_user.is_admin():
+            u.editar()
+        else:
+            u.editarLite(request.form['idUsuario'], request.form['nombre'], request.form['direccion'], request.form['telefono'], request.form['password'])
+        return redirect(url_for('consultaUsuarios'))
     else:
-        u.editarLite(request.form['idUsuario'], request.form['nombre'], request.form['direccion'], request.form['telefono'], request.form['password'])
-    return redirect(url_for('consultaUsuarios'))
-    #else:
-     #   u.nombreCompleto = request.form['nombre']
-       # u.direccion = request.form['direccion']
-        #u.telefono = request.form['telefono']
-        #u.password = request.form['password']
-        #u.editar()
-        #return redirect(url_for('consultaUsuarios'))
+        return render_template('principal.html')
 
 @app.route('/usuarios/<int:id>')
 def consultaUsuario(id):
-    u = Usuario()
-    return render_template('usuarios/editarUsuario.html', usuario=u.consultaIndividual(id))
+    if current_user.is_authenticated and current_user.idUsuario == id:
+        u = Usuario()
+        return render_template('usuarios/editarUsuario.html', usuario=u.consultaIndividual(id))
+    else:
+        return render_template('principal.html')
 
 #Usuarios fin
 #Pedidos - Inicio
