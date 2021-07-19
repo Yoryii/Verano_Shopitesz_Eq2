@@ -165,6 +165,16 @@ def consultaDetallePedidos():
 
 #DetallePedidos - Fin
 
+#Manejo de errores - INICIO
+@app.errorhandler(404)
+def error_404(e):
+    return render_template('Errores/error_404.html'), 404
+
+@app.errorhandler(500)
+def error_500(e):
+    return render_template('Errores/error_500.html'), 500
+#Manejo de errores - FIN
+
 #Rutas de Yoryi - fin
 
 
