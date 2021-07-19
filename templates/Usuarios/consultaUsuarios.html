@@ -22,7 +22,7 @@
         <th>Tipo</th>
         <th>Estatus</th>
         <th>Modificar</th>
-        <th>Eliminar</th>
+        <!--<th>Eliminar</th>-->
         {% for u in usuarios %}
             <tr>
                 <td>{{u.idUsuario}}</td>
@@ -34,7 +34,7 @@
                 <td>{{u.tipo}}</td>
                 <td>{{u.estatus}}</td>
                 <td><a href="/usuarios/{{u.idUsuario}}"><img src="{{url_for('static',filename='img/editar.png')}}"></a></td>
-                <td><a href="./eliminarUsuarios.html"><img src="{{url_for('static',filename='img/eliminar.png')}}"></a></td>
+                <!--<td><a href="./eliminarUsuarios.html"><img src="{{url_for('static',filename='img/eliminar.png')}}"></a></td>-->
             </tr>
         {% endfor %}
     </table>

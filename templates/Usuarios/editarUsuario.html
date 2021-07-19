@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <link rel="stylesheet" href="{{url_for('static',filename='css/estilo.css')}}">
+    <script src="{{url_for('static',filename='JS/global.js')}}"></script>
     <meta charset="UTF-8">
     <title>Editar usuario</title>
 </head>
@@ -67,6 +68,9 @@
                         <a href="/">Cancelar</a>
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <a href="/usuarios"><button type="submit">Guardar</button></a>
+                        <br>
+                        <br>
+                        <a href="javascript:eliminarUsuario({{usuario.idUsuario}},'{{usuario.nombreCompleto}}')"><font color="red">¡Eliminar cuenta!</font></a>
                     </fieldset>
                     </div>
                  </form>

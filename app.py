@@ -134,12 +134,18 @@ def editarUsuario():
 
 @app.route('/usuarios/<int:id>')
 def consultaUsuario(id):
-    if current_user.is_authenticated and current_user.idUsuario == id:
+    if current_user.is_authenticated and (current_user.idUsuario == id or current_user.is_admin()):
         u = Usuario()
         return render_template('usuarios/editarUsuario.html', usuario=u.consultaIndividual(id))
     else:
         return render_template('principal.html')
 
+@app.route('/usuarios/delete/<int:id>')
+def eliminarUsuario(id):
+    u=Usuario()
+    u.idUsuario=id
+    u.eliminar()
+    return render_template('principal.html')
 #Usuarios fin
 #Pedidos - Inicio
 
