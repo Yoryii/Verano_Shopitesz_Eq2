@@ -4,34 +4,39 @@
     <link rel="stylesheet" href="{{url_for('static',filename='css/estilo.css')}}">
     <meta charset="UTF-8">
     <title>Categorias</title>
-
 </head>
-<body>
-
-
+<nav>
     <h1 align="center">Categorias</h1>
+    <div align="center"><img style="width:100px; height:100px;" src="{{url_for('static',filename='img/usuarios.png')}}"></div>
+</nav>
+<body>
+    <div align="center"><a href="/usuarios/new"><img src="{{url_for('static',filename='img/add.gif')}}">Registrar categoria</a></div>
     <br>
-    <table align="center" border="2">
-        <th>idCategoria</th>
+    <table border="5" align="center">
+        <th>ID</th>
         <th>Nombre</th>
         <th>Imagen</th>
-        <th>estatus</th>
+
+        <!--<th>Contraseña</th>-->
+        <th>Estatus</th>
         <th>Modificar</th>
-        <tr>
-            <td>1</td>
-            <td>Electrónicos</td>
-            <td><a href="/Tarjetas/new"><img src="{{url_for('static',filename='img/Tarjeta.jpg')}}"></a></td>
-            <td>Activo</td>
-            <td><input type="submit" value="Modificar"></td>
-        </tr>
+        <!--<th>Eliminar</th>-->
+        {% for c in categorias %}
+            <tr>
+                <td>{{c.idCategoria}}</td>
+                <td>{{c.nombre}}</td>
+                <td>{{c.estatus}}</td>
+                <td>{{c.imagen}}</td>
+                <td><a href="/categorias/{{c.idCategoria}}"><img src="{{url_for('static',filename='img/editar.png')}}"></a></td>
+                <!--<td><a href="./eliminarUsuarios.html"><img src="{{url_for('static',filename='img/eliminar.png')}}"></a></td>-->
+            </tr>
+        {% endfor %}
     </table>
     <br>
-
-    <div align="center"><input type="submit" value="Agregar Categoria"></div>
-    <br>
-    <br>
-    <div align="center"><a href="javascript: history.go(-1)">Regresar</a></div>
-    <br>
-
+    <div align="center"><a href="/"><button>Ir al inicio</button></a></div>
+    <footer>
+        <br>
+        <div align="center">Curso de verano 2021 Ⓡ</div>
+    </footer>
 </body>
 </html>
