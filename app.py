@@ -3,7 +3,7 @@ from datetime import timedelta
 
 from flask import Flask, render_template, request, redirect, url_for, flash, session, abort
 from flask_bootstrap import Bootstrap
-from Modelo.Dao import db, Usuario, Pedido, DetallePedido, Tarjetas, Categoria
+from Modelo.Dao import db, Usuario, Pedido, DetallePedido, Tarjetas, Categoria, Producto
 
 # GDU
 from flask_login import login_required, login_user, logout_user, current_user, LoginManager
@@ -331,9 +331,66 @@ def eliminarCategoria(id):
 # Rutas CATEGORIAS------------------------------------------FIN
 
 
+
+
+
+
+#Rutas PRODUCTOS-------------------------------------------INICIO
+
 @app.route('/productos')
 def productos():
-    return render_template('Productos/productos.html')
+    p = Producto()
+    return render_template('Productos/productos.html', productos=p.consultaGeneral())
+
+
+
+
+@app.route('/productos/new')
+def nuevoProducto():
+    return render_template('Productos/agregarProducto.html')
+
+@app.route('/productos/agregar', methods=['post'])
+def agregarProducto():
+    # try:
+    p = Producto()
+    p.idProducto = request.form['idProducto']
+    p.idCategoria = request.form['idCategoria']
+    p.nombre = request.form['nombre']
+    p.descripcion = request.form['descripcion']
+    p.precioVenta = request.form['precioVenta']
+    p.estatus = 'Activo'
+    p.agregar()
+    # except:
+    # print(error)
+    return redirect(url_for('productos'))
+
+
+@app.route('/categorias/edit', methods=['post'])
+def editarProducto():
+
+        c = Categoria()
+        c.idCategoria = request.form['idCategoria']
+        c.nombre = request.form['nombre']
+
+        c.editar()
+
+        return redirect(url_for('categorias'))
+
+
+@app.route('/categorias/<int:id>')
+def consultaProducto(id):
+
+        c = Categoria()
+        return render_template('categorias/editarCategoria.html', c=c.consultaIndividual(id))
+
+@app.route('/categorias/delete/<int:id>')
+def eliminarProducto(id):
+    c = Categoria()
+    c.idCategoria = id
+    c.eliminar()
+    return render_template('principal.html')
+
+#Rutas PRODUCTOS--------------------------------------------FIN
 
 
 # Rutas de JO - fin

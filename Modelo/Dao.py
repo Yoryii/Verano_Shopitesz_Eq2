@@ -233,4 +233,38 @@ class Tarjetas(db.Model):
 #Parte de Francisco - Fin
 
 
+class Producto(db.Model):
+    __tablename__='Producto'
+    idProducto=Column(Integer,primary_key=True)
+    idCategoria=Column(Integer)
+    nombre=Column(String,unique=True)
+    descripcion=Column(String,nullable=False)
+    precioVenta=Column(Float, nullable=False)
+    existencia=Column(Integer, nullable=False)
+    foto=Column(BLOB)
+    especificaciones=Column(BLOB)
+    estatus=Column(String,nullable=False)
+
+
+    def consultaGeneral(self):
+        return self.query.all()
+
+    def consultaIndividual(self,id):
+        return Categoria.query.get(id)
+
+    def consultarImagen(self,id):
+        return self.consultaIndividuall(id).imagen
+
+    def agregar(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def editar(self):
+        db.session.merge(self)
+        db.session.commit()
+
+    def eliminar(self):
+        db.session.delete(self)
+        db.session.commit()
+
 
