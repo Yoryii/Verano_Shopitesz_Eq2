@@ -4,70 +4,32 @@
     <link rel="stylesheet" href="{{url_for('static',filename='css/estilo.css')}}">
     <script src="{{url_for('static',filename='JS/global.js')}}"></script>
     <meta charset="UTF-8">
-    <title>Editar usuario</title>
+    <title>Editar categoria</title>
 </head>
 <body>
     <main>
         <section>
-            <h1 align="center">Editar usuario</h1>
+            <h1 align="center">Editar Categoria</h1>
             <div align="center"><img style="width:120px; height:120px;" src="{{url_for('static',filename='img/usuariosEdit.png')}}"></div>
-            <form method="post" action="/usuarios/edit">
+            <form method="post" action="/categorias/edit">
                 <div id="datosPersonales" align="center">
                     <fieldset>
-                        <legend>Datos del usuario</legend>
-                        <label>ID usuario:</label>
-                        <input type="number" name="idUsuario" readonly value="{{usuario.idUsuario}}">
+                        <legend>Datos de la categoria</legend>
+                        <label>ID categoria:</label>
+                        <input type="number" name="idCategoria" readonly value="{{categoria.idCategoria}}">
                         <br>
 
                         <label>Nombre:</label>
-                        <input type="text" name="nombre" value="{{usuario.nombreCompleto}}">
-                        <br>
-
-                        <label>Dirección:</label>
-                        <input type="text" name="direccion" value="{{usuario.direccion}}">
-                        <br>
-
-                        <label>Teléfono:</label>
-                        <input type="text" name="telefono" value="{{usuario.telefono}}">
-                        <br>
-                        {% if current_user.is_authenticated and current_user.is_admin() %}
-                        <label>Email:</label>
-                        <input type="email" name="email" value="{{usuario.email}}">
-                        <br>
-                        {% endif %}
-                        <label>Contraseña:</label>
-                        <input type="password" name="password" value="{{usuario.contrasena}}">
+                        <input type="text" name="nombre" value="{{categoria.nombre}}">
                         <br>
 
 
-                        {% if current_user.is_authenticated and current_user.is_admin() %}
-                        <label>Tipo:</label>
-                        <br>
-                        <select name="tipo">
-                            {% if usuario.tipo=='Comprador' %}
-                            <option value="Comprador" selected>Comprador</option>
-                            {% else %}
-                            <option value="Comprador">Comprador</option>
-                            {% endif %}
-                            {% if usuario.tipo=='Vendedor' %}
-                            <option value="Vendedor" selected>Vendedor</option>
-                            {% else %}
-                            <option value="Vendedor">Vendedor</option>
-                            {% endif %}
-                            {% if usuario.tipo=='Administrador' %}
-                            <option value="Administrador" selected>Administrador</option>
-                            {% else %}
-                            <option value="Administrador">Administrador</option>
-                            {% endif %}
-                        </select>
 
-                        <br>
-                        {% endif %}
-                        <br>
+
 
                         <a href="/">Cancelar</a>
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="/usuarios"><button type="submit">Guardar</button></a>
+                        <a href="/categorias"><button type="submit">Guardar</button></a>
                         <br>
                         <br>
                         <a href="javascript:eliminarUsuario({{usuario.idUsuario}},'{{usuario.nombreCompleto}}')"><font color="red">¡Eliminar cuenta!</font></a>

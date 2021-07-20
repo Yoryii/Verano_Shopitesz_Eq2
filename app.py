@@ -243,21 +243,18 @@ def nuevaCategoria():
 @app.route('/categorias/edit',methods=['post'])
 def editarCategoria():
 
-        c=Categoria()
+        c = Categoria()
         c.nombre = request.form['nombre']
-
         c.editar()
-
         return redirect(url_for('categorias'))
 
 
-@app.route('/usuarios/<int:id>')
-def consultaUsuario(id):
-    if current_user.is_authenticated and (current_user.idUsuario == id or current_user.is_admin()):
-        u = Usuario()
-        return render_template('usuarios/editarUsuario.html', usuario=u.consultaIndividual(id))
-    else:
-        return render_template('principal.html')
+@app.route('/categorias/<int:id>')
+def consultaCategoria(id):
+
+        c = Categoria()
+        return render_template('categorias/editarCategoria.html', categoria=c.consultaIndividual(id))
+
 #Rutas CATEGORIAS------------------------------------------FIN
 
 
