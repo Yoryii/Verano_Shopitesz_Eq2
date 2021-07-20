@@ -250,7 +250,7 @@ class Producto(db.Model):
         return self.query.all()
 
     def consultaIndividual(self,id):
-        return Categoria.query.get(id)
+        return Producto.query.get(id)
 
     def consultarImagen(self,id):
         return self.consultaIndividuall(id).imagen

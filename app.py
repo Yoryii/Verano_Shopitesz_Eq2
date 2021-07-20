@@ -365,29 +365,33 @@ def agregarProducto():
     return redirect(url_for('productos'))
 
 
-@app.route('/categorias/edit', methods=['post'])
+@app.route('/productos/edit', methods=['post'])
 def editarProducto():
 
-        c = Categoria()
-        c.idCategoria = request.form['idCategoria']
-        c.nombre = request.form['nombre']
+        p = Producto()
+        p.idProducto = request.form['idProducto']
+        p.idCategorias = request.form['idCategoria']
+        p.nombre = request.form['nombre']
+        p.descripcion = request.form['descripcion']
+        p.precioVenta = request.form['precioVenta']
+        p.existencia = request.form['existencia']
 
-        c.editar()
+        p.editar()
 
-        return redirect(url_for('categorias'))
+        return redirect(url_for('productos'))
 
 
-@app.route('/categorias/<int:id>')
+@app.route('/productos/<int:id>')
 def consultaProducto(id):
 
-        c = Categoria()
-        return render_template('categorias/editarCategoria.html', c=c.consultaIndividual(id))
+        p = Producto()
+        return render_template('productos/editarProducto.html', p=p.consultaIndividual(id))
 
-@app.route('/categorias/delete/<int:id>')
+@app.route('/productos/delete/<int:id>')
 def eliminarProducto(id):
-    c = Categoria()
-    c.idCategoria = id
-    c.eliminar()
+    p = Producto()
+    p.idProducto = id
+    p.eliminar()
     return render_template('principal.html')
 
 #Rutas PRODUCTOS--------------------------------------------FIN

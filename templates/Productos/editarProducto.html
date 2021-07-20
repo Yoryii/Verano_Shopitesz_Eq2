@@ -1,10 +1,61 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="es">
 <head>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/estilo.css')}}">
+    <script src="{{url_for('static',filename='JS/global.js')}}"></script>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Editar Producto</title>
 </head>
 <body>
+    <main>
+        <section>
+            <h1 align="center">Editar Producto</h1>
+            <div align="center"><img style="width:120px; height:120px;" src="{{url_for('static',filename='img/usuariosEdit.png')}}"></div>
+            <form method="post" action="/productos/edit">
+                <div id="datosPersonales" align="center">
+                    <fieldset>
+                        <legend>Datos del producto</legend>
+                        <label>ID producto:</label>
+                        <input type="number" name="idProducto" readonly value="{{p.idProducto}}">
+                        <br>
 
+                        <label>ID categoria:</label>
+                        <input type="number" name="idCategoria" value="{{p.idCategoria}}">
+                        <br>
+
+
+                        <label>Nombre:</label>
+                        <input type="text" name="nombre" value="{{p.nombre}}">
+                        <br>
+
+                        <label>Descripcion:</label>
+                        <input type="text" name="descripcion" value="{{p.descripcion}}">
+                        <br>
+
+                        <label>Precio Venta:</label>
+                        <input type="text" name="precioVenta" value="{{p.existencia}}">
+                        <br>
+
+                        <label>Existencias:</label>
+                        <input type="text" name="existencia" value="{{p.existencia}}">
+                        <br>
+
+
+
+                        <a href="/">Cancelar</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="/categorias"><button type="submit">Guardar</button></a>
+                        <br>
+                        <br>
+                        <a href="javascript:eliminarProducto({{p.idProducto}},'{{p.idCategoria}}')"><font color="red">¡Eliminar producto!</font></a>
+                    </fieldset>
+                    </div>
+                 </form>
+        </section>
+    </main>
+        <footer>
+            <br>
+            <div align="center">Curso de verano 2021 Ⓡ</div>
+        </footer>
 </body>
 </html>
