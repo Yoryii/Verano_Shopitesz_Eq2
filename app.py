@@ -233,7 +233,7 @@ def agregarCategoria():
 @app.route('/categorias')
 def categorias():
     c = Categoria()
-    return render_template('Categorias/categorias.html', categorias=c.consultaGeneral)
+    return render_template('Categorias/categorias.html', categorias = c.consultaGeneral())
 
 
 @app.route('/categorias/new')

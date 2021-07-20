@@ -21,12 +21,12 @@
         <th>Estatus</th>
         <th>Modificar</th>
         <!--<th>Eliminar</th>-->
-        {% for c in categorias %}
+        {% for c in categorias%}
             <tr>
                 <td>{{c.idCategoria}}</td>
                 <td>{{c.nombre}}</td>
-                <td>{{c.estatus}}</td>
                 <td>{{c.imagen}}</td>
+                <td>{{c.estatus}}</td>
                 <td><a href="/categorias/{{c.idCategoria}}"><img src="{{url_for('static',filename='img/editar.png')}}"></a></td>
                 <!--<td><a href="./eliminarUsuarios.html"><img src="{{url_for('static',filename='img/eliminar.png')}}"></a></td>-->
             </tr>

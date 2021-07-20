@@ -111,6 +111,11 @@ alter table Productos add constraint productos_categorias_fk foreign key (idCate
 
 /*Mostrar tablas*/
 show tables;
+select*from categorias
+update usuarios set tipo='Administrador'
+ where idUsuario=2;
+ 
+ insert into Categorias (idCategoria, nombre, imagen, estatus) values(1, 'Electronicos', null, 'Activo')
 
 /*Usuarios y permisos para conexión*/
 create user user_shopitesz_Eq2 identified by 'Hola.123';
