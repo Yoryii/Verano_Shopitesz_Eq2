@@ -195,3 +195,42 @@ class DetallePedido(db.Model):
 #DetallePedidos - Fin
 
 #Parte de Yoryi - Fin
+
+
+#Parte de Francisco - Inicio
+
+class Tarjetas(db.Model):
+    __tablename__ = 'Tarjetas'
+    idTarjeta = Column(Integer, primary_key=True)
+    idUsuario = Column(Integer)
+    noTarjeta = Column(Integer)
+    saldo = Column(Float)
+    banco = Column(String)
+    estatus = Column(String, nullable=False)
+
+    def consultaGeneral(self, id):
+        return self.query.filter(Tarjetas.idUsuario==id).all()
+
+    def consultaIndividual(self,id):
+        return self.query.get(id)
+
+    def agregar(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def editar(self):
+        db.session.merge(self)
+        db.session.commit()
+
+    def eliminar(self):
+        usuario = self.consultaIndividual(self.idUsuario)
+        db.session.delete(usuario)
+        db.session.commit()
+
+
+
+
+#Parte de Francisco - Fin
+
+
+

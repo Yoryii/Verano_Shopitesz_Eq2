@@ -3,41 +3,44 @@
     <HEAD>
         <link rel="stylesheet" href="{{url_for('static',filename='css/estilo.css')}}">
         <meta charset="utf-8">
-        <title>Actualizar tarjeta</title>
+        <title>Registrar tarjeta</title>
     </HEAD>
     <body>
-        <br>
         <p align="center"><b>Actualizar tarjeta</b></p>
         <div align="center"><img src="{{url_for('static',filename='img/Tarjeta.jpg')}}"></div>
         <br>
-        <form align="center">
-            <label>Nombre(s):</label>
+        <form align="center" action="/Tarjetas/editar"  method="post">
+            <label>ID:</label>
             <br>
-            <input type="text" name="nombre">
+            <input type="number" readonly name="idTarjeta" value="{{Tar.idTarjeta}}">
             <br>
             <label>Numero de usuario:</label>
             <br>
-            <input type="text" name="noUsuario">
+            <input type="text" name="idUsuario" value="{{Tar.idUsuario}}">
             <br>
             <label>Numero de tarjeta:</label>
             <br>
-            <input type="text" name="noTarjeta">
+            <input type="text" name="noTarjeta" value="{{Tar.noTarjeta}}">
             <br>
             <label>Saldo:</label>
             <br>
-            <input type="text" name="saldo">
+            <input type="text" name="saldo" value="{{Tar.saldo}}">
             <br>
             <label>Banco:</label>
             <br>
-            <input type="text" name="banco">
+            <input type="text" name="banco" value="{{Tar.banco}}">
             <br>
             <label>Estatus:</label>
             <br>
-            <input type="text" name="estatus">
+            <input type="text" name="estatus" value="{{Tar.estatus}}">
 
             <br>
             <br>
-            <button type="submit">Actualizar</button>
+            <button type="submit">Guardar</button>
+            <br>
+            <a href="javascript:eliminarUsuario({{Tar.idTarjeta}},'{{Tar.idUsuario}}')"><font color="red">¡Eliminar Tarjeta!</font></a>
+            <br>
+            <div align="center"><a href="/"><button>Ir al inicio</button></a></div>
         </form>
     </body>
 </HTML>

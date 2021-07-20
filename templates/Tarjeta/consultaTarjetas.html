@@ -15,24 +15,26 @@
         <th>Saldo</th>
         <th>Banco</th>
         <th>Estatus</th>
-        <th>Editar tarjeta</th>
-        <th>Eliminar Tarjeta</th>
+        <th>Ver detalles</th>
+        {% for Tar in tarjetas %}
         <tr>
-            <td>1</td>
-            <td>123</td>
-            <td>4598712365478952</td>
-            <td>$10,000</td>
-            <td>BBVA</td>
-            <td>Verificada</td>
-            <td><a href="/Tarjetas/editarTarjeta"><img src="{{url_for('static',filename='img/editar.png')}}"></a></td>
-            <td><a href="/Tarjetas/eliminarTarjeta"><img src="{{url_for('static',filename='img/eliminar.png')}} "></a></td>
+            <td>{{Tar.idTarjeta}}</td>
+            <td>{{Tar.idUsuario}}</td>
+            <td>{{Tar.noTarjeta}}</td>
+            <td>{{Tar.saldo}}</td>
+            <td>{{Tar.banco}}</td>
+            <td>{{Tar.estatus}}</td>
+            <td><a href="/Tarjetas/editarTarjeta"><img src="{{url_for('static',filename='img/ojo.png')}}"></a></td>
         </tr>
+        {% endfor %}
     </table>
         <br>
         <div align="center"><a href="/Tarjetas/new">Registrar tarjeta</a></div>
         <br>
-    <a href="javascript: history.go(-1)">Regresar</a>
+    <div align="center"><a href="/"><button>Ir al inicio</button></a></div>
     <footer>
+        <br>
+        <div align="center">Curso de verano 2021 Ⓡ</div>
     </footer>
 </body>
 </html>
