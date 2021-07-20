@@ -16,11 +16,11 @@
                     <fieldset>
                         <legend>Datos de la categoria</legend>
                         <label>ID categoria:</label>
-                        <input type="number" name="idCategoria" readonly value="{{categoria.idCategoria}}">
+                        <input type="number" name="idCategoria" readonly value="{{c.idCategoria}}">
                         <br>
 
                         <label>Nombre:</label>
-                        <input type="text" name="nombre" value="{{categoria.nombre}}">
+                        <input type="text" name="nombre" value="{{c.nombre}}">
                         <br>
 
 
@@ -32,7 +32,7 @@
                         <a href="/categorias"><button type="submit">Guardar</button></a>
                         <br>
                         <br>
-                        <a href="javascript:eliminarUsuario({{usuario.idUsuario}},'{{usuario.nombreCompleto}}')"><font color="red">¡Eliminar cuenta!</font></a>
+                        <a href="javascript:eliminarCategoria({{c.idCategoria}},'{{c.nombre}}')"><font color="red">¡Eliminar categoria!</font></a>
                     </fieldset>
                     </div>
                  </form>

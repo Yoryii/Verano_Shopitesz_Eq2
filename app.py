@@ -300,6 +300,34 @@ def agregarCategoria():
     # except:
     # print(error)
     return redirect(url_for('categorias'))
+
+
+@app.route('/categorias/edit', methods=['post'])
+def editarCategoria():
+
+        c = Categoria()
+        c.idCategoria = request.form['idCategoria']
+        c.nombre = request.form['nombre']
+
+        c.editar()
+
+        return redirect(url_for('categorias'))
+
+
+@app.route('/categorias/<int:id>')
+def consultaCategoria(id):
+
+        c = Categoria()
+        return render_template('categorias/editarCategoria.html', c=c.consultaIndividual(id))
+
+@app.route('/categorias/delete/<int:id>')
+def eliminarCategoria(id):
+    c = Categoria()
+    c.idCategoria = id
+    c.eliminar()
+    return render_template('principal.html')
+
+
 # Rutas CATEGORIAS------------------------------------------FIN
 
 
