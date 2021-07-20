@@ -1,10 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<!Doctype HTML>
+<HTML LANG="ES">
+    <HEAD>
+        <link rel="stylesheet" href="{{url_for('static',filename='css/estilo.css')}}">
+        <meta charset="utf-8">
+        <title>Registrar producto</title>
+    </HEAD>
+    <body>
+        <h1 align="center">Registrar producto</h1>
+        <div align="center"><img src="{{url_for('static',filename='img/registro.png')}}"></div>
+        <br>
+        <form align="center" action="/productos/agregar"  method="post">
 
-</body>
-</html>
+
+            <label>idCategoria: </label>
+            <br>
+            <input type="number" name="idCategoria">
+            <br>
+            <label>Nombre:</label>
+            <br>
+            <input type="text" name="nombre">
+            <br>
+            <label>Descripcion:</label>
+            <br>
+            <input type="text" name="descripcion">
+            <br>
+            <label> Precio de venta:</label>
+            <br>
+            <input type="text" name="precioVenta">
+            <br>
+
+            <label>Existencias: </label>
+            <br>
+            <input type="text" name="existencia">
+            <br>
+
+            <br>
+            <button type="submit">Registrar</button>
+            <br>
+            <a href="javascript: history.go(-1)">Regresar</a>
+        </form>
+        <footer>
+            <br>
+            <div align="center">Curso de verano 2021 Ⓡ</div>
+        </footer>
+    </body>
+</HTML>

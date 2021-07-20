@@ -234,7 +234,7 @@ class Tarjetas(db.Model):
 
 
 class Producto(db.Model):
-    __tablename__='Producto'
+    __tablename__='Productos'
     idProducto=Column(Integer,primary_key=True)
     idCategoria=Column(Integer)
     nombre=Column(String,unique=True)

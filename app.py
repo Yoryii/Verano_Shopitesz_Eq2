@@ -353,11 +353,11 @@ def nuevoProducto():
 def agregarProducto():
     # try:
     p = Producto()
-    p.idProducto = request.form['idProducto']
     p.idCategoria = request.form['idCategoria']
     p.nombre = request.form['nombre']
     p.descripcion = request.form['descripcion']
     p.precioVenta = request.form['precioVenta']
+    p.existencia = request.form['existencia']
     p.estatus = 'Activo'
     p.agregar()
     # except:
