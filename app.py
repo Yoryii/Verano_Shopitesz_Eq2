@@ -3,7 +3,7 @@ from datetime import timedelta
 
 from flask import Flask, render_template, request, redirect, url_for, flash, session, abort
 from flask_bootstrap import Bootstrap
-from Modelo.Dao import db, Usuario, Pedido, DetallePedido, Tarjetas
+from Modelo.Dao import db, Usuario, Pedido, DetallePedido, Tarjetas, Categoria
 
 # GDU
 from flask_login import login_required, login_user, logout_user, current_user, LoginManager
@@ -282,14 +282,24 @@ def consultaGeneral(id):
 
 @app.route('/categorias')
 def categorias():
-    return render_template('Categorias/categorias.html')
+    c = Categoria()
+    return render_template('Categorias/categorias.html', categorias=c.consultaGeneral())
 
 
 @app.route('/categorias/new')
 def nuevaCategoria():
     return render_template('Categorias/agregarCategoria.html')
 
-
+@app.route('/categorias/agregar', methods=['post'])
+def agregarCategoria():
+    # try:
+    c = Categoria()
+    c.nombre = request.form['nombre']
+    c.estatus = 'Activa'
+    c.agregar()
+    # except:
+    # print(error)
+    return redirect(url_for('categorias'))
 # Rutas CATEGORIAS------------------------------------------FIN
 
 
