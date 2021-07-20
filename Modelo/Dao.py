@@ -118,7 +118,7 @@ class Usuario(UserMixin, db.Model):
         db.session.commit()
     def editarLite(self, id, name, address, phone, pwd):
         u=self.consultaIndividual(id)
-        u.nombre = name
+        u.nombreCompleto = name
         u.direccion = address
         u.telefono = phone
         u.password = pwd

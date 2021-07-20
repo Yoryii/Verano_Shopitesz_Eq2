@@ -2,54 +2,37 @@
 <html lang="es">
 <head>
     <link rel="stylesheet" href="{{url_for('static',filename='css/estilo.css')}}">
+    <script src="{{url_for('static',filename='JS/global.js')}}"></script>
     <meta charset="UTF-8">
-    <title>Editar usuario</title>
+    <title>Editar categoria</title>
 </head>
 <body>
     <main>
         <section>
-            <h1 align="center">Editar usuario</h1>
+            <h1 align="center">Editar Categoria</h1>
             <div align="center"><img style="width:120px; height:120px;" src="{{url_for('static',filename='img/usuariosEdit.png')}}"></div>
-            <form>
+            <form method="post" action="/categorias/edit">
                 <div id="datosPersonales" align="center">
                     <fieldset>
-                        <legend>Datos del usuario</legend>
-
-                        <label>Número de usuario:</label>
-                        <input type="number" name="idUsuario" readonly>
+                        <legend>Datos de la categoria</legend>
+                        <label>ID categoria:</label>
+                        <input type="number" name="idCategoria" readonly value="{{categoria.idCategoria}}">
                         <br>
 
                         <label>Nombre:</label>
-                        <input type="text" name="nombre">
+                        <input type="text" name="nombre" value="{{categoria.nombre}}">
                         <br>
 
-                        <label>Dirección:</label>
-                        <input type="text" name="direccion">
-                        <br>
 
-                        <label>Teléfono:</label>
-                        <input type="number" name="teléfono">
-                        <br>
 
-                        <label>Email:</label>
-                        <input type="email" name="email">
-                        <br>
 
-                        <label>Contraseña:</label>
-                        <input type="password" name="contraseña">
-                        <br>
 
-                        <label>Tipo:</label>
-                        <br>
-                        <input type="checkbox" name="tipo">Cliente
-                        <input type="checkbox" name="tipo">Vendedor
-                        <input type="checkbox" name="tipo">Administrador
-                        <br>
-                        <br>
-
-                        <a href="/usuarios">Cancelar</a>
+                        <a href="/">Cancelar</a>
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="/usuarios">Guardar</a>
+                        <a href="/categorias"><button type="submit">Guardar</button></a>
+                        <br>
+                        <br>
+                        <a href="javascript:eliminarUsuario({{usuario.idUsuario}},'{{usuario.nombreCompleto}}')"><font color="red">¡Eliminar cuenta!</font></a>
                     </fieldset>
                     </div>
                  </form>
