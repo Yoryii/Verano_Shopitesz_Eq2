@@ -209,7 +209,7 @@ class Tarjetas(db.Model):
     estatus = Column(String, nullable=False)
 
     def consultaGeneral(self, id):
-        return self.query.filter(Tarjetas.idUsuario==id).all()
+        return self.query.filter(self.idUsuario==id).all()
 
     def consultaIndividual(self,id):
         return self.query.get(id)

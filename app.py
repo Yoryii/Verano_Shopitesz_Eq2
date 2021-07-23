@@ -245,7 +245,7 @@ def eliminarTarjeta(id):
 def consultaTarjetas():
     if current_user.is_authenticated and current_user.is_comprador():
         Tar = Tarjetas()
-        return render_template('Tarjeta/consultaTarjetas.html', Tarjetas=Tar.consultaGeneral(Tar.idUsuario))
+        return render_template('Tarjeta/consultaTarjetas.html', Tarjetas=Tar.consultaGeneral(current_user.idUsuario))
     else:
         return render_template('principal.html')
 
