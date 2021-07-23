@@ -158,7 +158,7 @@ def consultaUsuario(id):
 def eliminarUsuario(id):
     u = Usuario()
     u.idUsuario = id
-    u.eliminar()
+    u.eliminacionLogica()
     return render_template('principal.html')
 
 

@@ -123,6 +123,11 @@ class Usuario(UserMixin, db.Model):
         u.telefono = phone
         u.password = pwd
         u.editar()
+
+    def eliminacionLogica(self):
+        u=self.consultaIndividual(self.idUsuario)
+        u.estatus = 'Inactivo'
+        u.editar()
 #Usuarios - Fin
 
 #Pedidos - Inicio
@@ -156,6 +161,7 @@ class Pedido(db.Model):
     def eliminar(self):
         db.session.delete(self)
         db.session.commit()
+
 #Pedidos - Fin
 
 #DetallePedidos - Inicio
