@@ -29,6 +29,7 @@
         <th>Fecha de cierre</th>
         <th>Total</th>
         <th>Estatus</th>
+        <th>Ver detalles</th>
         <th>Modificar</th>
         <th>Eliminar</th>
         {% for p in pedidos %}
@@ -47,8 +48,9 @@
                 <td>{{p.fechaCierre}}</td>
                 <td>{{p.total}}</td>
                 <td>{{p.estatus}}</td>
-                <td><a href="/usuarios/edit"><img src="{{url_for('static',filename='img/editar.png')}}"></a></td>
-                <td><a href="./eliminarUsuarios.html"><img src="{{url_for('static',filename='img/eliminar.png')}}"></a></td>
+                <td><a href="/detallePedido/{{p.idPedido}}"><div align="center"><img style="width:20px; height:20px;" src="{{url_for('static',filename='img/ojo.png')}}"></div></a></td>
+                <td><a href="/usuarios/edit"><div align="center"><img src="{{url_for('static',filename='img/editar.png')}}"></div></a></td>
+                <td><a href="./eliminarUsuarios.html"><div align="center"><img src="{{url_for('static',filename='img/eliminar.png')}}"></div></a></td>
             </tr>
         {% endfor %}
     </table>

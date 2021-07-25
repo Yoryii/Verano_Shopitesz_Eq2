@@ -180,10 +180,10 @@ def consultaPedidos():
 
 # DetallePedidos - Inicio
 
-@app.route('/detallePedidos')
-def consultaDetallePedidos():
+@app.route('/detallePedido/<int:id>')
+def consultaDetallePedidos(id):
     d = DetallePedido()
-    return render_template('Pedidos/consultaDetallePedidos.html', detallePedidos=d.consultaGeneral())
+    return render_template('Pedidos/consultaDetallePedidos.html', detallePedidos=d.consultaGeneral(id))
 
 
 # DetallePedidos - Fin

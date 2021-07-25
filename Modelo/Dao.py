@@ -179,8 +179,8 @@ class Pedido(db.Model):
 class DetallePedido(db.Model):
     __tablename__ = 'DetallePedidos'
     idDetalle = Column(Integer, primary_key=True)
-    idPedido = Column(Integer)
-    idProducto = Column(Integer)
+    idPedido = Column(Integer, ForeignKey('Pedidos.idPedido'))
+    idProducto = Column(Integer, ForeignKey('Productos.idProducto'))
     precio = Column(Float)
     cantidadPedida = Column(Integer)
     cantidadEnviada = Column(Integer)
@@ -189,9 +189,10 @@ class DetallePedido(db.Model):
     subtotal = Column(Float)
     estatus = Column(String, nullable=False)
     comentario = Column(String)
-
-    def consultaGeneral(self):
-        return self.query.all()
+    pedido = relationship('Pedido', backref='detallepedidos', lazy='select')
+    producto = relationship('Producto', backref='detallepedidos', lazy='select')
+    def consultaGeneral(self, id):
+        return self.query.filter(DetallePedido.idPedido==id).all()
 
     def consultaIndividual(self,id):
         return DetallePedido.query.get(id)
