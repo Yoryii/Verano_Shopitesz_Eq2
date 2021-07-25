@@ -4,12 +4,14 @@
     <link rel="stylesheet" href="{{url_for('static',filename='css/estilo.css')}}">
     <meta charset="UTF-8">
     <title>Productos</title>
+   <script src="{{url_for('static',filename='JS/productos.js')}}"></script>
 </head>
 <nav>
     <h1 align="center">Productos</h1>
     <div align="center"><img style="width:100px; height:100px;" src="{{url_for('static',filename='img/usuarios.png')}}"></div>
 </nav>
 <body>
+<form>
     <div align="center"><a href="/productos/new"><img src="{{url_for('static',filename='img/add.gif')}}">Registrar producto</a></div>
     <br>
     <table border="5" align="center">
@@ -49,5 +51,7 @@
         <br>
         <div align="center">Curso de verano 2021 Ⓡ</div>
     </footer>
+
+</form>
 </body>
-</html
+</html>
