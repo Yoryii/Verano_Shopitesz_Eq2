@@ -183,7 +183,7 @@ def consultaPedidos():
 @app.route('/detallePedido/<int:id>')
 def consultaDetallePedidos(id):
     d = DetallePedido()
-    return render_template('Pedidos/consultaDetallePedidos.html', detallePedidos=d.consultaGeneral(id))
+    return render_template('Pedidos/consultaDetallePedidos.html', detallePedidos=d.consultaGeneral(id), ID=id)
 
 
 # DetallePedidos - Fin
