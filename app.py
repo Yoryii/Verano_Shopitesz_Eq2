@@ -175,6 +175,12 @@ def consultaPedidos():
     if current_user.is_authenticated and current_user.is_comprador():
         return render_template('Pedidos/consultaPedidos.html', pedidos=p.consultaComprador(current_user.idUsuario))
 
+@app.route('/pedidos/<int:id>')
+def consultaPedido(id):
+    p = Pedido()
+    u=Usuario()
+    t=Tarjetas()
+    return render_template('pedidos/editarPedido.html', pedido=p.consultaIndividual(id), compradores = u.consultaCompradores(), vendedores=u.consultaVendedores(), tarjetas=t.consultaXUsuario(current_user.idUsuario))
 
 # Pedidos - Fin
 
@@ -183,7 +189,7 @@ def consultaPedidos():
 @app.route('/detallePedido/<int:id>')
 def consultaDetallePedidos(id):
     d = DetallePedido()
-    return render_template('Pedidos/consultaDetallePedidos.html', detallePedidos=d.consultaGeneral(id), ID=id)
+    return render_template('DetallePedidos/consultaDetallePedidos.html', detallePedidos=d.consultaGeneral(id), ID=id)
 
 
 # DetallePedidos - Fin

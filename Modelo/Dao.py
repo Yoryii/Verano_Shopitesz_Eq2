@@ -101,6 +101,12 @@ class Usuario(UserMixin, db.Model):
     def consultaGeneral(self):
         return self.query.all()
 
+    def consultaCompradores(self):
+        return self.query.filter(Usuario.tipo=='Comprador').all()
+
+    def consultaVendedores(self):
+        return self.query.filter(Usuario.tipo=='Vendedor').all()
+
     def consultaIndividual(self,id):
         return Usuario.query.get(id)
 
@@ -227,6 +233,9 @@ class Tarjetas(db.Model):
 
     def consultaGeneral(self, id):
         return self.query.filter(self.idUsuario==id).all()
+
+    def consultaXUsuario(self, id):
+        return self.query.filter(Tarjetas.idUsuario == id).all()
 
     def consultaIndividual(self,id):
         return self.query.get(id)
