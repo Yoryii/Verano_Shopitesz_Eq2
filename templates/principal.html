@@ -52,6 +52,9 @@ li a:hover {
     {% if current_user.is_authenticated and current_user.is_admin() %}
     <li><a href="/usuarios">Usuarios</a> </li>
     {% endif %}
+    {% if current_user.is_authenticated %}
+    <li><a href="/pedidos">Pedidos</a> </li>
+    {% endif %}
     {% if not current_user.is_authenticated %}
   <li><a href="login">Iniciar sesión</a></li>
   <li><a href="usuarios/new">Registrate ahora!</a></li>

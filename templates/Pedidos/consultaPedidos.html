@@ -10,13 +10,19 @@
     <div align="center"><img style="width:100px; height:100px;" src="{{url_for('static',filename='img/pedidos.png')}}"></div>
 </nav>
 <body>
+    {% if current_user.is_authenticated and current_user.is_admin() %}
     <div align="center"><a href="/pedidos/new"><img src="{{url_for('static',filename='img/add.gif')}}">Registrar pedido</a></div>
+    {% endif %}
     <br>
     <table border="5" align="center">
-        <th>ID pedido</th>
-        <th>ID comprador</th>
-        <th>ID vendedor</th>
-        <th>ID Tarjeta</th>
+        <th>ID</th>
+        {% if current_user.is_authenticated and not current_user.is_comprador() %}
+        <th>Comprador</th>
+        {% endif %}
+        {% if current_user.is_authenticated and not current_user.is_vendedor() %}
+        <th>Vendedor</th>
+        {% endif %}
+        <th>Tarjeta</th>
         <th>Fecha de registro</th>
         <th>Fecha de atención</th>
         <th>Fecha de recepción</th>
@@ -28,9 +34,13 @@
         {% for p in pedidos %}
             <tr>
                 <td>{{p.idPedido}}</td>
-                <td>{{p.idComprador}}</td>
-                <td>{{p.idVendedor}}</td>
-                <td>{{p.idTarjeta}}</td>
+                {% if current_user.is_authenticated and not current_user.is_comprador() %}
+                <td>{{p.comprador.nombreCompleto}}</td>
+                {% endif %}
+                {% if current_user.is_authenticated and not current_user.is_vendedor() %}
+                <td>{{p.vendedor.nombreCompleto}}</td>
+                {% endif %}
+                <td>{{p.tarjeta.noTarjeta}} - {{p.tarjeta.banco}}</td>
                 <td>{{p.fechaRegistro}}</td>
                 <td>{{p.fechaAtencion}}</td>
                 <td>{{p.fechaRecepcion}}</td>

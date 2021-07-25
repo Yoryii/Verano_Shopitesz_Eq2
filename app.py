@@ -168,7 +168,12 @@ def eliminarUsuario(id):
 @app.route('/pedidos')
 def consultaPedidos():
     p = Pedido()
-    return render_template('Pedidos/consultaPedidos.html', pedidos=p.consultaGeneral())
+    if current_user.is_authenticated and current_user.is_admin():
+        return render_template('Pedidos/consultaPedidos.html', pedidos=p.consultaGeneral())
+    if current_user.is_authenticated and current_user.is_vendedor():
+        return render_template('Pedidos/consultaPedidos.html', pedidos=p.consultaVendedor(current_user.idUsuario))
+    if current_user.is_authenticated and current_user.is_comprador():
+        return render_template('Pedidos/consultaPedidos.html', pedidos=p.consultaComprador(current_user.idUsuario))
 
 
 # Pedidos - Fin

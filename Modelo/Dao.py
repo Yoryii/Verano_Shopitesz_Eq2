@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import Column,Integer,String,BLOB,Date,Float
+from sqlalchemy import Column,Integer,String,BLOB,Date,Float,ForeignKey
 
 #GDU
 from sqlalchemy.orm import relationship
@@ -134,21 +134,31 @@ class Usuario(UserMixin, db.Model):
 class Pedido(db.Model):
     __tablename__ = 'Pedidos'
     idPedido = Column(Integer, primary_key=True)
-    idComprador = Column(Integer)
-    idVendedor = Column(Integer)
-    idTarjeta = Column(Integer)
+    idComprador = Column(Integer, ForeignKey('Usuarios.idUsuario'))
+    #idVendedor = Column(Integer)
+    idVendedor = Column(Integer, ForeignKey('Usuarios.idUsuario'))
+    idTarjeta = Column(Integer, ForeignKey('Tarjetas.idTarjeta'))
     fechaRegistro = Column(Date)
     fechaAtencion = Column(Date)
     fechaRecepcion = Column(Date)
     fechaCierre = Column(Date)
     total = Column(Float)
     estatus = Column(String, nullable=False)
+    comprador = relationship('Usuario', foreign_keys='Pedido.idComprador')
+    vendedor = relationship('Usuario', foreign_keys='Pedido.idVendedor')
+    tarjeta = relationship('Tarjetas', backref='pedidos', lazy='select')
 
     def consultaGeneral(self):
         return self.query.all()
 
     def consultaIndividual(self,id):
         return Pedido.query.get(id)
+
+    def consultaVendedor(self, id):
+        return self.query.filter(Pedido.idVendedor==id).all()
+
+    def consultaComprador(self, id):
+        return self.query.filter(Pedido.idComprador==id).all()
 
     def agregar(self):
         db.session.add(self)
