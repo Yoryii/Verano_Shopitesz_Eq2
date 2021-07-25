@@ -191,7 +191,11 @@ def consultaDetallePedidos(id):
     d = DetallePedido()
     return render_template('DetallePedidos/consultaDetallePedidos.html', detallePedidos=d.consultaGeneral(id), ID=id)
 
-
+@app.route('/detallePedidos/<int:id>')
+def consultaDetallePedido(id):
+    d = DetallePedido()
+    p = Producto()
+    return render_template('DetallePedidos/editarDetallePedidos.html', detalle=d.consultaIndividual(id), productos = p.consultaGeneral())
 # DetallePedidos - Fin
 
 # Manejo de errores - INICIO
