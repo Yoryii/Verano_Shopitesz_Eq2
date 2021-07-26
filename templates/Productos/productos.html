@@ -4,12 +4,14 @@
     <link rel="stylesheet" href="{{url_for('static',filename='css/estilo.css')}}">
     <meta charset="UTF-8">
     <title>Productos</title>
+   <script src="{{url_for('static',filename='JS/productos.js')}}"></script>
 </head>
 <nav>
     <h1 align="center">Productos</h1>
     <div align="center"><img style="width:100px; height:100px;" src="{{url_for('static',filename='img/usuarios.png')}}"></div>
 </nav>
 <body>
+<form>
     <div align="center"><a href="/productos/new"><img src="{{url_for('static',filename='img/add.gif')}}">Registrar producto</a></div>
     <br>
     <table border="5" align="center">
@@ -26,6 +28,7 @@
         <!--<th>Contraseña</th>-->
         <th>Estatus</th>
         <th>Modificar</th>
+        <th>Comprar</th>
         <!--<th>Eliminar</th>-->
         {% for p in productos%}
             <tr>
@@ -39,6 +42,7 @@
                 <td>{{p.especificaciones}}</td>
                 <td>{{p.estatus}}</td>
                 <td><a href="/productos/{{p.idProducto}}"><img src="{{url_for('static',filename='img/editar.png')}}"></a></td>
+                <td><a href="/Pedidos/Carrito/{{p.idProducto}}"><img src="{{url_for('static',filename='img/Carrito.png')}}"></a></td>
                 <!--<td><a href="./eliminarUsuarios.html"><img src="{{url_for('static',filename='img/eliminar.png')}}"></a></td>-->
             </tr>
         {% endfor %}
@@ -49,5 +53,7 @@
         <br>
         <div align="center">Curso de verano 2021 Ⓡ</div>
     </footer>
+
+</form>
 </body>
-</html
+</html>
