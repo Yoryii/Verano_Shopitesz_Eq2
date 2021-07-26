@@ -39,11 +39,13 @@
                 <td>{{d.subtotal}}</td>
                 <td>{{d.estatus}}</td>
                 <td>{{d.comentario}}</td>
-                <td><a href="/usuarios/edit"><img src="{{url_for('static',filename='img/editar.png')}}"></a></td>
+                <td><a href="/detallePedidos/{{d.idDetalle}}"><img src="{{url_for('static',filename='img/editar.png')}}"></a></td>
                 <td><a href="./eliminarUsuarios.html"><img src="{{url_for('static',filename='img/eliminar.png')}}"></a></td>
             </tr>
         {% endfor %}
     </table>
+    <br>
+    <div align="center"><a href="/pedidos"><button>Regresar</button></a></div>
     <br>
     <div align="center"><a href="/"><button>Ir al inicio</button></a></div>
     <footer>

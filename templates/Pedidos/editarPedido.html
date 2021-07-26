@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/estilo.css')}}">
+    <script src="{{url_for('static',filename='JS/global.js')}}"></script>
+    <meta charset="UTF-8">
+    <title>Editar pedido</title>
+</head>
+<body>
+    <main>
+        <section>
+            <h1 align="center">Editar pedido</h1>
+            <div align="center"><img style="width:120px; height:120px;" src="{{url_for('static',filename='img/pedidos.png')}}"></div>
+            <form method="post" action="/pedidos/edit">
+                <div id="datosPersonales" align="center">
+                    <fieldset>
+                        <legend>Datos del pedido</legend>
+                        <label>ID Pedido:</label>
+                        <input type="number" name="idPedido" readonly value="{{pedido.idPedido}}">
+                        <br>
+                        <label>Comprador:</label>
+                        <select name="comprador">
+                        {% for c in compradores %}
+                            {% if c.idUsuario==pedido.idComprador%}
+                            <option value="{{c.idUsuario}}" selected>{{c.nombreCompleto}}</option>
+                            {% else %}
+                            <option value="{{c.idUsuario}}">{{c.nombreCompleto}}</option>
+                            {% endif %}
+                        {% endfor %}
+                        </select>
+                        <br>
+                        <label>Vendedor:</label>
+                        <select name="vendedor">
+                        {% for v in vendedores %}
+                            {% if v.idUsuario==pedido.idVendedor%}
+                            <option value="{{v.idUsuario}}" selected>{{v.nombreCompleto}}</option>
+                            {% else %}
+                            <option value="{{v.idUsuario}}">{{v.nombreCompleto}}</option>
+                            {% endif %}
+                        {% endfor %}
+                        </select>
+                        <br>
+                        <label>Tarjeta:</label>
+                        <select name="tarjeta">
+                        {% for t in tarjetas %}
+                            {% if pedido.idTarjeta==t.idTarjeta%}
+                            <option value="{{t.idTarjeta}}" selected>{{t.noTarjeta}}</option>
+                            {% else %}
+                            <option value="{{t.idTarjeta}}">{{t.noTarjeta}}</option>
+                            {% endif %}
+                        {% endfor %}
+                        </select>
+                        <br>
+                        <label>Fecha de registro:</label>
+                        <input type="date" name="fechaRegistro" value="{{pedido.fechaRegistro}}">
+                        <br>
+                        <label>Fecha de atención:</label>
+                        <input type="date" name="fechaAtencion" value="{{pedido.fechaAtencion}}">
+                        <br>
+                        <label>Fecha de recepción:</label>
+                        <input type="date" name="fechaRecepcion" value="{{pedido.fechaRecepcion}}">
+                        <br>
+                        <label>Fecha de cierre:</label>
+                        <input type="date" name="fechaCierre" value="{{pedido.fechaCierre}}">
+                        <br>
+                        <label>Total:</label>
+                        <input type="number" name="total" value="{{pedido.total}}">
+                        <br>
+                        <select name="estatus">
+                            {% if pedido.estatus=='Pendiente' %}
+                            <option value="Pendiente" selected>Pendiente</option>
+                            {% else %}
+                            <option value="Pendiente">Pendiente</option>
+                            {% endif %}
+                            {% if pedido.estatus=='Enviado' %}
+                            <option value="Enviado" selected>Enviado</option>
+                            {% else %}
+                            <option value="Enviado">Enviado</option>
+                            {% endif %}
+                            {% if pedido.estatus=='Recibido' %}
+                            <option value="Recibido" selected>Recibido</option>
+                            {% else %}
+                            <option value="Recibido">Recibido</option>
+                            {% endif %}
+                            {% if pedido.estatus=='Cancelado' %}
+                            <option value="Cancelado" selected>Cancelado</option>
+                            {% else %}
+                            <option value="Cancelado">Cancelado</option>
+                            {% endif %}
+                        </select>
+                        <br>
+                        <a href="/pedidos">Cancelar</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="/usuarios"><button type="submit">Guardar</button></a>
+                        <br>
+                        <br>
+                    </fieldset>
+                    </div>
+                 </form>
+        </section>
+    </main>
+        <footer>
+            <br>
+            <div align="center">Curso de verano 2021 Ⓡ</div>
+        </footer>
+</body>
+</html>

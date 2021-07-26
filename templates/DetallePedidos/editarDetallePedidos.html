@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/estilo.css')}}">
+    <script src="{{url_for('static',filename='JS/global.js')}}"></script>
+    <meta charset="UTF-8">
+    <title>Editar detalle de pedido</title>
+</head>
+<body>
+    <main>
+        <section>
+            <h1 align="center">Editar detalle de pedido</h1>
+            <div align="center"><img style="width:120px; height:120px;" src="{{url_for('static',filename='img/pedidos.png')}}"></div>
+            <form method="post" action="/detallePedidos/edit">
+                <div id="datosPersonales" align="center">
+                    <fieldset>
+                        <legend>Datos del detalle</legend>
+                        <label>ID Detalle:</label>
+                        <input type="number" name="idDetalle" readonly value="{{detalle.idDetalle}}">
+                        <br>
+                        <label>Pedido:</label>
+                        <input type="number" name="idPedido" readonly value="{{detalle.idPedido}}">
+                        <br>
+                        <label>Producto:</label>
+                        <select name="producto">
+                        {% for p in productos %}
+                            {% if p.idProducto==detalle.idProducto%}
+                            <option value="{{p.idProducto}}" selected>{{p.nombre}}</option>
+                            {% else %}
+                            <option value="{{p.idProducto}}">{{p.nombre}}</option>
+                            {% endif %}
+                        {% endfor %}
+                        </select>
+
+                        <br>
+                        <label>Precio:</label>
+                        <input type="number" name="precio" value="{{detalle.precio}}">
+                        <br>
+                        <label>Cantidad Pedida:</label>
+                        <input type="number" name="cantidadPedida" value="{{detalle.cantidadPedida}}">
+                        <br>
+                        <label>Cantidad Enviada:</label>
+                        <input type="number" name="cantidadEnviada" value="{{detalle.cantidadEnviada}}">
+                        <br>
+                        <label>Cantidad Aceptada:</label>
+                        <input type="number" name="cantidadAceptada" value="{{detalle.cantidadAceptada}}">
+                        <br>
+                        <label>Cantidad Rechazada:</label>
+                        <input type="number" name="cantidadRechazada" value="{{detalle.cantidadRechazada}}">
+                        <br>
+                        <label>Subtotal:</label>
+                        <input type="number" name="subtotal" value="{{detalle.subtotal}}">
+                        <br>
+                        <label>Comentario:</label>
+                        <input type="text" name="comentario" value="{{detalle.comentario}}">
+                        <br>
+                        <label>Estatus:</label>
+                        <select name="estatus">
+                            {% if detalle.estatus=='Pendiente' %}
+                            <option value="Pendiente" selected>Pendiente</option>
+                            {% else %}
+                            <option value="Pendiente">Pendiente</option>
+                            {% endif %}
+                            {% if detalle.estatus=='Enviado' %}
+                            <option value="Enviado" selected>Enviado</option>
+                            {% else %}
+                            <option value="Enviado">Enviado</option>
+                            {% endif %}
+                            {% if detalle.estatus=='Recibido' %}
+                            <option value="Recibido" selected>Recibido</option>
+                            {% else %}
+                            <option value="Recibido">Recibido</option>
+                            {% endif %}
+                            {% if detalle.estatus=='Cancelado' %}
+                            <option value="Cancelado" selected>Cancelado</option>
+                            {% else %}
+                            <option value="Cancelado">Cancelado</option>
+                            {% endif %}
+                        </select>
+                        <br>
+                        <br>
+                        <a href="/detallePedido/{{detalle.idPedido}}">Cancelar</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="/usuarios"><button type="submit">Guardar</button></a>
+                        <br>
+                        <br>
+                    </fieldset>
+                    </div>
+                 </form>
+        </section>
+    </main>
+        <footer>
+            <br>
+            <div align="center">Curso de verano 2021 Ⓡ</div>
+        </footer>
+</body>
+</html>
