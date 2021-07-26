@@ -2,6 +2,22 @@ function imprimirMsg(){
     alert('Se hizo click');
 }
 
+function prueba(form){
+
+    var entera=1;
+
+    if(entera==1){
+    div.innerHTML='<p>No se agrego</p>'
+    return false;
+    }
+
+    if(entera!=2){
+    return true;
+    }
+
+
+}
+
 function validar(form){
 
     var cad=validarPassword(form.password.value);
