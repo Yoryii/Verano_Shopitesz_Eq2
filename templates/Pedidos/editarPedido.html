@@ -18,27 +18,40 @@
                         <label>ID Pedido:</label>
                         <input type="number" name="idPedido" readonly value="{{pedido.idPedido}}">
                         <br>
-                        <label>Comprador:</label>
-                        <select name="comprador">
-                        {% for c in compradores %}
-                            {% if c.idUsuario==pedido.idComprador%}
-                            <option value="{{c.idUsuario}}" selected>{{c.nombreCompleto}}</option>
-                            {% else %}
-                            <option value="{{c.idUsuario}}">{{c.nombreCompleto}}</option>
-                            {% endif %}
-                        {% endfor %}
-                        </select>
-                        <br>
-                        <label>Vendedor:</label>
-                        <select name="vendedor">
-                        {% for v in vendedores %}
-                            {% if v.idUsuario==pedido.idVendedor%}
-                            <option value="{{v.idUsuario}}" selected>{{v.nombreCompleto}}</option>
-                            {% else %}
-                            <option value="{{v.idUsuario}}">{{v.nombreCompleto}}</option>
-                            {% endif %}
-                        {% endfor %}
-                        </select>
+                        {% if current_user.is_authenticated and current_user.is_vendedor() %}
+                            <label>Comprador</label>
+                            <input type="text" name="comprador" readonly value="{{pedido.comprador.nombreCompleto}}">
+                        {% endif %}
+                        {% if current_user.is_authenticated and current_user.is_admin() %}
+                            <label>Comprador:</label>
+                            <select name="comprador">
+                            {% for c in compradores %}
+                                {% if c.idUsuario==pedido.idComprador%}
+                                    <option value="{{c.idUsuario}}" selected>{{c.nombreCompleto}}</option>
+                                {% else %}
+                                    <option value="{{c.idUsuario}}">{{c.nombreCompleto}}</option>
+                                {% endif %}
+                            {% endfor %}
+                            </select>
+                            <br>
+                        {% endif %}
+                        {% if current_user.is_authenticated and current_user.is_comprador() %}
+                            <label>Vendedor</label>
+                            <input type="text" name="vendedor" readonly value="{{pedido.vendedor.nombreCompleto}}">
+                        {% endif %}
+                        {% if current_user.is_authenticated and current_user.is_admin() %}
+                            <label>Vendedor:</label>
+                            <select name="vendedor">
+                            {% for v in vendedores %}
+                                {% if v.idUsuario==pedido.idVendedor%}
+                                <option value="{{v.idUsuario}}" selected>{{v.nombreCompleto}}</option>
+                                {% else %}
+                                <option value="{{v.idUsuario}}">{{v.nombreCompleto}}</option>
+                                {% endif %}
+                            {% endfor %}
+                            </select>
+                        {% endif %}
+                        {% if current_user.is_authenticated and current_user.is_comprador() %}
                         <br>
                         <label>Tarjeta:</label>
                         <select name="tarjeta">
@@ -50,48 +63,74 @@
                             {% endif %}
                         {% endfor %}
                         </select>
+                        {% endif %}
                         <br>
                         <label>Fecha de registro:</label>
-                        <input type="date" name="fechaRegistro" value="{{pedido.fechaRegistro}}">
+                        <input type="date" name="fechaRegistro" readonly value="{{pedido.fechaRegistro}}">
                         <br>
-                        <label>Fecha de atención:</label>
-                        <input type="date" name="fechaAtencion" value="{{pedido.fechaAtencion}}">
-                        <br>
-                        <label>Fecha de recepción:</label>
-                        <input type="date" name="fechaRecepcion" value="{{pedido.fechaRecepcion}}">
-                        <br>
-                        <label>Fecha de cierre:</label>
-                        <input type="date" name="fechaCierre" value="{{pedido.fechaCierre}}">
-                        <br>
-                        <label>Total:</label>
-                        <input type="number" name="total" value="{{pedido.total}}">
-                        <br>
+                        {% if current_user.is_authenticated and current_user.is_comprador() %}
+                            <label>Fecha de atención:</label>
+                            <input type="date" name="fechaAtencion" readonly value="{{pedido.fechaAtencion}}">
+                            <br>
+                        {% else %}
+                            <label>Fecha de atención:</label>
+                            <input type="date" name="fechaAtencion" value="{{pedido.fechaAtencion}}">
+                            <br>
+                        {% endif %}
+                        {% if current_user.is_authenticated and current_user.is_vendedor() %}
+                            <label>Fecha de recepción:</label>
+                            <input type="date" name="fechaRecepcion" readonly value="{{pedido.fechaRecepcion}}">
+                            <br>
+                        {% else %}
+                            <label>Fecha de recepción:</label>
+                            <input type="date" name="fechaRecepcion" value="{{pedido.fechaRecepcion}}">
+                            <br>
+                        {% endif %}
+                        {% if current_user.is_authenticated and current_user.is_comprador() %}
+                            <label>Fecha de cierre:</label>
+                            <input type="date" name="fechaCierre" readonly value="{{pedido.fechaCierre}}">
+                            <br>
+                        {% else %}
+                            <label>Fecha de cierre:</label>
+                            <input type="date" name="fechaCierre" value="{{pedido.fechaCierre}}">
+                            <br>
+                        {% endif %}
+                        {% if current_user.is_authenticated and current_user.is_comprador() %}
+                            <label>Total:</label>
+                            <input type="number" name="total" readonly value="{{pedido.total}}">
+                            <br>
+                        {% else %}
+                            <label>Total:</label>
+                            <input type="number" name="total" value="{{pedido.total}}">
+                            <br>
+                        {% endif %}
+                        <label>Estatus: </label>
                         <select name="estatus">
                             {% if pedido.estatus=='Pendiente' %}
-                            <option value="Pendiente" selected>Pendiente</option>
+                                <option value="Pendiente" selected>Pendiente</option>
                             {% else %}
-                            <option value="Pendiente">Pendiente</option>
+                                <option value="Pendiente">Pendiente</option>
                             {% endif %}
                             {% if pedido.estatus=='Enviado' %}
-                            <option value="Enviado" selected>Enviado</option>
+                                <option value="Enviado" selected>Enviado</option>
                             {% else %}
-                            <option value="Enviado">Enviado</option>
+                                <option value="Enviado">Enviado</option>
                             {% endif %}
                             {% if pedido.estatus=='Recibido' %}
-                            <option value="Recibido" selected>Recibido</option>
+                                <option value="Recibido" selected>Recibido</option>
                             {% else %}
-                            <option value="Recibido">Recibido</option>
+                                <option value="Recibido">Recibido</option>
                             {% endif %}
                             {% if pedido.estatus=='Cancelado' %}
-                            <option value="Cancelado" selected>Cancelado</option>
+                                <option value="Cancelado" selected>Cancelado</option>
                             {% else %}
-                            <option value="Cancelado">Cancelado</option>
+                                <option value="Cancelado">Cancelado</option>
                             {% endif %}
                         </select>
                         <br>
                         <a href="/pedidos">Cancelar</a>
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="/usuarios"><button type="submit">Guardar</button></a>
+                        <a href="/pedidos"><button type="submit">Guardar</button></a>
                         <br>
                         <br>
                     </fieldset>

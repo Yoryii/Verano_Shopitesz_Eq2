@@ -178,6 +178,35 @@ class Pedido(db.Model):
         db.session.delete(self)
         db.session.commit()
 
+    def editarAdmin(self, id, c, v, fr, fa, fre, fc, t, e):
+        p = self.consultaIndividual(id)
+        p.idPedido = id
+        p.idComprador = c
+        p.idVendedor = v
+        p.fechaRegistro = fr
+        p.fechaAtencion = fa
+        p.fechaRecepcion = fre
+        p.fechaCierre = fc
+        p.total = t
+        p.estatus = e
+        p.editar()
+
+    def editarComprador(self, id, t, fr,e):
+        p = self.consultaIndividual(id)
+        p.idPedido = id
+        p.idTarjeta = t
+        p.fechaRecepcion = fr
+        p.estatus = e
+        p.editar()
+
+    def editarVendedor(self, id, fa, fc, t, e):
+        p = self.consultaIndividual(id)
+        p.idPedido = id
+        p.fechaAtencion = fa
+        p.fechaCierre = fc
+        p.total = t
+        p.estatus = e
+        p.editar()
 #Pedidos - Fin
 
 #DetallePedidos - Inicio

@@ -165,6 +165,7 @@ def eliminarUsuario(id):
 # Usuarios fin
 # Pedidos - Inicio
 
+#Consulta general
 @app.route('/pedidos')
 def consultaPedidos():
     p = Pedido()
@@ -175,6 +176,7 @@ def consultaPedidos():
     if current_user.is_authenticated and current_user.is_comprador():
         return render_template('Pedidos/consultaPedidos.html', pedidos=p.consultaComprador(current_user.idUsuario))
 
+#Consulta individual
 @app.route('/pedidos/<int:id>')
 def consultaPedido(id):
     p = Pedido()
@@ -182,6 +184,31 @@ def consultaPedido(id):
     t=Tarjetas()
     return render_template('pedidos/editarPedido.html', pedido=p.consultaIndividual(id), compradores = u.consultaCompradores(), vendedores=u.consultaVendedores(), tarjetas=t.consultaXUsuario(current_user.idUsuario))
 
+#editar
+@app.route('/pedidos/edit', methods=['post'])
+def editarPedido():
+    p = Pedido()
+    p.idPedido = request.form['idPedido']
+    if current_user.is_authenticated and current_user.is_admin():
+        p.idComprador = request.form['comprador']
+        p.idVendedor = request.form['vendedor']
+        p.fechaRegistro = request.form['fechaRegistro']
+    if current_user.is_authenticated and current_user.is_comprador():
+        p.idTarjeta = request.form['tarjeta']
+    if current_user.is_authenticated and not current_user.is_comprador():
+        p.fechaAtencion = request.form['fechaAtencion']
+        p.fechaCierre = request.form['fechaCierre']
+        p.total = request.form['total']
+    if current_user.is_authenticated and not current_user.is_vendedor():
+        p.fechaRecepcion = request.form['fechaRecepcion']
+    p.estatus = request.form['estatus']
+    if current_user.is_authenticated and current_user.is_admin():
+        p.editarAdmin(p.idPedido, p.idComprador, p.idVendedor, p.fechaRegistro, p.fechaAtencion, p.fechaRecepcion,p.fechaCierre, p.total, p.estatus)
+    if current_user.is_authenticated and current_user.is_comprador():
+        p.editarComprador(p.idPedido, p.idTarjeta, p.fechaRecepcion, p.estatus)
+    if current_user.is_authenticated and current_user.is_vendedor():
+        p.editarVendedor(p.idPedido,p.fechaAtencion,p.fechaCierre,p.total,p.estatus)
+    return redirect(url_for('consultaPedidos'))
 # Pedidos - Fin
 
 # DetallePedidos - Inicio
