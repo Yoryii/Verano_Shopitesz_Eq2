@@ -26,6 +26,7 @@
         <!--<th>Contraseña</th>-->
         <th>Estatus</th>
         <th>Modificar</th>
+        <th>Comprar</th>
         <!--<th>Eliminar</th>-->
         {% for p in productos%}
             <tr>
@@ -39,6 +40,7 @@
                 <td>{{p.especificaciones}}</td>
                 <td>{{p.estatus}}</td>
                 <td><a href="/productos/{{p.idProducto}}"><img src="{{url_for('static',filename='img/editar.png')}}"></a></td>
+                <td><a href="/Pedidos/Carrito/{{p.idProducto}}"><img src="{{url_for('static',filename='img/Carrito.png')}}"></a></td>
                 <!--<td><a href="./eliminarUsuarios.html"><img src="{{url_for('static',filename='img/eliminar.png')}}"></a></td>-->
             </tr>
         {% endfor %}
