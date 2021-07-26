@@ -4,12 +4,13 @@
         <link rel="stylesheet" href="{{url_for('static',filename='css/estilo.css')}}">
         <meta charset="utf-8">
         <title>Registrar usuario</title>
+        <script src="{{url_for('static',filename='JS/usuarios.js')}}"></script>
     </HEAD>
     <body>
         <h1 align="center">Registrar usuario</h1>
         <div align="center"><img src="{{url_for('static',filename='img/registro.png')}}"></div>
         <br>
-        <form align="center" action="/usuarios/agregar"  method="post">
+        <form align="center" action="/usuarios/agregar"  method="post" onsubmit="return validar(this)">
             <label>Nombre completo:</label>
             <br>
             <input type="text" name="nombre">
@@ -28,7 +29,7 @@
             <br>
             <label>Contraseña:</label>
             <br>
-            <input type="password" name="password">
+            <input type="password" name="password" id="password">
             <br>
             {% if current_user.is_authenticated and current_user.is_admin() %}
             <br>
