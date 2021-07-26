@@ -273,6 +273,15 @@ def editarDetallePedido():
             d.comentario = c
         d.editar()
         return redirect(url_for('consultaDetallePedidos', id = d.idPedido))
+
+#eliminar
+@app.route('/detallePedidos/delete/<int:id>')
+@login_required
+def eliminarDetalle(id):
+    d = DetallePedido()
+    d = d.consultaIndividual(id)
+    d.eliminacionLogica()
+    return redirect(url_for('consultaDetallePedidos', id=d.idPedido))
 # DetallePedidos - Fin
 
 # Manejo de errores - INICIO

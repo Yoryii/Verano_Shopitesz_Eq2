@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
     <link rel="stylesheet" href="{{url_for('static',filename='css/estilo.css')}}">
+    <script src="{{url_for('static',filename='JS/global.js')}}"></script>
     <meta charset="UTF-8">
     <title>Detalle Pedidos</title>
 </head>
@@ -44,7 +45,7 @@
                 {% endif %}
                 <td>{{d.comentario}}</td>
                 <td><a href="/detallePedidos/{{d.idDetalle}}"><img src="{{url_for('static',filename='img/editar.png')}}"></a></td>
-                <td><a href="./eliminarUsuarios.html"><img src="{{url_for('static',filename='img/eliminar.png')}}"></a></td>
+                <td><a href="javascript:eliminarDetalle({{d.idDetalle}})"><img src="{{url_for('static',filename='img/eliminar.png')}}"></a></td>
             </tr>
         {% endfor %}
     </table>

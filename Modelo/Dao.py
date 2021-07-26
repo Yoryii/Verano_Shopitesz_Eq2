@@ -247,6 +247,11 @@ class DetallePedido(db.Model):
         db.session.delete(self)
         db.session.commit()
 
+    def eliminacionLogica(self):
+        d=self.consultaIndividual(self.idDetalle)
+        d.estatus = 'Inactivo'
+        d.editar()
+
 #DetallePedidos - Fin
 
 #Parte de Yoryi - Fin
