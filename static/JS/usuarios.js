@@ -1,17 +1,21 @@
 function imprimirMsg(){
     alert('Se hizo click');
 }
+
 function validar(form){
+
     var cad=validarPassword(form.password.value);
     cad+=passwordRobusto(form.password.value,form.password.value);
-    cad+=validarPasswords(form.password.value,form.passwordConfirmacion.value)
+  // cad+=validarPasswords(form.password.value,form.passwordConfirmacion.value)
     cad+=validarTelefono(form.telefono.value);
     var div=document.getElementById("notificaciones");
     if(cad!=''){
         div.innerHTML='<p>'+cad+'</p>';
+        alert("false");
         return false;
     }
     else{
+        alert("true");
         return true;
     }
 
