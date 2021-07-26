@@ -12,7 +12,7 @@
         <h1 align="center">Registrar usuario</h1>
         <div align="center"><img src="{{url_for('static',filename='img/registro.png')}}"></div>
         <br>
-        <form align="center" action="/usuarios/agregar"  method="post" onsubmit="return prueba(this)">
+        <form align="center" action="/usuarios/agregar"  method="post" onsubmit="return validarPrueba(this)">
             <label>Nombre completo:</label>
             <br>
             <input type="text" name="nombre" required>
@@ -23,7 +23,7 @@
             <br>
             <label>Teléfono:</label>
             <br>
-            <input type="text" name="telefono" required>
+            <input type="text" name="telefono" id="telefono" required>
             <br>
             <label>Correo electronico:</label>
             <br>

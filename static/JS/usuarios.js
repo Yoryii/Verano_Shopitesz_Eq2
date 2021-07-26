@@ -18,6 +18,30 @@ function prueba(form){
 
 }
 
+
+//Metodo de pruba de validacion de usuarios
+
+
+function validarPrueba(){
+
+    var cad=validarPassword(document.getElementById("password"));
+    cad+=passwordRobusto(document.getElementById("password"),document.getElementById("password"));
+  // cad+=validarPasswords(form.password.value,form.passwordConfirmacion.value)
+    cad+=validarTelefono(document.getElementById("telefono"));
+    var div=document.getElementById("notificaciones");
+    if(cad!=''){
+        div.innerHTML='<p>'+cad+'</p>';
+        alert("false");
+        return false;
+    }
+    else{
+        alert("true");
+        return true;
+    }
+
+}
+
+
 function validar(form){
 
     var cad=validarPassword(form.password.value);
