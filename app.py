@@ -225,15 +225,20 @@ def editarPedido():
 
 # DetallePedidos - Inicio
 
+#Consulta general
 @app.route('/detallePedido/<int:id>')
 @login_required
 def consultaDetallePedidos(id):
     if current_user.is_authenticated:
         d = DetallePedido()
-        return render_template('DetallePedidos/consultaDetallePedidos.html', detallePedidos=d.consultaGeneral(id), ID=id)
+        if current_user.is_authenticated and current_user.is_admin():
+            return render_template('DetallePedidos/consultaDetallePedidos.html', detallePedidos=d.consultaGeneralAdmin(id), ID=id)
+        else:
+            return render_template('DetallePedidos/consultaDetallePedidos.html', detallePedidos=d.consultaGeneral(id), ID=id)
     else:
         abort(404)
 
+#Consulta individual
 @app.route('/detallePedidos/<int:id>')
 @login_required
 def consultaDetallePedido(id):
@@ -243,6 +248,31 @@ def consultaDetallePedido(id):
         return render_template('DetallePedidos/editarDetallePedidos.html', detalle=d.consultaIndividual(id), productos = p.consultaGeneral())
     else:
         abort(404)
+
+#editar
+@app.route('/detallePedidos/edit', methods=['post'])
+@login_required
+def editarDetallePedido():
+    if current_user.is_authenticated:
+        d = DetallePedido()
+        d = d.consultaIndividual(request.form['idDetalle'])
+        cp = request.form['cantidadPedida']
+        if cp:
+            d.cantidadPedida = cp
+        ce = request.form['cantidadEnviada']
+        if ce:
+            d.cantidadEnviada = ce
+        ca = request.form['cantidadAceptada']
+        if ca:
+            d.cantidadAceptada = ca
+        cr = request.form['cantidadRechazada']
+        if cr:
+            d.cantidadRechazada = cr
+        c = request.form['comentario']
+        if c:
+            d.comentario = c
+        d.editar()
+        return redirect(url_for('consultaDetallePedidos', id = d.idPedido))
 # DetallePedidos - Fin
 
 # Manejo de errores - INICIO

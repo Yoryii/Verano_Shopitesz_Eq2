@@ -6,7 +6,7 @@ from sqlalchemy.orm import relationship
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash,check_password_hash
 
-db=SQLAlchemy()
+db=SQLAlchemy(session_options={"autoflush": False})
 
 class Categoria(db.Model):
     __tablename__='Categorias'
@@ -227,10 +227,13 @@ class DetallePedido(db.Model):
     pedido = relationship('Pedido', backref='detallepedidos', lazy='select')
     producto = relationship('Producto', backref='detallepedidos', lazy='select')
     def consultaGeneral(self, id):
-        return self.query.filter(DetallePedido.idPedido==id).all()
+        return self.query.filter(DetallePedido.idPedido==id ).filter(DetallePedido.estatus=='Activo').all()
 
     def consultaIndividual(self,id):
         return DetallePedido.query.get(id)
+
+    def consultaGeneralAdmin(self, id):
+        return self.query.filter(DetallePedido.idPedido==id ).all()
 
     def agregar(self):
         db.session.add(self)

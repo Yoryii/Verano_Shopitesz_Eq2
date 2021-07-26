@@ -15,12 +15,16 @@
                 <div id="datosPersonales" align="center">
                     <fieldset>
                         <legend>Datos del detalle</legend>
-                        <label>ID Detalle:</label>
+                        <label>Detalle:</label>
                         <input type="number" name="idDetalle" readonly value="{{detalle.idDetalle}}">
                         <br>
                         <label>Pedido:</label>
                         <input type="number" name="idPedido" readonly value="{{detalle.idPedido}}">
                         <br>
+                        <label>Producto:</label>
+                        <input type="text" name="producto" readonly value="{{detalle.producto.nombre}}">
+                        <br>
+                        <!--
                         <label>Producto:</label>
                         <select name="producto">
                         {% for p in productos %}
@@ -33,27 +37,50 @@
                         </select>
 
                         <br>
+                        -->
                         <label>Precio:</label>
-                        <input type="number" name="precio" value="{{detalle.precio}}">
+                        <input type="number" name="precio" readonly value="{{detalle.precio}}">
                         <br>
-                        <label>Cantidad Pedida:</label>
-                        <input type="number" name="cantidadPedida" value="{{detalle.cantidadPedida}}">
-                        <br>
-                        <label>Cantidad Enviada:</label>
-                        <input type="number" name="cantidadEnviada" value="{{detalle.cantidadEnviada}}">
-                        <br>
-                        <label>Cantidad Aceptada:</label>
-                        <input type="number" name="cantidadAceptada" value="{{detalle.cantidadAceptada}}">
-                        <br>
-                        <label>Cantidad Rechazada:</label>
-                        <input type="number" name="cantidadRechazada" value="{{detalle.cantidadRechazada}}">
-                        <br>
+                        {% if current_user.is_admin() %}
+                            <label>Cantidad Pedida:</label>
+                            <input type="number" name="cantidadPedida" value="{{detalle.cantidadPedida}}">
+                            <br>
+                        {% else %}
+                            <label>Cantidad Pedida:</label>
+                            <input type="number" name="cantidadPedida" readonly value="{{detalle.cantidadPedida}}">
+                            <br>
+                        {% endif %}
+                        {% if not current_user.is_comprador() %}
+                            <label>Cantidad Enviada:</label>
+                            <input type="number" name="cantidadEnviada" value="{{detalle.cantidadEnviada}}">
+                            <br>
+                        {% else %}
+                            <label>Cantidad Enviada:</label>
+                            <input type="number" name="cantidadEnviada" readonly value="{{detalle.cantidadEnviada}}">
+                            <br>
+                        {% endif %}
+                        {% if not current_user.is_vendedor() %}
+                            <label>Cantidad Aceptada:</label>
+                            <input type="number" name="cantidadAceptada" value="{{detalle.cantidadAceptada}}">
+                            <br>
+                            <label>Cantidad Rechazada:</label>
+                            <input type="number" name="cantidadRechazada" value="{{detalle.cantidadRechazada}}">
+                            <br>
+                        {% else %}
+                            <label>Cantidad Aceptada:</label>
+                            <input type="number" name="cantidadAceptada" readonly value="{{detalle.cantidadAceptada}}">
+                            <br>
+                            <label>Cantidad Rechazada:</label>
+                            <input type="number" name="cantidadRechazada" readonly value="{{detalle.cantidadRechazada}}">
+                            <br>
+                        {% endif %}
                         <label>Subtotal:</label>
-                        <input type="number" name="subtotal" value="{{detalle.subtotal}}">
+                        <input type="number" name="subtotal" readonly value="{{detalle.subtotal}}">
                         <br>
                         <label>Comentario:</label>
                         <input type="text" name="comentario" value="{{detalle.comentario}}">
                         <br>
+                        <!--
                         <label>Estatus:</label>
                         <select name="estatus">
                             {% if detalle.estatus=='Pendiente' %}
@@ -78,10 +105,11 @@
                             {% endif %}
                         </select>
                         <br>
+                        -->
                         <br>
                         <a href="/detallePedido/{{detalle.idPedido}}">Cancelar</a>
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <a href="/usuarios"><button type="submit">Guardar</button></a>
+                        <a href="/detallePedido/{{detalle.idPedido}}"><button type="submit">Guardar</button></a>
                         <br>
                         <br>
                     </fieldset>

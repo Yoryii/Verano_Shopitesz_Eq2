@@ -22,7 +22,9 @@
         <th>Cantidad aceptada</th>
         <th>Cantidad rechazada</th>
         <th>Subtotal</th>
-        <th>Estatus</th>
+        {% if current_user.is_admin() %}
+            <th>Estatus</th>
+        {% endif %}
         <th>Comentario</th>
         <th>Modificar</th>
         <th>Eliminar</th>
@@ -37,7 +39,9 @@
                 <td>{{d.cantidadAceptada}}</td>
                 <td>{{d.cantidadRechazada}}</td>
                 <td>{{d.subtotal}}</td>
-                <td>{{d.estatus}}</td>
+                {% if current_user.is_admin() %}
+                    <td>{{d.estatus}}</td>
+                {% endif %}
                 <td>{{d.comentario}}</td>
                 <td><a href="/detallePedidos/{{d.idDetalle}}"><img src="{{url_for('static',filename='img/editar.png')}}"></a></td>
                 <td><a href="./eliminarUsuarios.html"><img src="{{url_for('static',filename='img/eliminar.png')}}"></a></td>
