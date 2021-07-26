@@ -167,62 +167,82 @@ def eliminarUsuario(id):
 
 #Consulta general
 @app.route('/pedidos')
+@login_required
 def consultaPedidos():
-    p = Pedido()
-    if current_user.is_authenticated and current_user.is_admin():
-        return render_template('Pedidos/consultaPedidos.html', pedidos=p.consultaGeneral())
-    if current_user.is_authenticated and current_user.is_vendedor():
-        return render_template('Pedidos/consultaPedidos.html', pedidos=p.consultaVendedor(current_user.idUsuario))
-    if current_user.is_authenticated and current_user.is_comprador():
-        return render_template('Pedidos/consultaPedidos.html', pedidos=p.consultaComprador(current_user.idUsuario))
+    if current_user.is_authenticated:
+        p = Pedido()
+        if current_user.is_authenticated and current_user.is_admin():
+            return render_template('Pedidos/consultaPedidos.html', pedidos=p.consultaGeneral())
+        if current_user.is_authenticated and current_user.is_vendedor():
+            return render_template('Pedidos/consultaPedidos.html', pedidos=p.consultaVendedor(current_user.idUsuario))
+        if current_user.is_authenticated and current_user.is_comprador():
+            return render_template('Pedidos/consultaPedidos.html', pedidos=p.consultaComprador(current_user.idUsuario))
+    else:
+        abort(404)
 
 #Consulta individual
 @app.route('/pedidos/<int:id>')
+@login_required
 def consultaPedido(id):
-    p = Pedido()
-    u=Usuario()
-    t=Tarjetas()
-    return render_template('pedidos/editarPedido.html', pedido=p.consultaIndividual(id), compradores = u.consultaCompradores(), vendedores=u.consultaVendedores(), tarjetas=t.consultaXUsuario(current_user.idUsuario))
+    if current_user.is_authenticated:
+        p = Pedido()
+        u=Usuario()
+        t=Tarjetas()
+        return render_template('pedidos/editarPedido.html', pedido=p.consultaIndividual(id), compradores = u.consultaCompradores(), vendedores=u.consultaVendedores(), tarjetas=t.consultaXUsuario(current_user.idUsuario))
+    else:
+        abort(404)
 
 #editar
 @app.route('/pedidos/edit', methods=['post'])
+@login_required
 def editarPedido():
-    p = Pedido()
-    p.idPedido = request.form['idPedido']
-    if current_user.is_authenticated and current_user.is_admin():
-        p.idComprador = request.form['comprador']
-        p.idVendedor = request.form['vendedor']
-        p.fechaRegistro = request.form['fechaRegistro']
-    if current_user.is_authenticated and current_user.is_comprador():
-        p.idTarjeta = request.form['tarjeta']
-    if current_user.is_authenticated and not current_user.is_comprador():
-        p.fechaAtencion = request.form['fechaAtencion']
-        p.fechaCierre = request.form['fechaCierre']
-        p.total = request.form['total']
-    if current_user.is_authenticated and not current_user.is_vendedor():
-        p.fechaRecepcion = request.form['fechaRecepcion']
-    p.estatus = request.form['estatus']
-    if current_user.is_authenticated and current_user.is_admin():
-        p.editarAdmin(p.idPedido, p.idComprador, p.idVendedor, p.fechaRegistro, p.fechaAtencion, p.fechaRecepcion,p.fechaCierre, p.total, p.estatus)
-    if current_user.is_authenticated and current_user.is_comprador():
-        p.editarComprador(p.idPedido, p.idTarjeta, p.fechaRecepcion, p.estatus)
-    if current_user.is_authenticated and current_user.is_vendedor():
-        p.editarVendedor(p.idPedido,p.fechaAtencion,p.fechaCierre,p.total,p.estatus)
-    return redirect(url_for('consultaPedidos'))
+    if current_user.is_authenticated:
+        p = Pedido()
+        p.idPedido = request.form['idPedido']
+        if current_user.is_authenticated and current_user.is_admin():
+            p.idComprador = request.form['comprador']
+            p.idVendedor = request.form['vendedor']
+            p.fechaRegistro = request.form['fechaRegistro']
+        if current_user.is_authenticated and current_user.is_comprador():
+            p.idTarjeta = request.form['tarjeta']
+        if current_user.is_authenticated and not current_user.is_comprador():
+            p.fechaAtencion = request.form['fechaAtencion']
+            p.fechaCierre = request.form['fechaCierre']
+            p.total = request.form['total']
+        if current_user.is_authenticated and not current_user.is_vendedor():
+            p.fechaRecepcion = request.form['fechaRecepcion']
+        p.estatus = request.form['estatus']
+        if current_user.is_authenticated and current_user.is_admin():
+            p.editarAdmin(p.idPedido, p.idComprador, p.idVendedor, p.fechaRegistro, p.fechaAtencion, p.fechaRecepcion,p.fechaCierre, p.total, p.estatus)
+        if current_user.is_authenticated and current_user.is_comprador():
+            p.editarComprador(p.idPedido, p.idTarjeta, p.fechaRecepcion, p.estatus)
+        if current_user.is_authenticated and current_user.is_vendedor():
+            p.editarVendedor(p.idPedido,p.fechaAtencion,p.fechaCierre,p.total,p.estatus)
+        return redirect(url_for('consultaPedidos'))
+    else:
+        abort(404)
 # Pedidos - Fin
 
 # DetallePedidos - Inicio
 
 @app.route('/detallePedido/<int:id>')
+@login_required
 def consultaDetallePedidos(id):
-    d = DetallePedido()
-    return render_template('DetallePedidos/consultaDetallePedidos.html', detallePedidos=d.consultaGeneral(id), ID=id)
+    if current_user.is_authenticated:
+        d = DetallePedido()
+        return render_template('DetallePedidos/consultaDetallePedidos.html', detallePedidos=d.consultaGeneral(id), ID=id)
+    else:
+        abort(404)
 
 @app.route('/detallePedidos/<int:id>')
+@login_required
 def consultaDetallePedido(id):
-    d = DetallePedido()
-    p = Producto()
-    return render_template('DetallePedidos/editarDetallePedidos.html', detalle=d.consultaIndividual(id), productos = p.consultaGeneral())
+    if current_user.is_authenticated:
+        d = DetallePedido()
+        p = Producto()
+        return render_template('DetallePedidos/editarDetallePedidos.html', detalle=d.consultaIndividual(id), productos = p.consultaGeneral())
+    else:
+        abort(404)
 # DetallePedidos - Fin
 
 # Manejo de errores - INICIO
