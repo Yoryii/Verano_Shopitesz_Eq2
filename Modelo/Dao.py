@@ -162,10 +162,10 @@ class Pedido(db.Model):
         return Pedido.query.get(id)
 
     def consultaVendedor(self, id):
-        return self.query.filter(Pedido.idVendedor==id).all()
+        return self.query.filter(Pedido.idVendedor==id).filter(Pedido.estatus!='Inactivo').all()
 
     def consultaComprador(self, id):
-        return self.query.filter(Pedido.idComprador==id).all()
+        return self.query.filter(Pedido.idComprador==id).filter(Pedido.estatus!='Inactivo').all()
 
     def agregar(self):
         db.session.add(self)
