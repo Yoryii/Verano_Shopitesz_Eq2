@@ -1,6 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column,Integer,String,BLOB,Date,Float,ForeignKey
-from datetime import datetime
+import datetime
 
 #GDU
 from sqlalchemy.orm import relationship
@@ -265,7 +265,7 @@ class Carrito(db.Model):
     idCarrito = Column(Integer, primary_key=True)
     idUsuario = Column(Integer, ForeignKey('Usuarios.idUsuario'))
     idProducto = Column(Integer, ForeignKey('Productos.idProducto'))
-    fecha = Column(Date, default=datetime.date.today())
+    fecha=Column(Date,default=datetime.date.today())
     cantidad = Column(Integer, nullable=False,default=1)
     estatus = Column(String, nullable=False, default='Pendiente')
     producto = relationship('Productos', backref='carrito', lazy='select')
