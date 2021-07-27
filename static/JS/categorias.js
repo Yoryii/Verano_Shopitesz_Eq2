@@ -2,16 +2,16 @@ function nombreCategoria(){
 
  var nombre = document.getElementById("nombre").value;
 
-   if(nombre == ''){
+   if(nombre.length < 2){
 
-   alert('No se ingreso ningun nombre!');
-
-   return false;
+   alert('!');
+return 'El nombre debe tener mínimo dos caracteres<br>';
+   
    }
    else{
 
-   alert('El nombre es: '+nombre);
-   return true;
+
+   return '';
    }
 
 }
