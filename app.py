@@ -1,9 +1,12 @@
 # GDU
-from datetime import timedelta
+import json
+
+
+from datetime import timedelta, date
 
 from flask import Flask, render_template, request, redirect, url_for, flash, session, abort
 from flask_bootstrap import Bootstrap
-from Modelo.Dao import db, Usuario, Pedido, DetallePedido, Tarjetas, Categoria, Producto
+from Modelo.Dao import db, Usuario, Pedido, DetallePedido, Tarjetas, Categoria, Producto, Carrito
 
 # GDU
 from flask_login import login_required, login_user, logout_user, current_user, LoginManager
@@ -300,16 +303,40 @@ def error_500(e):
 # Rutas de Yoryi - fin
 
 
+
 # Rutas de Pancho - inicio
 
 @app.route('/pedidos/carrito')
 def carrito():
     return render_template('pedidos/Carrito.html')
 
-
 @app.route('/Tarjetas/new')
 def nuevaTarjeta():
     return render_template('Tarjeta/registrarTarjeta.html')
+
+@app.route('/Carrito/agregar/<data>', methods=['get'])
+def agregarProductoCarrito(data):
+    msg=''
+    if current_user.is_authenticated and current_user.is_comprador():
+        datos=json.loads(data)
+        carrito=Carrito()
+        carrito.idProducto=datos['idProducto']
+        carrito=idUsuario=current_user.idUsuario
+        carrito.cantidad=datos['cantidad']
+        carrito.agregar()
+        msg={'estatus':'Ok', 'mensaje':'Producto agregado a la cesta'}
+    else:
+        msg = {'estatus':'error', 'mensaje':'Debes iniciar sesion'}
+    return json.dumps(msg)
+
+@app.route('/carrito')
+@login_required
+def consultarCarrito():
+    if current_user.is_authenticated:
+        carrito=Carrito()
+        return render_template('carrito/consultaGeneral.html', Carrito=carrito.consultaGeneral(current_user.idUsuario))
+    else:
+        return redirect(url_for('mostrar login'))
 
 
 @app.route('/usuarios/error')

@@ -42,7 +42,7 @@
                 <td>{{p.especificaciones}}</td>
                 <td>{{p.estatus}}</td>
                 <td><a href="/productos/{{p.idProducto}}"><img src="{{url_for('static',filename='img/editar.png')}}"></a></td>
-                <td><a href="/Pedidos/Carrito/{{p.idProducto}}"><img src="{{url_for('static',filename='img/Carrito.png')}}"></a></td>
+                <td><a href="/pedidos/carrito"><img style="width:50px; height:50px;" src="{{url_for('static',filename='img/Carrito.png')}}"></a></td>
                 <!--<td><a href="./eliminarUsuarios.html"><img src="{{url_for('static',filename='img/eliminar.png')}}"></a></td>-->
             </tr>
         {% endfor %}

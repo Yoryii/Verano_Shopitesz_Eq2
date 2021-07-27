@@ -45,10 +45,10 @@ li a:hover {
 <ul>
   <li><a href="categorias">Categorias</a></li>
     {% if current_user.is_authenticated and current_user.is_comprador() %}
-    <li><a href="consultaTarjetas">Tarjetas</a>
+    <li><a href="/consultaTarjetas">Tarjetas</a>
     {% endif %}
-    <li><a href="productos">Productos</a></li>
-  <li><a href="pedidos/carrito">Carrito</a></li>
+    <li><a href="/productos">Productos</a></li>
+  <li><a href="/carrito">Carrito</a></li>
     {% if current_user.is_authenticated and current_user.is_admin() %}
     <li><a href="/usuarios">Usuarios</a> </li>
     {% endif %}

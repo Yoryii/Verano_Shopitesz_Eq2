@@ -10,24 +10,27 @@
     <div align="center"> <img style="width:100px; height:100px;" src="{{url_for('static',filename='img/Carrito.png')}}"></div>
     <br>
     <div align="center"><table border="10">
-        <th>Numero de carrito</th>
-        <th>Número de usuario</th>
-        <th>Número de producto</th>
-        <th>Fecha</th>
-        <th>Cantidad de productos</th>
-        <th>Estatus</th>
+        <th>Seleccionar</th>
+        <th>Producto</th>
+        <th>Unidades</th>
+        <th>Precio</th>
+        <th>Total</th>
+        <th>Fecha de registro</th>
         <th>Editar cantidad</th>
         <th>Eliminar articulo</th>
+        {% for prod in carrito %}
+
         <tr>
-            <td>1</td>
-            <td>123</td>
-            <td>54</td>
-            <td>12/05/2021</td>
-            <td>15</td>
-            <td>Disponible</td>
+            <td><input type="checkbox" name="idProducto"></td>
+            <td>{{prod.producto.nombre}}</td>
+            <td>{{prod.cantidad}}</td>
+            <td>{{prod.producto.precio}}</td>
+            <td>{{prod.producto.precioVenta * prod.cantidad}}</td>
+            <td>{{prod.fecha}}</td>
             <td><div align ='center'> <img src="{{url_for('static',filename='img/editar.png')}}"></div></td>
             <td><div align ='center'> <img src="{{url_for('static',filename='img/eliminar.png')}}"></div></td>
         </tr>
+        {% endfor %}
     </table>
     <br>
         <br><div align ="center"></div><a href="/consultaTarjetas"><button type="submit">Comprar carrito</button></a></div>

@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import Column,Integer,String,BLOB,Date,Float,ForeignKey
+from datetime import datetime
 
 #GDU
 from sqlalchemy.orm import relationship
@@ -259,6 +260,27 @@ class DetallePedido(db.Model):
 
 #Parte de Francisco - Inicio
 
+class Carrito(db.Model):
+    __tablename__ = 'Carrito'
+    idCarrito = Column(Integer, primary_key=True)
+    idUsuario = Column(Integer, ForeignKey('Usuarios.idUsuario'))
+    idProducto = Column(Integer, ForeignKey('Productos.idProducto'))
+    fecha = Column(Date, default=datetime.date.today())
+    cantidad = Column(Integer, nullable=False,default=1)
+    estatus = Column(String, nullable=False, default='Pendiente')
+    producto = relationship('Productos', backref='carrito', lazy='select')
+    idUsuario = relationship('Usuario', backref='carrito', lazy='select')
+
+
+    def agregar(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def consultaGeneral(self, idUsuario):
+        return self.query.filter(Carrito.idUsuario==idUsuario).all()
+
+
+
 class Tarjetas(db.Model):
     __tablename__ = 'Tarjetas'
     idTarjeta = Column(Integer, primary_key=True)
@@ -289,6 +311,11 @@ class Tarjetas(db.Model):
         usuario = self.consultaIndividual(self.idUsuario)
         db.session.delete(usuario)
         db.session.commit()
+
+
+
+
+
 
 
 
