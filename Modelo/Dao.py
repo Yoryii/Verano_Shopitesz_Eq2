@@ -179,6 +179,11 @@ class Pedido(db.Model):
         db.session.delete(self)
         db.session.commit()
 
+    def eliminacionLogica(self):
+        p=self.consultaIndividual(self.idPedido)
+        p.estatus = 'Inactivo'
+        p.editar()
+
     def editarAdmin(self, id, c, v, fr, fa, fre, fc, t, e):
         p = self.consultaIndividual(id)
         p.idPedido = id

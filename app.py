@@ -221,6 +221,15 @@ def editarPedido():
         return redirect(url_for('consultaPedidos'))
     else:
         abort(404)
+
+#eliminar
+@app.route('/pedidos/delete/<int:id>')
+@login_required
+def eliminarPedido(id):
+    p = Pedido()
+    p = p.consultaIndividual(id)
+    p.eliminacionLogica()
+    return redirect(url_for('consultaPedidos'))
 # Pedidos - Fin
 
 # DetallePedidos - Inicio
