@@ -10,7 +10,9 @@ function validar(){
     }
     else{
 
-        return true;
+    alert('Si se pudo');
+    return true;
+
     }
 
 
@@ -18,7 +20,7 @@ function validar(){
 
 function nombreCategoria(nombre){
 
- ;
+
 
    if(nombre.length < 2){
 

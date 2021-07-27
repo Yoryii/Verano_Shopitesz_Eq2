@@ -11,7 +11,7 @@
         <h1 align="center">Registrar categoria</h1>
         <div align="center"><img src="{{url_for('static',filename='img/registro.png')}}"></div>
         <br>
-        <form align="center" action="/categorias/agregar"  method="post" onsubmit="nombreCategoria()">
+        <form align="center" action="/categorias/agregar"  method="post" onsubmit="return validar()">
             <label>Nombre:</label>
             <br>
             <input type="text" id="nombre" name="nombre">
