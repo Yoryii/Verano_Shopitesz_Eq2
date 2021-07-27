@@ -1,13 +1,10 @@
 # GDU
-import json
-
-
-from datetime import timedelta, date
+from datetime import timedelta
 
 from flask import Flask, render_template, request, redirect, url_for, flash, session, abort
 from flask_bootstrap import Bootstrap
 from Modelo.Dao import db, Usuario, Pedido, DetallePedido, Tarjetas, Categoria, Producto, Carrito
-
+import json
 # GDU
 from flask_login import login_required, login_user, logout_user, current_user, LoginManager
 
