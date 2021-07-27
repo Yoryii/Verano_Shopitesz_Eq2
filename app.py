@@ -331,7 +331,7 @@ def agregarProductoCarrito(data):
 def consultarCarrito():
     if current_user.is_authenticated:
         carrito=Carrito()
-        return render_template('carrito/consultaGeneral.html', Carrito=carrito.consultaGeneral(current_user.idUsuario))
+        return render_template('carrito/consultaCarrito.html', Carrito=carrito.consultaGeneral(current_user.idUsuario))
     else:
         return redirect(url_for('mostrar login'))
 
