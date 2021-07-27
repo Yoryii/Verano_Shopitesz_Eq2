@@ -79,6 +79,44 @@ function consultarProducto(id){
     ajax.send();
 }
 
+
+function llenarCamposProductos(producto){
+    if(producto.estatus!='error'){
+        document.getElementById("cantidad").value=1;
+        validarCantidad(producto.existencia,producto.precio);
+        document.getElementById("id").value=producto.idProducto;
+        document.getElementById("nombre").value=producto.nombre;
+        document.getElementById("descripcion").value=producto.descripcion;
+        document.getElementById("precio").value=producto.precio;
+        document.getElementById("existencia").value=producto.existencia;
+        var cantidad=document.getElementById("cantidad").value;
+        document.getElementById("cantidad").setAttribute("max",producto.existencia);
+        document.getElementById("cantidad").setAttribute("onchange","validarCantidad("+producto.existencia+","+producto.precio+")");
+        document.getElementById("imagen").setAttribute("src","/productos/foto/"+producto.idProducto);
+        document.getElementById("total").value=producto.precio*cantidad;
+        document.getElementById("total").style.color="blue";
+    }
+    else{
+        document.getElementById("agregar").setAttribute("disabled",true);
+        document.getElementById("notificaciones").innerHTML=producto.mensaje;
+        document.getElementById("notificaciones").style.color="red";
+    }
+}
+
+function validarCantidad(existencia,precio){
+    var cantidad=document.getElementById("cantidad").value;
+    if(cantidad<=existencia && cantidad>0){
+        document.getElementById("total").value=precio*cantidad;
+        document.getElementById("agregar").removeAttribute("disabled");
+        document.getElementById("notificaciones").innerHTML="";
+    }
+    else{
+        document.getElementById("agregar").setAttribute("disabled",true);
+        document.getElementById("notificaciones").innerHTML="No hay suficiente cantidad en existencia";
+        document.getElementById("notificaciones").style.color="red";
+    }
+}
+
 function agregarCarrito(){
     var carrito{idProducto:document.getElementById("id").value, cantidad:document.getElementById('cantidad').value};
     var json=JSON.stringify(carrito);
@@ -106,10 +144,9 @@ function agregarCarrito(){
 
 
 function validar(){
-  var cad=validarPassword(document.getElementById("password"));
-    cad+=passwordRobusto(document.getElementById("password"),document.getElementById("password"));
-  // cad+=validarPasswords(form.password.value,form.passwordConfirmacion.value)
-    cad+=validarTelefono(document.getElementById("telefono"));
+  var cad=nombre(document.getElementById("nombre").value;);
+ //  cad+=passwordRobusto(document.getElementById("password"),document.getElementById("password"));
+
     var div=document.getElementById("notificaciones");
     if(cad!=''){
         div.innerHTML='<p>'+cad+'</p>';
@@ -122,9 +159,9 @@ function validar(){
     }
 }
 
-function nombre(){
+function nombre(nom){
 
- var nombre = document.getElementById("nombre").value;
+
 
    if(nombre.length < 2){
 
