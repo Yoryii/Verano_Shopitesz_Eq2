@@ -268,8 +268,8 @@ class Carrito(db.Model):
     fecha=Column(Date,default=datetime.date.today())
     cantidad = Column(Integer, nullable=False,default=1)
     estatus = Column(String, nullable=False, default='Pendiente')
-    producto = relationship('Productos', backref='carrito', lazy='select')
-    idUsuario = relationship('Usuario', backref='carrito', lazy='select')
+    producto = relationship('Producto', backref='carrito', lazy='select')
+    usuario = relationship('Usuario', backref='carrito', lazy='select')
 
 
     def agregar(self):
