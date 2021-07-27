@@ -2,19 +2,16 @@ function imprimirMsg(){
     alert('Se hizo click');
 }
 
-function prueba(form){
+function prueba(){
 
-    var entera=1;
+   var nombre = document.getElementById("nombre").value;
 
-    if(entera==1){
-    div.innerHTML='<p>No se agrego</p>'
-    return false;
-    }
+   if(nombre == ''){
 
-    if(entera!=2){
-    return true;
-    }
+   alert('No se ingreso ningun nombre!');
 
+   return false;
+   }
 
 }
 

@@ -138,3 +138,41 @@ function agregarCarrito(){
     }
     ajax.send();
 }
+
+
+//VALIDACIONES JO---------------------------------------------------------------------------------
+
+
+function validar(){
+  var cad=nombre(document.getElementById("nombre").value;);
+ //  cad+=passwordRobusto(document.getElementById("password"),document.getElementById("password"));
+
+    var div=document.getElementById("notificaciones");
+    if(cad!=''){
+        div.innerHTML='<p>'+cad+'</p>';
+        alert("false");
+        return false;
+    }
+    else{
+        alert("true");
+        return true;
+    }
+}
+
+function nombre(nom){
+
+
+
+   if(nombre.length < 2){
+
+   alert('La categoria debe tener mínimo dos caracteres!');
+
+   return false;
+   }
+   else{
+
+   alert('El nombre es: '+nombre);
+   return true;
+   }
+
+}

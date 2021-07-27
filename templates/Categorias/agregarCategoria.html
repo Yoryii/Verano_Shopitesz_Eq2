@@ -4,21 +4,28 @@
         <link rel="stylesheet" href="{{url_for('static',filename='css/estilo.css')}}">
         <meta charset="utf-8">
         <title>Registrar categoria</title>
+
+        <script src="{{url_for('static',filename='JS/categorias.js')}}"></script>
     </HEAD>
     <body>
         <h1 align="center">Registrar categoria</h1>
         <div align="center"><img src="{{url_for('static',filename='img/registro.png')}}"></div>
         <br>
-        <form align="center" action="/categorias/agregar"  method="post">
+        <form align="center" action="/categorias/agregar"  method="post" onsubmit="nombreCategoria()">
             <label>Nombre:</label>
             <br>
-            <input type="text" name="nombre">
+            <input type="text" id="nombre" name="nombre">
             <br>
             <br>
             <button type="submit">Registrar</button>
             <br>
             <a href="javascript: history.go(-1)">Regresar</a>
         </form>
+
+        <div id="notificaciones">
+
+        </div>
+
         <footer>
             <br>
             <div align="center">Curso de verano 2021 Ⓡ</div>
