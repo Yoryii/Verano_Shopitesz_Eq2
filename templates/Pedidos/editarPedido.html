@@ -15,16 +15,12 @@
                 <div id="datosPersonales" align="center">
                     <fieldset>
                         <legend>Datos del pedido</legend>
-                        <label>ID Pedido:</label>
+                        <label>Pedido:</label>
                         <input type="number" name="idPedido" readonly value="{{pedido.idPedido}}">
                         <br>
-                        {% if current_user.is_authenticated and current_user.is_vendedor() %}
-                            <label>Comprador</label>
-                            <input type="text" name="comprador" readonly value="{{pedido.comprador.nombreCompleto}}">
-                        {% endif %}
                         {% if current_user.is_authenticated and current_user.is_admin() %}
                             <label>Comprador:</label>
-                            <select name="comprador">
+                            <select name="comprador" >
                             {% for c in compradores %}
                                 {% if c.idUsuario==pedido.idComprador%}
                                     <option value="{{c.idUsuario}}" selected>{{c.nombreCompleto}}</option>
@@ -34,10 +30,13 @@
                             {% endfor %}
                             </select>
                             <br>
-                        {% endif %}
-                        {% if current_user.is_authenticated and current_user.is_comprador() %}
-                            <label>Vendedor</label>
-                            <input type="text" name="vendedor" readonly value="{{pedido.vendedor.nombreCompleto}}">
+                        {% else %}
+                            <div {% if current_user.is_authenticated and current_user.is_comprador() %} style="display: none" {%endif%}>
+                                <label>Comprador:</label>
+                                <select name = comprador>
+                                    <option value="{{pedido.idComprador}}" selected>{{pedido.comprador.nombreCompleto}}</option>
+                                </select>
+                            </div>
                         {% endif %}
                         {% if current_user.is_authenticated and current_user.is_admin() %}
                             <label>Vendedor:</label>
@@ -50,9 +49,16 @@
                                 {% endif %}
                             {% endfor %}
                             </select>
+                            <br>
+                        {% else %}
+                            <div {% if current_user.is_authenticated and current_user.is_vendedor() %} style="display: none" {%endif%}>
+                                <label>Vendedor:</label>
+                                <select name = vendedor>
+                                    <option value="{{pedido.idVendedor}}" selected>{{pedido.vendedor.nombreCompleto}}</option>
+                                </select>
+                            </div>
                         {% endif %}
                         {% if current_user.is_authenticated and current_user.is_comprador() %}
-                        <br>
                         <label>Tarjeta:</label>
                         <select name="tarjeta">
                         {% for t in tarjetas %}
@@ -63,8 +69,8 @@
                             {% endif %}
                         {% endfor %}
                         </select>
-                        {% endif %}
                         <br>
+                        {% endif %}
                         <label>Fecha de registro:</label>
                         <input type="date" name="fechaRegistro" readonly value="{{pedido.fechaRegistro}}">
                         <br>
@@ -104,29 +110,51 @@
                             <input type="number" name="total" value="{{pedido.total}}">
                             <br>
                         {% endif %}
-                        <label>Estatus: </label>
-                        <select name="estatus">
-                            {% if pedido.estatus=='Pendiente' %}
-                                <option value="Pendiente" selected>Pendiente</option>
-                            {% else %}
-                                <option value="Pendiente">Pendiente</option>
-                            {% endif %}
-                            {% if pedido.estatus=='Enviado' %}
-                                <option value="Enviado" selected>Enviado</option>
-                            {% else %}
-                                <option value="Enviado">Enviado</option>
-                            {% endif %}
-                            {% if pedido.estatus=='Recibido' %}
-                                <option value="Recibido" selected>Recibido</option>
-                            {% else %}
-                                <option value="Recibido">Recibido</option>
-                            {% endif %}
-                            {% if pedido.estatus=='Cancelado' %}
-                                <option value="Cancelado" selected>Cancelado</option>
-                            {% else %}
-                                <option value="Cancelado">Cancelado</option>
-                            {% endif %}
-                        </select>
+                        <div {% if current_user.is_authenticated and not current_user.is_admin() %} style="display: none" {%endif%}>
+                            <label>Estatus: </label>
+                            <select name="estatus">
+                                {% if pedido.estatus=='Pendiente' %}
+                                    <option value="Pendiente" selected>Pendiente</option>
+                                {% else %}
+                                    <option value="Pendiente">Pendiente</option>
+                                {% endif %}
+                                {% if pedido.estatus=='Cancelado' %}
+                                    <option value="Cancelado" selected>Cancelado</option>
+                                {% else %}
+                                    <option value="Cancelado">Cancelado</option>
+                                {% endif %}
+                                {% if pedido.estatus=='Confirmado' %}
+                                    <option value="Confirmado" selected>Confirmado</option>
+                                {% else %}
+                                    <option value="Confirmado">Confirmado</option>
+                                {% endif %}
+                                {% if pedido.estatus=='Enviado' %}
+                                    <option value="Enviado" selected>Enviado</option>
+                                {% else %}
+                                    <option value="Enviado">Enviado</option>
+                                {% endif %}
+                                {% if pedido.estatus=='Recibido' %}
+                                    <option value="Recibido" selected>Recibido</option>
+                                {% else %}
+                                    <option value="Recibido">Recibido</option>
+                                {% endif %}
+                                {% if pedido.estatus=='Reembolso' %}
+                                    <option value="Reembolso" selected>Reembolso</option>
+                                {% else %}
+                                    <option value="Reembolso">Reembolso</option>
+                                {% endif %}
+                                {% if pedido.estatus=='Disputa' %}
+                                    <option value="Disputa" selected>Disputa</option>
+                                {% else %}
+                                    <option value="Disputa">Disputa</option>
+                                {% endif %}
+                                {% if pedido.estatus=='Cerrado' %}
+                                    <option value="Cerrado" selected>Cerrado</option>
+                                {% else %}
+                                    <option value="Cerrado">Cerrado</option>
+                                {% endif %}
+                            </select>
+                        </div>
                         <br>
                         <a href="/pedidos">Cancelar</a>
                         &nbsp;&nbsp;&nbsp;&nbsp;

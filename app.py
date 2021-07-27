@@ -198,26 +198,42 @@ def consultaPedido(id):
 def editarPedido():
     if current_user.is_authenticated:
         p = Pedido()
-        p.idPedido = request.form['idPedido']
-        if current_user.is_authenticated and current_user.is_admin():
-            p.idComprador = request.form['comprador']
-            p.idVendedor = request.form['vendedor']
-            p.fechaRegistro = request.form['fechaRegistro']
-        if current_user.is_authenticated and current_user.is_comprador():
-            p.idTarjeta = request.form['tarjeta']
-        if current_user.is_authenticated and not current_user.is_comprador():
-            p.fechaAtencion = request.form['fechaAtencion']
-            p.fechaCierre = request.form['fechaCierre']
-            p.total = request.form['total']
-        if current_user.is_authenticated and not current_user.is_vendedor():
-            p.fechaRecepcion = request.form['fechaRecepcion']
-        p.estatus = request.form['estatus']
-        if current_user.is_authenticated and current_user.is_admin():
-            p.editarAdmin(p.idPedido, p.idComprador, p.idVendedor, p.fechaRegistro, p.fechaAtencion, p.fechaRecepcion,p.fechaCierre, p.total, p.estatus)
-        if current_user.is_authenticated and current_user.is_comprador():
-            p.editarComprador(p.idPedido, p.idTarjeta, p.fechaRecepcion, p.estatus)
-        if current_user.is_authenticated and current_user.is_vendedor():
-            p.editarVendedor(p.idPedido,p.fechaAtencion,p.fechaCierre,p.total,p.estatus)
+        p = p.consultaIndividual(request.form['idPedido'])
+        idP = request.form['idPedido']
+        if idP:
+            p.idPedido = idP
+        idC = request.form['comprador']
+        if idC:
+            p.idComprador = idC
+        idV = request.form['vendedor']
+        if idV:
+            p.idVendedor = idV
+        fR = request.form['fechaRegistro']
+        if fR:
+            p.fechaRegistro = fR
+        if current_user.is_comprador() and current_user.is_authenticated:
+            t = request.form['tarjeta']
+            if t:
+                p.idTarjeta = t
+        fA = request.form['fechaAtencion']
+        if fA:
+            p.fechaAtencion = fA
+        fC = request.form['fechaCierre']
+        if fC:
+            p.fechaCierre = fC
+        to = request.form['total']
+        if to:
+            p.total = to
+        fRe = request.form['fechaRecepcion']
+        if fRe:
+            p.fechaRecepcion = fRe
+        e = request.form['estatus']
+        if e:
+            p.estatus = e
+        p.editar()
+        #p.editarAdmin(p.idPedido, p.idComprador, p.idVendedor, p.fechaRegistro, p.fechaAtencion, p.fechaRecepcion,p.fechaCierre, p.total, p.estatus)
+        #p.editarComprador(p.idPedido, p.idTarjeta, p.fechaRecepcion, p.estatus)
+        #p.editarVendedor(p.idPedido,p.fechaAtencion,p.fechaCierre,p.total,p.estatus)
         return redirect(url_for('consultaPedidos'))
     else:
         abort(404)

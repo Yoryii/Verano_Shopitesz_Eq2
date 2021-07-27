@@ -12,7 +12,7 @@
 </nav>
 <body>
     {% if current_user.is_authenticated and current_user.is_admin() %}
-    <div align="center"><a href="/pedidos/new"><img src="{{url_for('static',filename='img/add.gif')}}">Registrar pedido</a></div>
+    <!--<div align="center"><a href="/pedidos/new"><img src="{{url_for('static',filename='img/add.gif')}}">Registrar pedido</a></div>-->
     {% endif %}
     <br>
     <table border="5" align="center">
