@@ -161,7 +161,7 @@ function nombreApellido(nombre){
 var name = /^[A-Z]+$/i
    var codigo=nombre.charCodeAt(0);
     if(nombre.length < 2){
-    return 'Tu nombre debe tener más de 1 letra, empezar con mayúscula';
+    return 'Tu nombre debe tener más de 1 letra';
     }
     else{
     if(name.test(nombre)==true && ((codigo>=65 && codigo<=90) || codigo==165)){
