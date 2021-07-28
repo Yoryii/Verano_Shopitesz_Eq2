@@ -12,7 +12,9 @@
 </nav>
 <body>
 <form>
-    <div align="center"><a href="/productos/new"><img src="{{url_for('static',filename='img/add.gif')}}">Registrar producto</a></div>
+    {% if current_user.is_authenticated and not current_user.is_comprador() %}
+        <div align="center"><a href="/productos/new"><img src="{{url_for('static',filename='img/add.gif')}}">Registrar producto</a></div>
+    {% endif %}
     <br>
     <table border="5" align="center">
         <th>IDProducto</th>
@@ -27,8 +29,12 @@
 
         <!--<th>Contraseña</th>-->
         <th>Estatus</th>
-        <th>Modificar</th>
-        <th>Comprar</th>
+        {% if current_user.is_authenticated and not current_user.is_comprador() %}
+            <th>Modificar</th>
+        {% endif %}
+        {% if current_user.is_authenticated and current_user.is_comprador() %}
+            <th>Comprar</th>
+        {% endif %}
         <!--<th>Eliminar</th>-->
         {% for p in productos%}
             <tr>
@@ -41,16 +47,22 @@
                 <td>{{p.foto}}</td>
                 <td>{{p.especificaciones}}</td>
                 <td>{{p.estatus}}</td>
+                {% if current_user.is_authenticated and not current_user.is_comprador() %}
                 <td><a href="/productos/{{p.idProducto}}"><img src="{{url_for('static',filename='img/editar.png')}}"></a></td>
-                <td><a href="/cesta/agregar/{{p.idProducto}}"><img style="width:50px; height:50px;" src="{{url_for('static',filename='img/Carrito.png')}}"></a></td>
+                {% endif %}
+                {% if current_user.is_authenticated and current_user.is_comprador() %}
+                    <td><a href="/cesta/agregar/{{p.idProducto}}"><img style="width:50px; height:50px;" src="{{url_for('static',filename='img/Carrito.png')}}"></a></td>
+                {% endif %}
                 <!--<td><a href="./eliminarUsuarios.html"><img src="{{url_for('static',filename='img/eliminar.png')}}"></a></td>-->
             </tr>
         {% endfor %}
     </table>
     <br>
-    <div align="center"><a href="/"><button>Ir al inicio</button></a></div>
+    <div align="center"><a href="/">Ir al inicio</a></div>
+    {% if current_user.is_authenticated and current_user.is_comprador() %}
     <br>
     <div align="center"><a href="/cesta">Ver carrito</a></div>
+    {%endif%}
     <footer>
         <br>
         <div align="center">Curso de verano 2021 Ⓡ</div>

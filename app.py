@@ -167,40 +167,45 @@ def eliminarUsuario(id):
 #Función de agregar pedidos, detalles de pedido y cambiar estatus de carrito------------------INICIO
 
 @app.route('/pedidos/agregar', methods=['post'])
+@login_required
 def agregarPedidos():
-    p = Pedido()
-    p.idComprador = current_user.idUsuario
-    p.idTarjeta = request.form['tarjeta']
-    p.idVendedor = request.form['vendedor']
-    p.estatus = 'Pendiente'
-    c = Cesta()
-    carritos = c.consultaGeneral(current_user.idUsuario)
-    total = 0
-    for ca in carritos:
-        total = total + (ca.producto.precioVenta * ca.cantidad)
-    p.total = total
-    p.agregar()
-    pedidos = p.consultaGeneral()
-    idP = 0
-    for pe in pedidos:
-        idP = pe.idPedido
-    print(idP)
-    detalle = DetallePedido()
-    carritos = c.consultaGeneral(current_user.idUsuario)
-    detalles = []
-    for car in carritos:
-        print('Se agrego')
-        detalle.idPedido = idP
-        detalle.idProducto = car.idProducto
-        detalle.precio = car.producto.precioVenta
-        detalle.cantidadPedida = car.cantidad
-        detalle.subtotal = (car.producto.precioVenta * car.cantidad)
-        detalle.estatus = 'Activo'
-        detalles.append(detalle)
-        detalles.pop().agregar()
+    if current_user.is_authenticated and current_user.is_comprador():
+        p = Pedido()
+        p.idComprador = current_user.idUsuario
+        p.idTarjeta = request.form['tarjeta']
+        p.idVendedor = request.form['vendedor']
+        p.estatus = 'Pendiente'
+        c = Cesta()
+        carritos = c.consultaGeneral(current_user.idUsuario)
+        total = 0
+        for ca in carritos:
+            total = total + (ca.producto.precioVenta * ca.cantidad)
+        p.total = total
+        p.agregar()
+        pedidos = p.consultaGeneral()
+        idP = 0
+        for pe in pedidos:
+            idP = pe.idPedido
+        print(idP)
+        detalle = DetallePedido()
+        carritos = c.consultaGeneral(current_user.idUsuario)
+        detalles = []
+        for car in carritos:
+            print('Se agrego')
+            detalle.idPedido = idP
+            detalle.idProducto = car.idProducto
+            detalle.precio = car.producto.precioVenta
+            detalle.cantidadPedida = car.cantidad
+            detalle.subtotal = (car.producto.precioVenta * car.cantidad)
+            detalle.estatus = 'Activo'
+            detalles.append(detalle)
+            detalles.pop().agregar()
+        return redirect(url_for('consultaPedidos'))
+    else:
+        abort(404)
 
 
-    return redirect(url_for('consultaPedidos'))
+
 
 
 
@@ -341,6 +346,8 @@ def editarDetallePedido():
             d.comentario = c
         d.editar()
         return redirect(url_for('consultaDetallePedidos', id = d.idPedido))
+    else:
+        abort(404)
 
 #eliminar
 @app.route('/detallePedidos/delete/<int:id>')
@@ -418,15 +425,18 @@ def nuevaTarjeta():
 
 @app.route('/Tarjeta/editar', methods=['post'])
 def editarTarjeta():
-    Tar = Tarjetas()
-    Tar.idTarjeta = request.form['idTarjeta']
-    Tar.idUsuario = request.form['idUsuario']
-    Tar.noTarjeta = request.form['noTarjeta']
-    Tar.saldo = request.form['saldo']
-    Tar.banco = request.form['banco']
-    Tar.estatus = request.form['estatus']
-    Tar.editar()
-    return redirect(url_for('consultaTarjetas'))
+    if current_user.is_authenticated and current_user.is_comprador():
+        Tar = Tarjetas()
+        Tar.idTarjeta = request.form['idTarjeta']
+        Tar.idUsuario = request.form['idUsuario']
+        Tar.noTarjeta = request.form['noTarjeta']
+        Tar.saldo = request.form['saldo']
+        Tar.banco = request.form['banco']
+        Tar.estatus = request.form['estatus']
+        Tar.editar()
+        return redirect(url_for('consultaTarjetas'))
+    else:
+        abort(404)
 
 
 
@@ -436,10 +446,13 @@ def editarTarjeta():
 @app.route('/Tarjetas/delete/<int:id>')
 @login_required
 def eliminarTarjeta(id):
-    t = Tarjetas()
-    t = t.consultaIndividual(id)
-    t.eliminacionLogica()
-    return redirect(url_for('consultaTarjetas'))
+    if current_user.is_authenticated and current_user.is_comprador():
+        t = Tarjetas()
+        t = t.consultaIndividual(id)
+        t.eliminacionLogica()
+        return redirect(url_for('consultaTarjetas'))
+    else:
+        abort(404)
 
 # CRUD Tarjetas
 
@@ -486,6 +499,8 @@ def pago():
         t = Tarjetas()
         u = Usuario()
         return render_template('Cesta/pagar.html', tarjetas=t.consultaGeneral(current_user.idUsuario), vendedores=u.consultaVendedores())
+    else:
+        abort(404)
 
 @app.route('/cesta')
 @login_required
@@ -500,7 +515,7 @@ def consultaGeneralCesta():
 @app.route('/cesta/<int:id>')
 @login_required
 def consultaIndividualCesta(id):
-    if current_user.is_authenticated:
+    if current_user.is_authenticated and current_user.is_comprador():
         c = Cesta()
         return render_template('Cesta/editarCesta.html', cesta=c.consultaIndividual(id))
     else:
@@ -533,11 +548,14 @@ def eliminarCesta(id):
 @app.route('/cesta/agregar/<int:id>')
 @login_required
 def agregarCesta(id):
-    c = Cesta()
-    c.idProducto = id
-    c.idUsuario = current_user.idUsuario
-    c.agregar()
-    return redirect(url_for('productos'))
+    if current_user.is_authenticated and current_user.is_comprador():
+        c = Cesta()
+        c.idProducto = id
+        c.idUsuario = current_user.idUsuario
+        c.agregar()
+        return redirect(url_for('productos'))
+    else:
+        abort(404)
 
 
 # Rutas de cesta ----------------------------------------------------FIN
@@ -557,23 +575,29 @@ def categorias():
 
 @app.route('/categorias/new')
 def nuevaCategoria():
-    return render_template('Categorias/agregarCategoria.html')
+    if current_user.is_authenticated and current_user.is_admin():
+        return render_template('Categorias/agregarCategoria.html')
+    else:
+        abort(404)
 
 @app.route('/categorias/agregar', methods=['post'])
 def agregarCategoria():
-    # try:
-    c = Categoria()
-    c.nombre = request.form['nombre']
-    c.estatus = 'Activa'
-    c.agregar()
-    # except:
-    # print(error)
-    return redirect(url_for('categorias'))
+    if current_user.is_authenticated and current_user.is_admin():
+        # try:
+        c = Categoria()
+        c.nombre = request.form['nombre']
+        c.estatus = 'Activa'
+        c.agregar()
+        # except:
+        # print(error)
+        return redirect(url_for('categorias'))
+    else:
+        abort(404)
 
 
 @app.route('/categorias/edit', methods=['post'])
 def editarCategoria():
-
+    if current_user.is_authenticated and current_user.is_admin():
         c = Categoria()
         c.idCategoria = request.form['idCategoria']
         c.nombre = request.form['nombre']
@@ -581,20 +605,27 @@ def editarCategoria():
         c.editar()
 
         return redirect(url_for('categorias'))
+    else:
+        abort(404)
 
 
 @app.route('/categorias/<int:id>')
 def consultaCategoria(id):
-
+    if current_user.is_authenticated and current_user.is_admin():
         c = Categoria()
         return render_template('categorias/editarCategoria.html', c=c.consultaIndividual(id))
+    else:
+        abort(404)
 
 @app.route('/categorias/delete/<int:id>')
 def eliminarCategoria(id):
-    c = Categoria()
-    c.idCategoria = id
-    c.eliminar()
-    return render_template('principal.html')
+    if current_user.is_authenticated and current_user.is_admin():
+        c = Categoria()
+        c.idCategoria = id
+        c.eliminar()
+        return render_template('principal.html')
+    else:
+        abort(404)
 
 
 # Rutas CATEGORIAS------------------------------------------FIN
@@ -616,27 +647,33 @@ def productos():
 
 @app.route('/productos/new')
 def nuevoProducto():
-    return render_template('Productos/agregarProducto.html')
+    if current_user.is_authenticated and not current_user.is_comprador():
+        return render_template('Productos/agregarProducto.html')
+    else:
+        abort(404)
 
 @app.route('/productos/agregar', methods=['post'])
 def agregarProducto():
-    # try:
-    p = Producto()
-    p.idCategoria = request.form['idCategoria']
-    p.nombre = request.form['nombre']
-    p.descripcion = request.form['descripcion']
-    p.precioVenta = request.form['precioVenta']
-    p.existencia = request.form['existencia']
-    p.estatus = 'Activo'
-    p.agregar()
-    # except:
-    # print(error)
-    return redirect(url_for('productos'))
+    if current_user.is_authenticated and not current_user.is_comprador():
+        # try:
+        p = Producto()
+        p.idCategoria = request.form['idCategoria']
+        p.nombre = request.form['nombre']
+        p.descripcion = request.form['descripcion']
+        p.precioVenta = request.form['precioVenta']
+        p.existencia = request.form['existencia']
+        p.estatus = 'Activo'
+        p.agregar()
+        # except:
+        # print(error)
+        return redirect(url_for('productos'))
+    else:
+        abort(404)
 
 
 @app.route('/productos/edit', methods=['post'])
 def editarProducto():
-
+    if current_user.is_authenticated and not current_user.is_comprador():
         p = Producto()
         p.idProducto = request.form['idProducto']
         p.idCategorias = request.form['idCategoria']
@@ -648,6 +685,8 @@ def editarProducto():
         p.editar()
 
         return redirect(url_for('productos'))
+    else:
+        abort(404)
 
 
 @app.route('/productos/<int:id>')
@@ -658,10 +697,13 @@ def consultaProducto(id):
 
 @app.route('/productos/delete/<int:id>')
 def eliminarProducto(id):
-    p = Producto()
-    p.idProducto = id
-    p.eliminar()
-    return render_template('principal.html')
+    if current_user.is_authenticated and not current_user.is_comprador():
+        p = Producto()
+        p.idProducto = id
+        p.eliminar()
+        return render_template('principal.html')
+    else:
+        abort(404)
 
 #Rutas PRODUCTOS--------------------------------------------FIN
 

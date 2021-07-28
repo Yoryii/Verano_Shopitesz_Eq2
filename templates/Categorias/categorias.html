@@ -10,7 +10,9 @@
     <div align="center"><img style="width:100px; height:100px;" src="{{url_for('static',filename='img/usuarios.png')}}"></div>
 </nav>
 <body>
-    <div align="center"><a href="/categorias/new"><img src="{{url_for('static',filename='img/add.gif')}}">Registrar categoria</a></div>
+    {% if current_user.is_authenticated and current_user.is_admin() %}
+        <div align="center"><a href="/categorias/new"><img src="{{url_for('static',filename='img/add.gif')}}">Registrar categoria</a></div>
+    {%endif%}
     <br>
     <table border="5" align="center">
         <th>ID</th>
@@ -19,7 +21,9 @@
 
         <!--<th>Contraseña</th>-->
         <th>Estatus</th>
-        <th>Modificar</th>
+        {% if current_user.is_authenticated and current_user.is_admin() %}
+            <th>Modificar</th>
+        {% endif %}
         <!--<th>Eliminar</th>-->
         {% for c in categorias%}
             <tr>
@@ -27,7 +31,9 @@
                 <td>{{c.nombre}}</td>
                 <td>{{c.imagen}}</td>
                 <td>{{c.estatus}}</td>
-                <td><a href="/categorias/{{c.idCategoria}}"><img src="{{url_for('static',filename='img/editar.png')}}"></a></td>
+                {% if current_user.is_authenticated and current_user.is_admin() %}
+                    <td><a href="/categorias/{{c.idCategoria}}"><img src="{{url_for('static',filename='img/editar.png')}}"></a></td>
+                {%endif%}
                 <!--<td><a href="./eliminarUsuarios.html"><img src="{{url_for('static',filename='img/eliminar.png')}}"></a></td>-->
             </tr>
         {% endfor %}
