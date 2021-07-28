@@ -28,7 +28,7 @@ function validarPrueba(){
     cad+=passwordRobusto(document.getElementById("password").value,document.getElementById("password").value);
   // cad+=validarPasswords(form.password.value,form.passwordConfirmacion.value)
     cad+=validarTelefono(document.getElementById("telefono").value);
-    cad+=nombreApellido(document.getElementById("nombre").value);
+    //cad+=nombreApellido(document.getElementById("nombre").value);
     var div=document.getElementById("notificaciones");
     if(cad!=''){
         div.innerHTML='<p>'+cad+'</p>';
