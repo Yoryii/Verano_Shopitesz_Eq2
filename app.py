@@ -180,7 +180,26 @@ def agregarPedidos():
         total = total + (ca.producto.precioVenta * ca.cantidad)
     p.total = total
     p.agregar()
-    
+    pedidos = p.consultaGeneral()
+    idP = 0
+    for pe in pedidos:
+        idP = pe.idPedido
+    print(idP)
+    detalle = DetallePedido()
+    carritos = c.consultaGeneral(current_user.idUsuario)
+    detalles = []
+    for car in carritos:
+        print('Se agrego')
+        detalle.idPedido = idP
+        detalle.idProducto = car.idProducto
+        detalle.precio = car.producto.precioVenta
+        detalle.cantidadPedida = car.cantidad
+        detalle.subtotal = (car.producto.precioVenta * car.cantidad)
+        detalle.estatus = 'Activo'
+        detalles.append(detalle)
+        detalles.pop().agregar()
+
+
     return redirect(url_for('consultaPedidos'))
 
 
