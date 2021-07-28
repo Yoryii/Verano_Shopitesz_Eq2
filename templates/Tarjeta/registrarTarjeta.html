@@ -4,19 +4,21 @@
         <link rel="stylesheet" href="{{url_for('static',filename='css/estilo.css')}}">
         <meta charset="utf-8">
         <title>Registrar tarjeta</title>
+        <script src="{{url_for('static',filename='JS/tarjetas.js')}}"></script>
+
     </HEAD>
     <body>
         <p align="center"><b>Registrar nueva tarjeta</b></p>
         <div align="center"><img src="{{url_for('static',filename='img/Tarjeta.jpg')}}"></div>
         <br>
-        <form align="center" action="/Tarjetas/agregar"  method="post">
+        <form align="center" action="/Tarjetas/agregar"  method="post" onsubmit="return validar()">
             <!--<label>Numero de usuario:</label>
             <br>
             <input type="text" name="idUsuario">
             <br>-->
             <label>Numero de tarjeta:</label>
             <br>
-            <input type="text" name="noTarjeta">
+            <input type="text" name="noTarjeta" id="noTarjeta">
             <br>
             <label>Saldo:</label>
             <br>
@@ -34,5 +36,8 @@
             <br>
             <button type="submit">Registrar</button>
         </form>
+    <div id="notificaciones">
+
+        </div>
     </body>
 </HTML>
