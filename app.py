@@ -3,7 +3,7 @@ from datetime import timedelta
 
 from flask import Flask, render_template, request, redirect, url_for, flash, session, abort
 from flask_bootstrap import Bootstrap
-from Modelo.Dao import db, Usuario, Pedido, DetallePedido, Tarjetas, Categoria, Producto, Carrito
+from Modelo.Dao import db, Usuario, Pedido, DetallePedido, Tarjetas, Categoria, Producto, Cesta
 import json
 # GDU
 from flask_login import login_required, login_user, logout_user, current_user, LoginManager
@@ -328,7 +328,7 @@ def error_500(e):
 
 # Rutas de Pancho - inicio
 
-@app.route('/pedidos/carrito')
+"""@app.route('/pedidos/carrito')
 def carrito():
     return render_template('pedidos/Carrito.html')
 
@@ -358,7 +358,7 @@ def consultarCarrito():
         carrito=Carrito()
         return render_template('carrito/consultaCarrito.html', Carrito=carrito.consultaGeneral(current_user.idUsuario))
     else:
-        return redirect(url_for('mostrar login'))
+        return redirect(url_for('mostrar login'))"""
 
 
 @app.route('/usuarios/error')
@@ -422,6 +422,63 @@ def consultaGeneral(id):
         return render_template('Tarjetas/editarTarjeta.html', Tar=Tar.consultaIndividual(id))
     else:
         return render_template('principal.html')
+
+# Rutas de cesta ----------------------------------------------------INICIO
+#Consulta general
+@app.route('/cesta')
+@login_required
+def consultaGeneralCesta():
+    if current_user.is_authenticated and current_user.is_comprador():
+        c = Cesta()
+        return render_template('Cesta/consultaCesta.html', cesta=c.consultaGeneral(current_user.idUsuario))
+    else:
+        abort(404)
+
+#Consulta individual
+@app.route('/cesta/<int:id>')
+@login_required
+def consultaIndividualCesta(id):
+    if current_user.is_authenticated:
+        c = Cesta()
+        return render_template('Cesta/editarCesta.html', cesta=c.consultaIndividual(id))
+    else:
+        abort(404)
+
+#editar
+@app.route('/cesta/edit', methods=['post'])
+@login_required
+def editarCesta():
+    if current_user.is_authenticated and current_user.is_comprador():
+        c = Cesta()
+        c.idCarrito = request.form['idCarrito']
+        c.idUsuario = request.form['idUsuario']
+        c.idProducto = request.form['idProducto']
+        c.fecha = request.form['fecha']
+        c.cantidad = request.form['cantidad']
+        c.estatus = request.form['estatus']
+        c.editar()
+        return redirect(url_for('consultaGeneralCesta'))
+
+#eliminar
+@app.route('/cesta/delete/<int:id>')
+@login_required
+def eliminarCesta(id):
+    c = Cesta()
+    c = c.consultaIndividual(id)
+    c.eliminacionLogica()
+    return redirect(url_for('consultaGeneralCesta'))
+
+@app.route('/cesta/agregar/<int:id>')
+@login_required
+def agregarCesta(id):
+    c = Cesta()
+    c.idProducto = id
+    c.idUsuario = current_user.idUsuario
+    c.agregar()
+    return redirect(url_for('productos'))
+#agregar
+
+# Rutas de cesta ----------------------------------------------------FIN
 
 
 # Rutas de Pancho - fin
