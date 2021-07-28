@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="{{url_for('static',filename='css/estilo.css')}}">
     <script src="{{url_for('static',filename='JS/global.js')}}"></script>
     <meta charset="UTF-8">
+    <script src="{{url_for('static',filename='JS/usuarios.js')}}"></script>
     <title>Editar usuario</title>
 </head>
 <body>
@@ -11,7 +12,7 @@
         <section>
             <h1 align="center">Editar usuario</h1>
             <div align="center"><img style="width:120px; height:120px;" src="{{url_for('static',filename='img/usuariosEdit.png')}}"></div>
-            <form method="post" action="/usuarios/edit">
+            <form method="post" action="/usuarios/edit" onsubmit="return validarPrueba()">
                 <div id="datosPersonales" align="center">
                     <fieldset>
                         <legend>Datos del usuario</legend>
@@ -20,7 +21,7 @@
                         <br>
 
                         <label>Nombre:</label>
-                        <input type="text" name="nombre" value="{{usuario.nombreCompleto}}">
+                        <input type="text" name="nombre" id="nombre" value="{{usuario.nombreCompleto}}">
                         <br>
 
                         <label>Dirección:</label>
@@ -28,7 +29,7 @@
                         <br>
 
                         <label>Teléfono:</label>
-                        <input type="text" name="telefono" value="{{usuario.telefono}}">
+                        <input type="text" name="telefono" id="telefono" value="{{usuario.telefono}}">
                         <br>
                         {% if current_user.is_authenticated and current_user.is_admin() %}
                         <label>Email:</label>
@@ -36,7 +37,7 @@
                         <br>
                         {% endif %}
                         <label>Contraseña:</label>
-                        <input type="password" name="password" value="{{usuario.contrasena}}">
+                        <input type="password" name="password" id="password" value="{{usuario.contrasena}}">
                         <br>
 
 

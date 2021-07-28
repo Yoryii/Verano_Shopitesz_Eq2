@@ -10,7 +10,7 @@ function validar(){
     }
     else{
 
-    alert('Si se pudo');
+    alert('Registrado con exito!');
     return true;
 
     }
@@ -18,7 +18,7 @@ function validar(){
 
 }
 
-function nombreCategoria(nombre){
+function nombre(nombre){
 
 
 
@@ -33,4 +33,18 @@ function nombreCategoria(nombre){
    return '';
    }
 
+}
+
+function nombreCategoria(nombre){
+var name = /^[A-Z]+$/i
+   var codigo=nombre.charCodeAt(0);
+    if(nombre.length < 3){
+    return 'El nombre debe tener más de 2 letras!';
+    }
+    else{
+    if(name.test(nombre)==true && ((codigo>=65 && codigo<=90) || codigo==165)){
+    return '';
+    }
+    return 'Tu nombre no debe tener numeros y debe comenzar con Mayuscula';
+    }
 }
