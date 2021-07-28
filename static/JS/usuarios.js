@@ -28,11 +28,11 @@ function validarPrueba(){
     var div=document.getElementById("notificaciones");
     if(cad!=''){
         div.innerHTML='<p>'+cad+'</p>';
-        alert(document.getElementById("password").value);
+
         return false;
     }
     else{
-        alert("true");
+        alert("Usuario registrado con exito!!");
         return true;
     }
 
