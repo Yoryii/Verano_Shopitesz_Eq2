@@ -21,14 +21,14 @@ function prueba(){
 
 function validarPrueba(){
 
-    var cad=validarPassword(document.getElementById("password"));
-    cad+=passwordRobusto(document.getElementById("password"),document.getElementById("password"));
+    var cad=validarPassword(document.getElementById("password").value);
+    cad+=passwordRobusto(document.getElementById("password").value,document.getElementById("password").value);
   // cad+=validarPasswords(form.password.value,form.passwordConfirmacion.value)
-    cad+=validarTelefono(document.getElementById("telefono"));
+    cad+=validarTelefono(document.getElementById("telefono").value);
     var div=document.getElementById("notificaciones");
     if(cad!=''){
         div.innerHTML='<p>'+cad+'</p>';
-        alert("false");
+        alert(document.getElementById("password").value);
         return false;
     }
     else{
