@@ -2,6 +2,9 @@ function imprimirMsg(){
     alert('Se hizo click');
 }
 
+
+
+
 function prueba(){
 
    var nombre = document.getElementById("nombre").value;
@@ -25,6 +28,7 @@ function validarPrueba(){
     cad+=passwordRobusto(document.getElementById("password").value,document.getElementById("password").value);
   // cad+=validarPasswords(form.password.value,form.passwordConfirmacion.value)
     cad+=validarTelefono(document.getElementById("telefono").value);
+    cad+=nombreApellido(document.getElementById("nombre").value);
     var div=document.getElementById("notificaciones");
     if(cad!=''){
         div.innerHTML='<p>'+cad+'</p>';
@@ -146,5 +150,17 @@ function validarTelefono(cadena){
     }
     else{
         return 'El numero telefonico debe tener el siguiente formato ###-###-####,<br> donde el # representa un numero del 0-9<br>';
+    }
+}
+
+function nombreApellido(nombre){
+
+    var name = / ^ [a-zA-Z] + [a-zA-Z] + $ /;
+
+    if(name.test(nombre)==true){
+    return '';
+    }
+    else{
+    return 'Ingrese su nombre y apellido!';
     }
 }
