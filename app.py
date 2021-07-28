@@ -163,6 +163,30 @@ def eliminarUsuario(id):
 
 
 # Usuarios fin
+
+#Función de agregar pedidos, detalles de pedido y cambiar estatus de carrito------------------INICIO
+
+@app.route('/pedidos/agregar', methods=['post'])
+def agregarPedidos():
+    p = Pedido()
+    p.idComprador = current_user.idUsuario
+    p.idTarjeta = request.form['tarjeta']
+    p.idVendedor = request.form['vendedor']
+    p.estatus = 'Pendiente'
+    c = Cesta()
+    carritos = c.consultaGeneral(current_user.idUsuario)
+    total = 0
+    for ca in carritos:
+        total = total + (ca.producto.precioVenta * ca.cantidad)
+    p.total = total
+    p.agregar()
+    
+    return redirect(url_for('consultaPedidos'))
+
+
+
+    #Función de agregar pedidos, detalles de pedido y cambiar estatus de carrito------------------FIN
+
 # Pedidos - Inicio
 
 #Consulta general
@@ -436,6 +460,14 @@ def consultaGeneral(id):
 
 # Rutas de cesta ----------------------------------------------------INICIO
 #Consulta general
+@app.route('/cesta/pagar')
+@login_required
+def pago():
+    if current_user.is_authenticated and current_user.is_comprador():
+        t = Tarjetas()
+        u = Usuario()
+        return render_template('Cesta/pagar.html', tarjetas=t.consultaGeneral(current_user.idUsuario), vendedores=u.consultaVendedores())
+
 @app.route('/cesta')
 @login_required
 def consultaGeneralCesta():

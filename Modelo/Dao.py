@@ -145,7 +145,7 @@ class Pedido(db.Model):
     #idVendedor = Column(Integer)
     idVendedor = Column(Integer, ForeignKey('Usuarios.idUsuario'))
     idTarjeta = Column(Integer, ForeignKey('Tarjetas.idTarjeta'))
-    fechaRegistro = Column(Date)
+    fechaRegistro = Column(Date, default=datetime.date.today())
     fechaAtencion = Column(Date)
     fechaRecepcion = Column(Date)
     fechaCierre = Column(Date)
@@ -379,6 +379,7 @@ class Cesta(db.Model):
         c=self.consultaIndividual(self.idCarrito)
         c.estatus = 'Inactivo'
         c.editar()
+
 
 
 #---------------CESTA-----------------------------------FIN

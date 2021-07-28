@@ -1,0 +1,37 @@
+<!Doctype HTML>
+<HTML LANG="ES">
+    <HEAD>
+        <link rel="stylesheet" href="{{url_for('static',filename='css/estilo.css')}}">
+        <meta charset="utf-8">
+        <title>Pago</title>
+    </HEAD>
+    <body>
+        <h1 align="center">Completar datos del pedido</h1>
+        <div align="center"><img src="{{url_for('static',filename='img/Tarjeta.jpg')}}"></div>
+        <br>
+        <form align="center" action="/pedidos/agregar"  method="post">
+            <label>Vendedor:</label>
+            <select name="vendedor">
+                {% for v in vendedores %}
+                    <option value="{{v.idUsuario}}">{{v.nombreCompleto}}</option>
+                {% endfor %}
+            </select>
+            <br>
+            <label>Tarjeta:</label>
+            <select name="tarjeta">
+                {% for t in tarjetas %}
+                    <option value="{{t.idTarjeta}}">{{t.noTarjeta}} - {{t.banco}}</option>
+                {% endfor %}
+            </select>
+            <br>
+            <button type="submit">Registrar</button>
+            <br>
+            <a href="javascript: history.go(-1)">Regresar</a>
+        </form>
+        </div>
+        <footer>
+            <br>
+            <div align="center">Curso de verano 2021 Ⓡ</div>
+        </footer>
+    </body>
+</HTML>
