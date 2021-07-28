@@ -45,6 +45,6 @@ var name = /^[A-Z]+$/i
     if(name.test(nombre)==true && ((codigo>=65 && codigo<=90) || codigo==165)){
     return '';
     }
-    return 'Tu nombre no debe tener numeros y debe comenzar con Mayuscula';
+    return 'El nombre no debe tener numeros y debe comenzar con Mayuscula';
     }
 }

@@ -4,12 +4,14 @@
         <link rel="stylesheet" href="{{url_for('static',filename='css/estilo.css')}}">
         <meta charset="utf-8">
         <title>Registrar producto</title>
+        <script src="{{url_for('static',filename='JS/productos.js')}}"></script>
+
     </HEAD>
     <body>
         <h1 align="center">Registrar producto</h1>
         <div align="center"><img src="{{url_for('static',filename='img/registro.png')}}"></div>
         <br>
-        <form align="center" action="/productos/agregar"  method="post">
+        <form align="center" action="/productos/agregar"  method="post" onsubmit="return validar()">
 
 
             <label>idCategoria: </label>
@@ -18,7 +20,7 @@
             <br>
             <label>Nombre:</label>
             <br>
-            <input type="text" name="nombre">
+            <input type="text" name="nombre" id="nombre">
             <br>
             <label>Descripcion:</label>
             <br>
@@ -26,12 +28,12 @@
             <br>
             <label> Precio de venta:</label>
             <br>
-            <input type="text" name="precioVenta">
+            <input type="text" name="precioVenta" id="precioVenta">
             <br>
 
             <label>Existencias: </label>
             <br>
-            <input type="text" name="existencia">
+            <input type="text" name="existencia" id="existencia">
             <br>
 
             <br>
