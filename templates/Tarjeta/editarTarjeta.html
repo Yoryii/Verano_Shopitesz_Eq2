@@ -3,44 +3,48 @@
     <HEAD>
         <link rel="stylesheet" href="{{url_for('static',filename='css/estilo.css')}}">
         <meta charset="utf-8">
-        <title>Registrar tarjeta</title>
+        <title>Editar tarjeta</title>
     </HEAD>
     <body>
         <p align="center"><b>Actualizar tarjeta</b></p>
         <div align="center"><img src="{{url_for('static',filename='img/Tarjeta.jpg')}}"></div>
         <br>
-        <form align="center" action="/Tarjetas/editar"  method="post">
-            <label>ID:</label>
-            <br>
-            <input type="number" readonly name="idTarjeta" value="{{Tar.idTarjeta}}">
-            <br>
-            <label>Numero de usuario:</label>
-            <br>
-            <input type="text" name="idUsuario" value="{{Tar.idUsuario}}">
-            <br>
+        <form align="center" action="/Tarjeta/editar"  method="post">
+            <!-- Datos que no se muestran -->
+            <div style="display:none">
+               <label>ID:</label>
+                <br>
+                <input type="number" readonly name="idTarjeta" value="{{Tar.idTarjeta}}">
+                <br>
+                <label>Numero de usuario:</label>
+                <br>
+                <input type="text" name="idUsuario" value="{{Tar.idUsuario}}" readonly>
+                <br>
+                <label>Estatus:</label>
+                <br>
+                <input type="text" name="estatus" value="{{Tar.estatus}}" readonly>
+            </div>
+
             <label>Numero de tarjeta:</label>
             <br>
             <input type="text" name="noTarjeta" value="{{Tar.noTarjeta}}">
             <br>
             <label>Saldo:</label>
             <br>
-            <input type="text" name="saldo" value="{{Tar.saldo}}">
+            <input type="number" name="saldo" value="{{Tar.saldo}}">
             <br>
             <label>Banco:</label>
             <br>
             <input type="text" name="banco" value="{{Tar.banco}}">
             <br>
-            <label>Estatus:</label>
-            <br>
-            <input type="text" name="estatus" value="{{Tar.estatus}}">
+
 
             <br>
             <br>
-            <button type="submit">Guardar</button>
+            <a href="/consultaTarjetas"><button type="submit">Guardar</button></a>
             <br>
-            <a href="javascript:eliminarUsuario({{Tar.idTarjeta}},'{{Tar.idUsuario}}')"><font color="red">¡Eliminar Tarjeta!</font></a>
             <br>
-            <div align="center"><a href="/"><button>Ir al inicio</button></a></div>
+            <div align="center"><a href="/">Ir al inicio</a></div>
         </form>
     </body>
 </HTML>

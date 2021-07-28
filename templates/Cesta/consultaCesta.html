@@ -7,7 +7,7 @@
     <title>Cesta</title>
 </head>
 <nav>
-    <h1 align="center">Cesta</h1>
+    <h1 align="center">Carrito</h1>
     <div align="center"><img style="width:100px; height:100px;" src="{{url_for('static',filename='img/Carrito.png')}}"></div>
 </nav>
 <body>
@@ -32,7 +32,10 @@
         {% endfor %}
     </table>
     <br>
+    <div align="center"><a href="/pagar"><button style="color: blue">Comprar carrito</button></a></div>
+    <br>
     <div align="center"><a href="/"><button>Ir al inicio</button></a></div>
+
 
     <footer>
         <br>

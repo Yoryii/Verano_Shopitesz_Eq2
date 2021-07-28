@@ -268,7 +268,10 @@ class Tarjetas(db.Model):
     estatus = Column(String, nullable=False)
 
     def consultaGeneral(self, id):
-        return self.query.filter(self.idUsuario==id).all()
+        return self.query.filter(Tarjetas.idUsuario == id).filter(Tarjetas.estatus == 'Activa').all()
+
+    #def consultaGeneral(self, id):
+    #    return self.query.filter(self.idUsuario==id).all()
 
     def consultaXUsuario(self, id):
         return self.query.filter(Tarjetas.idUsuario == id).all()
@@ -288,6 +291,11 @@ class Tarjetas(db.Model):
         usuario = self.consultaIndividual(self.idUsuario)
         db.session.delete(usuario)
         db.session.commit()
+
+    def eliminacionLogica(self):
+        t=self.consultaIndividual(self.idTarjeta)
+        t.estatus = 'Inactivo'
+        t.editar()
 
 
 

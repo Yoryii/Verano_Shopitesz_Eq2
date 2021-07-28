@@ -366,7 +366,14 @@ def error():
     return render_template('Usuarios/error.html')
 
 
-@app.route('/Tarjetas/editar', methods=['post'])
+@app.route('/Tarjetas/new')
+def nuevaTarjeta():
+    if current_user.is_authenticated and not current_user.is_comprador():
+        return render_template('principal.html')
+    else:
+        return render_template('Tarjeta/registrarTarjeta.html')
+
+@app.route('/Tarjeta/editar', methods=['post'])
 def editarTarjeta():
     Tar = Tarjetas()
     Tar.idTarjeta = request.form['idTarjeta']
@@ -382,12 +389,14 @@ def editarTarjeta():
 
 
 
+#eliminar
 @app.route('/Tarjetas/delete/<int:id>')
+@login_required
 def eliminarTarjeta(id):
-    Tar = Tarjetas()
-    Tar.idTarjeta = id
-    Tar.eliminar()
-    return render_template('principal.html')
+    t = Tarjetas()
+    t = t.consultaIndividual(id)
+    t.eliminacionLogica()
+    return redirect(url_for('consultaTarjetas'))
 
 # CRUD Tarjetas
 
@@ -404,11 +413,11 @@ def consultaTarjetas():
 def agregarTarjeta():
     if current_user.is_authenticated and current_user.is_comprador():
         Tar = Tarjetas()
-        Tar.idUsuario = request.form['idUsuario']
+        Tar.idUsuario = current_user.idUsuario
         Tar.noTarjeta = request.form['noTarjeta']
         Tar.saldo = request.form['saldo']
         Tar.banco = request.form['banco']
-        Tar.estatus = request.form['estatus']
+        Tar.estatus = 'Activa'
         Tar.agregar()
         return redirect(url_for('consultaTarjetas'))
     else:
@@ -419,9 +428,11 @@ def agregarTarjeta():
 def consultaGeneral(id):
     if current_user.is_authenticated and current_user.is_comprador():
         Tar = Tarjetas()
-        return render_template('Tarjetas/editarTarjeta.html', Tar=Tar.consultaIndividual(id))
+        return render_template('Tarjeta/editarTarjeta.html', Tar=Tar.consultaIndividual(id))
     else:
         return render_template('principal.html')
+
+
 
 # Rutas de cesta ----------------------------------------------------INICIO
 #Consulta general
@@ -476,7 +487,7 @@ def agregarCesta(id):
     c.idUsuario = current_user.idUsuario
     c.agregar()
     return redirect(url_for('productos'))
-#agregar
+
 
 # Rutas de cesta ----------------------------------------------------FIN
 
