@@ -28,7 +28,7 @@ function validarPrueba(){
     cad+=passwordRobusto(document.getElementById("password").value,document.getElementById("password").value);
   // cad+=validarPasswords(form.password.value,form.passwordConfirmacion.value)
     cad+=validarTelefono(document.getElementById("telefono").value);
-    //cad+=nombreApellido(document.getElementById("nombre").value);
+    cad+=nombreApellido(document.getElementById("nombre").value);
     var div=document.getElementById("notificaciones");
     if(cad!=''){
         div.innerHTML='<p>'+cad+'</p>';
@@ -69,6 +69,7 @@ function validarPassword(pwd){
         return '';
     }
 }
+
 function validarPasswords(pwd1,pwd2){
     if(pwd1!=pwd2){
         return 'Los password no coinciden<br>';
@@ -153,14 +154,19 @@ function validarTelefono(cadena){
     }
 }
 
+
+
+//Metodos Jose Angel
 function nombreApellido(nombre){
-
-    var name = / ^ [a-zA-Z] + [a-zA-Z] + $ /;
-
-    if(name.test(nombre)==true){
-    return '';
+var name = /^[A-Z]+$/i
+   var codigo=nombre.charCodeAt(0);
+    if(nombre.length < 2){
+    return 'Tu nombre debe tener más de 1 letra, empezar con mayúscula';
     }
     else{
-    return 'Ingrese su nombre y apellido!';
+    if(name.test(nombre)==true && ((codigo>=65 && codigo<=90) || codigo==165)){
+    return '';
+    }
+    return 'Tu nombre no debe tener numeros y debe comenzar con Mayuscula';
     }
 }
