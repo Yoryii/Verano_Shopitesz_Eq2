@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/estilo.css')}}">
+    <script src="{{url_for('static',filename='JS/global.js')}}"></script>
+    <meta charset="UTF-8">
+    <title>Cesta</title>
+</head>
+<nav>
+    <h1 align="center">Cesta</h1>
+    <div align="center"><img style="width:100px; height:100px;" src="{{url_for('static',filename='img/Carrito.png')}}"></div>
+</nav>
+<body>
+    {% if current_user.is_authenticated and current_user.is_admin() %}
+    <!--<div align="center"><a href="/pedidos/new"><img src="{{url_for('static',filename='img/add.gif')}}">Registrar pedido</a></div>-->
+    {% endif %}
+    <br>
+    <table border="5" align="center">
+        <th>Producto</th>
+        <th>Descripción</th>
+        <th>Cantidad</th>
+        <th>Modificar</th>
+        <th>Eliminar</th>
+        {% for c in cesta %}
+            <tr>
+                <td>{{c.producto.nombre}}</td>
+                <td>{{c.producto.descripcion}}</td>
+                <td>{{c.cantidad}}</td>
+                <td><a href="/cesta/{{c.idCarrito}}"><div align="center"><img src="{{url_for('static',filename='img/editar.png')}}"></div></a></td>
+                <td><a href="javascript:eliminarCesta({{c.idCarrito}})"><img src="{{url_for('static',filename='img/eliminar.png')}}"></a></td>
+            </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <div align="center"><a href="/"><button>Ir al inicio</button></a></div>
+
+    <footer>
+        <br>
+        <div align="center">Curso de verano 2021 Ⓡ</div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/estilo.css')}}">
+    <script src="{{url_for('static',filename='JS/global.js')}}"></script>
+    <meta charset="UTF-8">
+    <title>Editar cesta</title>
+</head>
+<body>
+    <main>
+        <section>
+            <h1 align="center">Editar producto en carrito</h1>
+            <div align="center"><img style="width:120px; height:120px;" src="{{url_for('static',filename='img/Carrito.png')}}"></div>
+            <form method="post" action="/cesta/edit">
+                <div id="datosPersonales" align="center">
+                    <fieldset>
+                        <legend>Datos</legend>
+                        <!-- Cosas que no se van a ver -->
+                        <div style="display: none">
+                        <input name="idCarrito" type="number" value="{{cesta.idCarrito}}" readonly>
+                            <input name="idUsuario" type="number" value="{{cesta.idUsuario}}" readonly>
+                            <input name="idProducto" type="number" value="{{cesta.idProducto}}" readonly>
+                            <input name="fecha" type="date" value="{{cesta.fecha}}" readonly>
+                            <input name="estatus" type="text" value="{{cesta.estatus}}" readonly>
+                        </div>
+                        <!-- Cosas que si se van a ver -->
+                        <label>Producto:</label>
+                        <input type="text" name="producto" readonly value="{{cesta.producto.nombre}}">
+                        <br>
+                        <label>Cantidad:</label>
+                        <input type="number" name="cantidad" value="{{cesta.cantidad}}">
+                        <br>
+                        <br>
+                        <a href="/cesta">Cancelar</a>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="/cesta"><button type="submit">Guardar</button></a>
+                        <br>
+                        <br>
+                    </fieldset>
+                    </div>
+                 </form>
+        </section>
+    </main>
+        <footer>
+            <br>
+            <div align="center">Curso de verano 2021 Ⓡ</div>
+        </footer>
+</body>
+</html>

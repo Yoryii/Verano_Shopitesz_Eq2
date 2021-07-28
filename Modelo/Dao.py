@@ -237,7 +237,7 @@ class DetallePedido(db.Model):
 
 #Parte de Francisco - Inicio
 
-class Carrito(db.Model):
+"""class Carrito(db.Model):
     __tablename__ = 'Carrito'
     idCarrito = Column(Integer, primary_key=True)
     idUsuario = Column(Integer, ForeignKey('Usuarios.idUsuario'))
@@ -254,7 +254,7 @@ class Carrito(db.Model):
         db.session.commit()
 
     def consultaGeneral(self, idUsuario):
-        return self.query.filter(Carrito.idUsuario==idUsuario).all()
+        return self.query.filter(Carrito.idUsuario==idUsuario).all()"""
 
 
 
@@ -335,3 +335,42 @@ class Producto(db.Model):
         db.session.commit()
 
 
+
+#---------------CESTA-----------------------------------INICIO
+class Cesta(db.Model):
+    __tablename__ = 'Carrito'
+    idCarrito = Column(Integer, primary_key=True)
+    idUsuario = Column(Integer, ForeignKey('Usuarios.idUsuario'))
+    idProducto = Column(Integer, ForeignKey('Productos.idProducto'))
+    fecha = Column(Date,default=datetime.date.today())
+    cantidad = Column(Integer, default=1)
+    estatus = Column(String, nullable=False,default='Pendiente')
+    producto = relationship('Producto', backref='carrito', lazy='select')
+    usuario = relationship('Usuario', backref='carrito', lazy='select')
+
+    def consultaGeneral(self, id):
+        return self.query.filter(Cesta.idUsuario == id).filter(Cesta.estatus == 'Pendiente').all()
+        #return self.query.all()
+
+    def consultaIndividual(self,id):
+        return Cesta.query.get(id)
+
+    def agregar(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def editar(self):
+        db.session.merge(self)
+        db.session.commit()
+
+    def eliminar(self):
+        db.session.delete(self)
+        db.session.commit()
+
+    def eliminacionLogica(self):
+        c=self.consultaIndividual(self.idCarrito)
+        c.estatus = 'Inactivo'
+        c.editar()
+
+
+#---------------CESTA-----------------------------------FIN

@@ -12,3 +12,8 @@ function eliminarPedido(id){
     if(confirm('¿Estás seguro de eliminar el pedido '+id+'?'))
         location.href='/pedidos/delete/'+id;
 }
+
+function eliminarCesta(id){
+    if(confirm('¿Estás seguro de eliminar la cesta?'))
+        location.href='/cesta/delete/'+id;
+}

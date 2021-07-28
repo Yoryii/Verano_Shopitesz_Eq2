@@ -42,13 +42,15 @@
                 <td>{{p.especificaciones}}</td>
                 <td>{{p.estatus}}</td>
                 <td><a href="/productos/{{p.idProducto}}"><img src="{{url_for('static',filename='img/editar.png')}}"></a></td>
-                <td><a href="/pedidos/carrito"><img style="width:50px; height:50px;" src="{{url_for('static',filename='img/Carrito.png')}}"></a></td>
+                <td><a href="/cesta/agregar/{{p.idProducto}}"><img style="width:50px; height:50px;" src="{{url_for('static',filename='img/Carrito.png')}}"></a></td>
                 <!--<td><a href="./eliminarUsuarios.html"><img src="{{url_for('static',filename='img/eliminar.png')}}"></a></td>-->
             </tr>
         {% endfor %}
     </table>
     <br>
     <div align="center"><a href="/"><button>Ir al inicio</button></a></div>
+    <br>
+    <div align="center"><a href="/cesta">Ver carrito</a></div>
     <footer>
         <br>
         <div align="center">Curso de verano 2021 Ⓡ</div>
